@@ -2,17 +2,10 @@ package bohdan.hushcha.sushchak.suggestme;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-
 import com.google.firebase.auth.FirebaseAuth;
-
-
-
-import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.activities.LoginActivity;
 import butterknife.ButterKnife;
 

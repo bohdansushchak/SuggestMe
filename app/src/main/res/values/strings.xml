@@ -9,4 +9,10 @@
     <string name="et_re_hint_password">Repeat password</string>
     <string name="btn_hint_register">Sign up </string>
 
+    <string name="alert_empty_email">Email is empty</string>
+    <string name="alert_empty_password">Password is empty</string>
+    <string name="alert_email_notvalid">Email not valid</string>
+    <string name="alert_password_notvalid">Password not valid</string>
+    <string name="alert_password_toshort">Password to short min 8 symbols</string>
+    <string name="alert_repassword_notequals">Repeat password not like password</string>
 </resources>

@@ -3,8 +3,11 @@ package bohdan.hushcha.sushchak.suggestme.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,9 +25,13 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    @BindView(R.id.etEmail) TextInputEditText etUserEmail;
+    @BindView(R.id.etEmail) TextInputEditText etEmail;
     @BindView(R.id.etPassword) TextInputEditText etPassword;
     @BindView(R.id.etRePassword) TextInputEditText etRepeatPassword;
+
+    @BindView(R.id.emailLayout) TextInputLayout emailLayout;
+    @BindView(R.id.passwordLayout) TextInputLayout passwordLayout;
+    @BindView(R.id.rePasswordLayout) TextInputLayout rePasswordLayout;
 
     private AuthUtils authUtils;
 
@@ -37,9 +44,60 @@ public class RegisterActivity extends AppCompatActivity {
         authUtils = new AuthUtils(RegisterActivity.this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        InitTextWatcher();
+    }
+
+    private void InitTextWatcher(){
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String emailError = authUtils.GetEmailError(etEmail.getText().toString());
+                emailLayout.setError(emailError);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String passwordError = authUtils.GetEmailError(etPassword.getText().toString());
+                passwordLayout.setError(passwordError);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        etRepeatPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String password = etPassword.getText().toString();
+                String rePassword = etRepeatPassword.getText().toString();
+
+                String rePasswordError = !password.equals(rePassword) ?
+                        getString(R.string.alert_repassword_notequals) : null;
+
+                rePasswordLayout.setError(rePasswordError);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+    }
+
     @OnClick(R.id.btnRegister)
     public void clickRegister(View view) {
-        String email = etUserEmail.getText().toString();
+        String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         String repeatPassword = etRepeatPassword.getText().toString();
 
@@ -64,7 +122,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         catch (AuthUtils.RegisterException regEx){
-            Toast.makeText(RegisterActivity.this, regEx.getEmailError() + regEx.getPasswordError() + regEx.getRepeatError(), Toast.LENGTH_LONG).show();
+            String emailError = regEx.getEmailError();
+            String passwordError = regEx.getPasswordError();
+            String rePasswordError = regEx.getRepeatError();
+
+            emailLayout.setError(emailError);
+            passwordLayout.setError(passwordError);
+            rePasswordLayout.setError(rePasswordError);
         }
 
         finally {
@@ -78,4 +142,5 @@ public class RegisterActivity extends AppCompatActivity {
         RegisterActivity.this.finish();
         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
     }
+
 }

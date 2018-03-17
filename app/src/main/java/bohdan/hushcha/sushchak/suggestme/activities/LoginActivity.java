@@ -3,8 +3,11 @@ package bohdan.hushcha.sushchak.suggestme.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,9 +18,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import bohdan.hushcha.sushchak.suggestme.MainActivity;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
@@ -27,10 +27,11 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //private AuthLoginUtils authLoginUtils;
+    @BindView(R.id.etEmail_Login) TextInputEditText etEmail;
+    @BindView(R.id.etPassword_Login) TextInputEditText etPassword;
 
-    @BindView(R.id.etEmail_Login) TextInputEditText editTextUsername;
-    @BindView(R.id.etPassword_Login) TextInputEditText editTextPassword;
+    @BindView(R.id.emailLayout) TextInputLayout emailLayout;
+    @BindView(R.id.passwordLayout) TextInputLayout passwordLayout;
 
     private AuthUtils authUtils;
 
@@ -47,9 +48,16 @@ public class LoginActivity extends AppCompatActivity {
         authUtils = new AuthUtils(LoginActivity.this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        InitTextWatcher();
+    }
+
     private void SignIn() {
-        String username = editTextUsername.getText().toString();
-        String password = editTextPassword.getText().toString();
+        String username = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
 
         try {
             Task<AuthResult> authResult = authUtils.SignIn(username, password);
@@ -71,7 +79,11 @@ public class LoginActivity extends AppCompatActivity {
             });
 
         } catch (AuthUtils.RegisterException regEx) {
-            Toast.makeText(LoginActivity.this, regEx.getEmailError() + regEx.getPasswordError() + regEx.getRepeatError(), Toast.LENGTH_LONG).show();
+            String emailError = regEx.getEmailError();
+            String passwordError = regEx.getPasswordError();
+
+            emailLayout.setError(emailError);
+            passwordLayout.setError(passwordError);
         } finally {
 
         }
@@ -99,4 +111,29 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void InitTextWatcher(){
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String emailError = authUtils.GetEmailError(etEmail.getText().toString());
+                emailLayout.setError(emailError);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+
+        etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String passwordError = authUtils.GetPasswordError(etPassword.getText().toString());
+                passwordLayout.setError(passwordError);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+    }
 }

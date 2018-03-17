@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,7 +28,8 @@
         android:layout_marginTop="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        app:errorTextAppearance="@style/error_appearance">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/etEmail"
@@ -47,7 +48,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        app:errorTextAppearance="@style/error_appearance">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/etPassword"
@@ -66,7 +68,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        app:errorTextAppearance="@style/error_appearance"
+        >
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/etRePassword"

@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import bohdan.hushcha.sushchak.suggestme.R;
+
 public class AuthUtils {
 
     private final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -37,22 +39,12 @@ public class AuthUtils {
 
         if(!emailMatcher.find() || !passwordMatcher.find() || !password.equals(rePassword)){
 
-            String emailError = null;
-            String passwordError = null;
+            String emailError = GetEmailError(email);
+            String passwordError = GetPasswordError(password);
             String repeatPassword = null;
 
-            if(email.length() == 0)
-                emailError = "Email is empty";
-            else if(!emailMatcher.find())
-                emailError = "Email not valid";
-
-            if(password.length() == 0)
-                passwordError = "Password is empty";
-            else if(!passwordMatcher.find())
-                passwordError = "Password not valid";
-
             if(!password.equals(rePassword))
-                repeatPassword = "Repeat password not equals password";
+                repeatPassword = context.getString(R.string.alert_repassword_notequals);
 
             throw new RegisterException(emailError, passwordError, repeatPassword);
         }
@@ -60,22 +52,18 @@ public class AuthUtils {
         return mAuth.createUserWithEmailAndPassword(email, password);
     }
 
-    public Task<AuthResult> SignIn(@NonNull String email, @NonNull String password) throws RegisterException {
+    public Task<AuthResult> SignIn(@NonNull String email, @NonNull String password)
+            throws RegisterException {
 
         Matcher emailMatcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
 
         if(!emailMatcher.find() || email.length() == 0 || password.length() == 0){
 
-            String emailError = null;
+            String emailError = GetEmailError(email);
             String passwordError = null;
 
-            if(email.length() == 0)
-                emailError = "Email is empty";
-            else if(!emailMatcher.find())
-                emailError ="Email not valid";
-
             if(password.length() == 0)
-                passwordError = "Password is empty";
+                passwordError = context.getString(R.string.alert_empty_password);
 
             throw new RegisterException(emailError, passwordError, null);
         }
@@ -83,6 +71,31 @@ public class AuthUtils {
         return mAuth.signInWithEmailAndPassword(email, password);
     }
 
+    public String GetEmailError(String email){
+        String emailError = null;
+        Matcher emailMatcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+
+        if(email.length() == 0)
+            emailError = context.getString(R.string.alert_empty_email);
+        else if(!emailMatcher.find())
+            emailError = context.getString(R.string.alert_email_notvalid);
+
+        return  emailError;
+    }
+
+    public String GetPasswordError(String password){
+        String passwordError = null;
+
+        Matcher passwordMatcher = VALID_PASSWORD_REGEX.matcher(password);
+        if(password.length() == 0)
+            passwordError = context.getString(R.string.alert_empty_password);
+        else if(password.length() < 8)
+            passwordError = context.getString(R.string.alert_password_toshort);
+        else if(!passwordMatcher.find())
+            passwordError = context.getString(R.string.alert_password_notvalid);
+
+        return  passwordError;
+    }
 
     public class RegisterException extends Exception{
         private String EmailError;

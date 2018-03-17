@@ -13,4 +13,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorTextError</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
