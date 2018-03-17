@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SuggestMe</string>
+
+    <string name="btn_hint_login">Log in</string>
+    <string name="tv_hint_sing_up">Sing up for SuggestMe</string>
+
+    <string name="et_hint_email">Email</string>
+    <string name="et_hint_password">Password</string>
+    <string name="et_re_hint_password">Repeat password</string>
+    <string name="btn_hint_register">Sign up </string>
+
 </resources>
