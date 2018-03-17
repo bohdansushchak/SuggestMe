@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
-import bohdan.hushcha.sushchak.suggestme.MainActivity;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import butterknife.BindView;
@@ -68,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String passwordError = authUtils.GetEmailError(etPassword.getText().toString());
+                String passwordError = authUtils.GetPasswordError(etPassword.getText().toString());
                 passwordLayout.setError(passwordError);
             }
             @Override

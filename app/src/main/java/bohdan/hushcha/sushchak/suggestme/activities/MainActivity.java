@@ -1,15 +1,15 @@
-package bohdan.hushcha.sushchak.suggestme;
+package bohdan.hushcha.sushchak.suggestme.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
-import bohdan.hushcha.sushchak.suggestme.activities.LoginActivity;
+
+import bohdan.hushcha.sushchak.suggestme.R;
 import butterknife.ButterKnife;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 

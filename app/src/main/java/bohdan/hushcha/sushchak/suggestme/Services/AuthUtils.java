@@ -72,19 +72,20 @@ public class AuthUtils {
     }
 
     public String GetEmailError(String email){
-        String emailError = null;
+        String emailError;
         Matcher emailMatcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
 
         if(email.length() == 0)
             emailError = context.getString(R.string.alert_empty_email);
         else if(!emailMatcher.find())
             emailError = context.getString(R.string.alert_email_notvalid);
+        else emailError = null;
 
         return  emailError;
     }
 
     public String GetPasswordError(String password){
-        String passwordError = null;
+        String passwordError;
 
         Matcher passwordMatcher = VALID_PASSWORD_REGEX.matcher(password);
         if(password.length() == 0)
@@ -93,6 +94,7 @@ public class AuthUtils {
             passwordError = context.getString(R.string.alert_password_toshort);
         else if(!passwordMatcher.find())
             passwordError = context.getString(R.string.alert_password_notvalid);
+        else passwordError = null;
 
         return  passwordError;
     }
