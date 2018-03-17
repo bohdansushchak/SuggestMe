@@ -6,5 +6,5 @@
 
     <color name="colorTextError">#fc001d</color>
 
-    <color name="colorText">#000000</color>
+    <color name="colorTextNormal">#000000</color>
 </resources>
