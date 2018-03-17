@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_facebook_id">584362065239926</string>
     <string name="app_name">SuggestMe</string>
 
     <string name="btn_hint_login">Sign in</string>

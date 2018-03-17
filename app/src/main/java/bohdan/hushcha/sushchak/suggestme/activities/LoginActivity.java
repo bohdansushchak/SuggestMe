@@ -8,15 +8,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
@@ -26,21 +37,24 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public final String TAG = "LoginActivity";
+
     @BindView(R.id.etEmail_Login) TextInputEditText etEmail;
     @BindView(R.id.etPassword_Login) TextInputEditText etPassword;
-
     @BindView(R.id.emailLayout) TextInputLayout emailLayout;
     @BindView(R.id.passwordLayout) TextInputLayout passwordLayout;
+    @BindView(R.id.btnFacebook) LoginButton btnFacebook;
 
     private AuthUtils authUtils;
-
     private GoogleApiClient mGoogleApiClient;
+    private CallbackManager mCallbackManager;
 
     private static final int REQUEST_CODE_SING_GOOGLE = 555;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         ButterKnife.bind(LoginActivity.this);
 
@@ -52,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         InitTextWatcher();
+        SignInByFacebookInit();
     }
 
     private void SignIn() {
@@ -110,29 +125,96 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void InitTextWatcher(){
+    private void SignInByFacebookInit() {
+        mCallbackManager = CallbackManager.Factory.create();
+        btnFacebook.setReadPermissions("email", "public_profile");
+        btnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void handleFacebookAccessToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful() && task.getResult().getUser() != null) {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            LoginActivity.this.finish();
+                        }
+                    }
+                });
+    }
+
+    private void InitTextWatcher() {
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String emailError = authUtils.GetEmailError(etEmail.getText().toString());
                 emailLayout.setError(emailError);
             }
+
             @Override
-            public void afterTextChanged(Editable editable) { }
+            public void afterTextChanged(Editable editable) {}
         });
 
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String passwordError = authUtils.GetPasswordError(etPassword.getText().toString());
                 passwordLayout.setError(passwordError);
             }
+
             @Override
-            public void afterTextChanged(Editable editable) { }
+            public void afterTextChanged(Editable editable) {}
         });
     }
 }
+
+/* //generate keyHash
+                try {
+                    PackageInfo info = getPackageManager().getPackageInfo(
+                            "bohdan.hushcha.sushchak.suggestme",
+                            PackageManager.GET_SIGNATURES);
+                    for (Signature signature : info.signatures) {
+                        MessageDigest md = MessageDigest.getInstance("SHA");
+                        md.update(signature.toByteArray());
+                        Log.d("KeyHash", "KeyHash:" + Base64.encodeToString(md.digest(),
+                                Base64.DEFAULT));
+
+                        Toast.makeText(getApplicationContext(), Base64.encodeToString(md.digest(),
+                                Base64.DEFAULT), Toast.LENGTH_LONG).show();
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+
+                } catch (NoSuchAlgorithmException e) {
+
+                }
+
+ */

@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //mAuth.signOut();
         if (mAuth.getCurrentUser() != null) {
             tvUserEmail.setText(mAuth.getCurrentUser().getEmail());
         } else {
