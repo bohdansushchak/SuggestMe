@@ -14,10 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="@dimen/marginTopLogo"
         android:text="@string/app_name"
-        android:textColor="#000"
-        android:textSize="32sp"
+        android:textColor="@color/colorTextLogo"
+        android:textSize="@dimen/textSizeLogo"
         android:typeface="normal"/>
 
     <android.support.design.widget.TextInputLayout
@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvAppName"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/marginEndLoginEd"
+        android:layout_marginStart="@dimen/marginStartLoginEd"
         android:layout_alignParentStart="true"
         app:errorTextAppearance="@style/error_appearance">
 
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailLayout"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/marginEndLoginEd"
+        android:layout_marginStart="@dimen/marginStartLoginEd"
         android:layout_alignParentEnd="true"
         app:errorTextAppearance="@style/error_appearance">
 
@@ -66,8 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/passwordLayout"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/marginEndLoginEd"
+        android:layout_marginStart="@dimen/marginStartLoginEd"
         android:layout_alignParentEnd="true"
         app:errorTextAppearance="@style/error_appearance"
         >
@@ -87,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/btn_hint_register"
+        android:textSize="@dimen/textSizeNormal"
         android:layout_below="@+id/rePasswordLayout"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

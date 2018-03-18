@@ -9,6 +9,7 @@
     <string name="et_hint_password">Password</string>
     <string name="et_re_hint_password">Repeat password</string>
     <string name="btn_hint_register">Sign up </string>
+    <string name="btn_hint_log_out">Sing out</string>
 
     <string name="alert_empty_email">Email is empty</string>
     <string name="alert_empty_password">Password is empty</string>

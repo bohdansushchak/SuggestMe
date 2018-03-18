@@ -17,11 +17,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -191,14 +193,21 @@ public class MainActivity extends AppCompatActivity {
                 Arrays.asList(getResources().getStringArray(R.array.cooking_sub_items))));
     }
 
+    @OnClick(R.id.btnSignOut)
+    public void SignOut(View view){
+        new AuthUtils(MainActivity.this).SignOut();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        MainActivity.this.finish();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        //new AuthUtils(MainActivity.this).SignOut();
-
         if (mAuth.getCurrentUser() != null) {
-            tvUserEmail.setText(mAuth.getCurrentUser().getEmail());
+            String email = mAuth.getCurrentUser().getUid();
+
+            tvUserEmail.setText(email);
         } else {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             MainActivity.this.finish();
