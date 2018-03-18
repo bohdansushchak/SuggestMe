@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
@@ -196,12 +197,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //mAuth.signOut();
+        new AuthUtils(MainActivity.this).SignOut();
+
         if (mAuth.getCurrentUser() != null) {
             tvUserEmail.setText(mAuth.getCurrentUser().getEmail());
         } else {
-            MainActivity.this.finish();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            MainActivity.this.finish();
         }
     }
 }
