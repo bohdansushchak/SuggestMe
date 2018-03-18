@@ -23,7 +23,7 @@
     <string name="category_weather">Weather</string>
     <string name="category_news">News</string>
     <string name="category_crypto">Crypto Info</string>
-    <string name="category_coocing">Cooking book</string>
+    <string name="category_cooking">Cooking book</string>
 
     <array name="cinema_sub_items">
         <item>Top rated movies</item>
@@ -43,6 +43,15 @@
     <array name="weather_sub_items">
         <item>Current weather</item>
         <item>Weather for 5 days</item>
+    </array>
+
+    <array name="new_sub_items">
+        <item>Search</item>
+    </array>
+
+    <array name="cooking_sub_items">
+        <item>Search recipes by ingredients</item>
+        <item>Popular recipes</item>
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->

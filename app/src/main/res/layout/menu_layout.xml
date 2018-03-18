@@ -44,8 +44,8 @@
             android:id="@+id/ev_menu"
             android:nestedScrollingEnabled="false"
             android:layout_width="match_parent"
+            android:groupIndicator="@null"
             android:layout_height="wrap_content">
-
         </ExpandableListView>
     </LinearLayout>
 </ScrollView>

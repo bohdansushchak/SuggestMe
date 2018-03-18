@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
@@ -182,22 +181,21 @@ public class MainActivity extends AppCompatActivity {
         categories.add(new Category(getString(R.string.category_weather),
                 Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
 
-
         categories.add(new Category(getString(R.string.category_news),
-                Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
+                Arrays.asList(getResources().getStringArray(R.array.new_sub_items))));
 
         categories.add(new Category(getString(R.string.category_crypto),
                 Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
 
-        categories.add(new Category(getString(R.string.category_coocing),
-                Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
+        categories.add(new Category(getString(R.string.category_cooking),
+                Arrays.asList(getResources().getStringArray(R.array.cooking_sub_items))));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        new AuthUtils(MainActivity.this).SignOut();
+        //new AuthUtils(MainActivity.this).SignOut();
 
         if (mAuth.getCurrentUser() != null) {
             tvUserEmail.setText(mAuth.getCurrentUser().getEmail());
