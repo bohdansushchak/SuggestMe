@@ -5,13 +5,13 @@ public class HomeItem {
 
     private String Title;
     private String Description;
-    private String Image;
+    private String ImageUrl;
     private String Category;
 
-    public HomeItem(String title, String description, String image, String category) {
+    public HomeItem(String title, String description, String imageUrl, String category) {
         Title = title;
         Description = description;
-        Image = image;
+        ImageUrl = imageUrl;
         Category = category;
     }
 
@@ -23,8 +23,8 @@ public class HomeItem {
         return Description;
     }
 
-    public String getImage() {
-        return Image;
+    public String getImageUrl() {
+        return ImageUrl;
     }
 
     public String getCategory() {

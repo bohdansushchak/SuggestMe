@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
@@ -38,6 +41,15 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
         holder.tvTitle.setText(items.get(position).getTitle());
         holder.tvDecription.setText(items.get(position).getDescription());
         holder.tvCategory.setText(items.get(position).getCategory());
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round);
+
+        Glide.with(context).load(items.get(position).getImageUrl())
+                .apply(options)
+                .into(holder.ivBackground);
     }
 
     @Override

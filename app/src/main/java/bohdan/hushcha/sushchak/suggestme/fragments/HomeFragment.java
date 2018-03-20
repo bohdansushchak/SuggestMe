@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
                 List<Article> articles = response.body().getArticles();
 
                 for (Article article : articles) {
-                    HomeItem item = new HomeItem(article.getTitle(), article.getDecription(), "",article.getPublishedAt());
+                    HomeItem item = new HomeItem(article.getTitle(), article.getDecription(), article.getUrlToImage(),article.getPublishedAt());
                     items.add(item);
                 }
                 adapter.notifyDataSetChanged();
