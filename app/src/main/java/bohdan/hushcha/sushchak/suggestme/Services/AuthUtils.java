@@ -56,7 +56,7 @@ public class AuthUtils {
             if (rePassword.length() == 0)
                 repeatPasswordError = context.getString(R.string.alert_repeat_password_empty);
             else if (!password.equals(rePassword))
-                repeatPasswordError = context.getString(R.string.alert_repassword_notequals);
+                repeatPasswordError = context.getString(R.string.alert_repassword_not_equals);
 
             throw new RegisterException(emailError, passwordError, repeatPasswordError);
         }
@@ -90,7 +90,7 @@ public class AuthUtils {
         if (email.length() == 0)
             emailError = context.getString(R.string.alert_empty_email);
         else if (!emailMatcher.find())
-            emailError = context.getString(R.string.alert_email_notvalid);
+            emailError = context.getString(R.string.alert_email_not_valid);
         else emailError = null;
 
         return emailError;
@@ -103,9 +103,9 @@ public class AuthUtils {
         if (password.length() == 0)
             passwordError = context.getString(R.string.alert_empty_password);
         else if (password.length() < 8)
-            passwordError = context.getString(R.string.alert_password_toshort);
+            passwordError = context.getString(R.string.alert_password_to_short);
         else if (!passwordMatcher.find())
-            passwordError = context.getString(R.string.alert_password_notvalid);
+            passwordError = context.getString(R.string.alert_password_not_valid);
         else passwordError = null;
 
         return passwordError;

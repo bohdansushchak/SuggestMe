@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.activities.MainActivity;
 import bohdan.hushcha.sushchak.suggestme.adapters.HomeFragmentAdapter;
 import bohdan.hushcha.sushchak.suggestme.models.HomeItem;
-import bohdan.hushcha.sushchak.suggestme.rest.Article;
-import bohdan.hushcha.sushchak.suggestme.rest.NewsApiClient;
-import bohdan.hushcha.sushchak.suggestme.rest.NewsApiInterface;
-import bohdan.hushcha.sushchak.suggestme.rest.NewsResponce;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.responces.NewsResponce;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -67,9 +65,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        NewsApiInterface apiService = NewsApiClient.getClient(getActivity()).create(NewsApiInterface.class);
+        NewsApiInterface apiService = NewsClient.getClient(getActivity()).create(NewsApiInterface.class);
 
-        Call<NewsResponce> call = apiService.TopHeadlines(NewsApiClient.API_KEY, "us", "business");
+        Call<NewsResponce> call = apiService.TopHeadlines(NewsClient.API_KEY, "us", "business");
         call.enqueue(new Callback<NewsResponce>() {
             @Override
             public void onResponse(Call<NewsResponce> call, Response<NewsResponce> response) {

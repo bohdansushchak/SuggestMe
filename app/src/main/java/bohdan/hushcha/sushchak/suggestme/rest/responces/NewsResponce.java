@@ -1,8 +1,10 @@
-package bohdan.hushcha.sushchak.suggestme.rest;
+package bohdan.hushcha.sushchak.suggestme.rest.responces;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 
 public class NewsResponce {
 
@@ -11,6 +13,11 @@ public class NewsResponce {
 
     @SerializedName("articles")
     private List<Article> Articles;
+
+    public NewsResponce(int totalResults, List<Article> articles) {
+        this.TotalResults = totalResults;
+        this.Articles = articles;
+    }
 
     public int getTotalResults() {
         return TotalResults;

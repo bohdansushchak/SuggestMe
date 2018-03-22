@@ -1,4 +1,4 @@
-package bohdan.hushcha.sushchak.suggestme.rest;
+package bohdan.hushcha.sushchak.suggestme.rest.clients;
 
 import android.content.Context;
 
@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NewsApiClient {
+public class NewsClient {
 
     private static Retrofit retrofit = null;
 

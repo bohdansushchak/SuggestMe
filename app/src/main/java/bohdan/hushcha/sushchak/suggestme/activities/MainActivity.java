@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,23 +15,15 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
-import bohdan.hushcha.sushchak.suggestme.rest.Article;
-import bohdan.hushcha.sushchak.suggestme.rest.NewsApiClient;
-import bohdan.hushcha.sushchak.suggestme.rest.NewsApiInterface;
-import bohdan.hushcha.sushchak.suggestme.rest.NewsResponce;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -193,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
 
         categories.add(new Category(getString(R.string.category_news),
-                Arrays.asList(getResources().getStringArray(R.array.new_sub_items))));
+                Arrays.asList(getResources().getStringArray(R.array.news_sub_items))));
 
         categories.add(new Category(getString(R.string.category_crypto),
                 Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));

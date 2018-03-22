@@ -13,11 +13,11 @@
 
     <string name="alert_empty_email">Email is empty</string>
     <string name="alert_empty_password">Password is empty</string>
-    <string name="alert_email_notvalid">Email not valid</string>
-    <string name="alert_password_notvalid">Password not valid</string>
-    <string name="alert_password_toshort">Password to short min 8 symbols</string>
+    <string name="alert_email_not_valid">Email not valid</string>
+    <string name="alert_password_not_valid">Password not valid</string>
+    <string name="alert_password_to_short">Password to short min 8 symbols</string>
     <string name="alert_repeat_password_empty">Repeat password is empty</string>
-    <string name="alert_repassword_notequals">Repeat password not equals password</string>
+    <string name="alert_repassword_not_equals">Repeat password not equals password</string>
 
     <string name="category_cinema">Cinema Recomendations</string>
     <string name="category_music">Music Recomendations</string>
@@ -46,8 +46,9 @@
         <item>Weather for 5 days</item>
     </array>
 
-    <array name="new_sub_items">
-        <item>Search</item>
+    <array name="news_sub_items">
+        <item>Top news</item>
+        <item>Search by criteria</item>
     </array>
 
     <array name="cooking_sub_items">
@@ -55,8 +56,7 @@
         <item>Popular recipes</item>
     </array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_hint_search">Search</string>
 
 
 </resources>

@@ -1,4 +1,4 @@
-package bohdan.hushcha.sushchak.suggestme.rest;
+package bohdan.hushcha.sushchak.suggestme.rest.models;
 
 import com.google.gson.annotations.SerializedName;
 

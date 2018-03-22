@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String rePassword = etRepeatPassword.getText().toString();
 
                 String rePasswordError = !password.equals(rePassword) ?
-                        getString(R.string.alert_repassword_notequals) : null;
+                        getString(R.string.alert_repassword_not_equals) : null;
 
                 rePasswordLayout.setError(rePasswordError);
             }
