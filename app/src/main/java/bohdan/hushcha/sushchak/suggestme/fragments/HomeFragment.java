@@ -34,8 +34,7 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.rvMainList) RecyclerView recyclerView;
 
-    public HomeFragment() {
-    }
+    public HomeFragment() { }
 
     @Nullable
     @Override

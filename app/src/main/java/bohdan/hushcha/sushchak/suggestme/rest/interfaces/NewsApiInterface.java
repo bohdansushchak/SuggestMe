@@ -14,6 +14,14 @@ public interface NewsApiInterface {
                                     @Query("country") String country,
                                     @Query("category") String category);
 
+    @GET("top-headlines")
+    Call<NewsResponce> TopHeadlinesByCountry(@Query("apiKey") String apiKey,
+                                             @Query("country") String country);
+
+    @GET("top-headlines")
+    Call<NewsResponce> TopHeadlinesByCategory(@Query("apiKey") String apiKey,
+                                              @Query("category") String category);
+
     @GET("everything")
     Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey, @Query("q") String query);
 
