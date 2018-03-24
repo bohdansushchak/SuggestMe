@@ -35,7 +35,7 @@ public class WeatherDayFragment extends Fragment {
     private static final String DATE_PARAM = "date";
 
     private OnFragmentInteractionListener mListener;
-    
+
     @BindView(R.id.tvLocation) TextView tvLocation;
     @BindView(R.id.ivIconWeather) ImageView ivIconWeather;
     @BindView(R.id.tvDate) TextView tvDate;
@@ -45,17 +45,18 @@ public class WeatherDayFragment extends Fragment {
 
     private WeatherInterface weatherClient;
 
-    private List<ConsolidatedWeather> weatherList;
+    private static List<ConsolidatedWeather> weatherList;
 
     public WeatherDayFragment() {
         this.weatherList = new ArrayList<>();
 
         weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
-        ;
     }
 
     public static WeatherDayFragment newInstance(Date date) {
         WeatherDayFragment fragment = new WeatherDayFragment();
+        //weatherList = weathers;
+
         WeatherDate = date;
         /*
         Bundle args = new Bundle();
@@ -74,7 +75,7 @@ public class WeatherDayFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         String date = formatter.format(WeatherDate);
 
-        weatherClient.GetWeatherByDate("44418", date).enqueue(new Callback<List<ConsolidatedWeather>>() {
+        weatherClient.GetWeatherByDate("523920", date).enqueue(new Callback<List<ConsolidatedWeather>>() {
             @Override
             public void onResponse(Call<List<ConsolidatedWeather>> call, Response<List<ConsolidatedWeather>> response) {
                 weatherList = response.body();

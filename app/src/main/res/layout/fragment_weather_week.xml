@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="bohdan.hushcha.sushchak.suggestme.fragments.WeatherWeekFragment">
+             tools:context="bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

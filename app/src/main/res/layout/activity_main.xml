@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -36,19 +36,32 @@
                     android:textColor="#ffffff"
                     android:layout_centerInParent="true"
                     android:textStyle="bold"
-                    android:id="@+id/tvTitle"/>
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_centerVertical="true"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@android:drawable/star_big_on"/>
+                    android:id="@+id/tvHeaderTitle"/>
 
                 <RelativeLayout
                     android:layout_width="40dp"
-                    android:id="@+id/rl_menu"
+                    android:id="@+id/rlMenu"
                     android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@android:drawable/star_big_on"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlSettings"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_settings"/>
 
                 </RelativeLayout>
 
@@ -58,6 +71,7 @@
                 android:id="@+id/content_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </LinearLayout>
 
     </LinearLayout>

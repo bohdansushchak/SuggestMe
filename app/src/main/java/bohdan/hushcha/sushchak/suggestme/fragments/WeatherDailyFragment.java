@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import bohdan.hushcha.sushchak.suggestme.R;
 
 
-public class WeatherWeekFragment extends Fragment {
+public class WeatherDailyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -23,7 +23,7 @@ public class WeatherWeekFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public WeatherWeekFragment() {
+    public WeatherDailyFragment() {
         // Required empty public constructor
     }
 
@@ -33,11 +33,11 @@ public class WeatherWeekFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WeatherWeekFragment.
+     * @return A new instance of fragment WeatherDailyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WeatherWeekFragment newInstance(String param1, String param2) {
-        WeatherWeekFragment fragment = new WeatherWeekFragment();
+    public static WeatherDailyFragment newInstance(String param1, String param2) {
+        WeatherDailyFragment fragment = new WeatherDailyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

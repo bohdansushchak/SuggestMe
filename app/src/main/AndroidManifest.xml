@@ -24,14 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/StartTheme">
         </activity>
-
         <activity
             android:name=".activities.RegisterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -42,5 +40,11 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_facebook_id"/>
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings">
+        </activity>
     </application>
+
 </manifest>

@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,7 +23,6 @@ import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
-import bohdan.hushcha.sushchak.suggestme.fragments.WeatherWeekFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,9 +39,8 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.ev_menu) ExpandableListView evList;
-    @BindView(R.id.tvTitle) TextView tvTitle;
+    @BindView(R.id.tvHeaderTitle) TextView tvHeaderTitle;
     @BindView(R.id.tvEmail) TextView tvUserEmail;
-    @BindView(R.id.rl_menu) RelativeLayout rlMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +74,11 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
         homeFragment = new HomeFragment();
         Bundle bundle = new Bundle();
         bundle.putString("name", categories.get(0).getCategoryName());
-        tvTitle.setText(categories.get(0).getCategoryName());
+        tvHeaderTitle.setText(categories.get(0).getCategoryName());
 
         homeFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, homeFragment, "HomeFragment")
                 .addToBackStack("null").commit();
-
-        rlMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });
     }
 
     private void setListViewHeight(ExpandableListView listView, int group) {
@@ -161,14 +152,11 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
         WeatherDayFragment fragment = WeatherDayFragment.newInstance(new Date());
 
 
-
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "HomeFragment")
                 .addToBackStack("null").commit();
         drawerLayout.closeDrawer(Gravity.LEFT);
 
-        tvTitle.setText(categories.get(group).getCategoryName());
-
-
+        tvHeaderTitle.setText(categories.get(group).getCategoryName());
 
         /*
         homeFragment = new HomeFragment();
@@ -180,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
                 .addToBackStack("null").commit();
         drawerLayout.closeDrawer(Gravity.LEFT);
 
-        tvTitle.setText(categories.get(group).getCategoryName());
+        tvHeaderTitle.setText(categories.get(group).getCategoryName());
         */
     }
 
@@ -211,13 +199,26 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
                 Arrays.asList(getResources().getStringArray(R.array.cooking_sub_items))));
     }
 
-    @OnClick(R.id.btnSignOut)
-    public void SignOut(View view){
+    @OnClick({R.id.btnSignOut, R.id.rlMenu, R.id.rlSettings})
+    public void SignOut(View view) {
 
-        new AuthUtils(MainActivity.this).SignOut();
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        MainActivity.this.finish();
+        switch (view.getId()){
 
+            case R.id.rlMenu:
+                drawerLayout.openDrawer(Gravity.LEFT);
+                break;
+
+            case R.id.rlSettings:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnSignOut:
+                new AuthUtils(MainActivity.this).SignOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                MainActivity.this.finish();
+                break;
+        }
     }
 
     @Override
