@@ -1,13 +1,129 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/ivBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/weather_background"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/llIcon"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Verona"
+        android:textColor="#000000"
+        android:textSize="@dimen/WeatherLocationSize"/>
+
+    <ImageView
+        android:id="@+id/ivIconWeather"
+        android:layout_width="@dimen/WeatherIconWidth"
+        android:layout_height="@dimen/WeatherIconHeight"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/weather_lc"/>
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:text="12.12.2018"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llIcon">
+
+            <TableLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow>
+
+                    <ImageView
+                        android:id="@+id/ivTempIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather_lc_64"/>
+
+                    <TextView
+                        android:id="@+id/tvTemp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13"
+                        android:textSize="@dimen/WeatherTempSize"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/tvWindSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="122rpm"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/tvWindSpeed2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="122rpm"/>
+
+                    <TextView
+                        android:id="@+id/tvWindSpeed3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="122rpm"/>
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/tvWindSpeed4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="122rpm"/>
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/tvWindSpeed5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="122rpm"/>
+                </TableRow>
+            </TableLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

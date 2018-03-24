@@ -1,71 +1,126 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link WeatherDayFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link WeatherDayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WeatherDayFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public final String TAG = "WeatherDayFragment";
+
+    private static final String DATE_PARAM = "date";
 
     private OnFragmentInteractionListener mListener;
+    
+    @BindView(R.id.tvLocation) TextView tvLocation;
+    @BindView(R.id.ivIconWeather) ImageView ivIconWeather;
+    @BindView(R.id.tvDate) TextView tvDate;
+    @BindView(R.id.tvTemp) TextView tvTemp;
+
+    private static Date WeatherDate;
+
+    private WeatherInterface weatherClient;
+
+    private List<ConsolidatedWeather> weatherList;
 
     public WeatherDayFragment() {
-        // Required empty public constructor
+        this.weatherList = new ArrayList<>();
+
+        weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
+        ;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WeatherDayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static WeatherDayFragment newInstance(String param1, String param2) {
+    public static WeatherDayFragment newInstance(Date date) {
         WeatherDayFragment fragment = new WeatherDayFragment();
+        WeatherDate = date;
+        /*
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        args.putString(DATE_PARAM, date.toString());
+        fragment.setArguments(args);*/
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        if (WeatherDate != null)
+            WeatherDate = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        String date = formatter.format(WeatherDate);
+
+        weatherClient.GetWeatherByDate("44418", date).enqueue(new Callback<List<ConsolidatedWeather>>() {
+            @Override
+            public void onResponse(Call<List<ConsolidatedWeather>> call, Response<List<ConsolidatedWeather>> response) {
+                weatherList = response.body();
+
+                ConsolidatedWeather weather = weatherList.get(0);
+                InitIcons(weather);
+            }
+
+            @Override
+            public void onFailure(Call<List<ConsolidatedWeather>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void InitIcons(ConsolidatedWeather weather) {
+
+         Long temp = Math.round(weather.getTheTemp());
+
+        int iconid = getIconId(weather.getWeatherStateAbbr(), false);
+
+        Integer id = iconid;
+
+        Log.d(TAG, weather.getTheTemp().toString());
+        Log.d(TAG, weather.getMinTemp().toString());
+        Log.d(TAG, weather.getMaxTemp().toString());
+        Log.d(TAG, id.toString());
+
+
+        tvTemp.setText(temp.toString());
+
+        //ivIconWeather.setImageResource(getIconId(weather.getWeatherStateAbbr(), false));
+
+        Drawable drawable =  getActivity().getDrawable(iconid);
+
+        ivIconWeather.setImageDrawable(drawable);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weather_day, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather_day, container, false);
+
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -86,22 +141,65 @@ public class WeatherDayFragment extends Fragment {
         }
     }
 
+    public int getIconId(String abbreviation, boolean isPreview) {
+        if (!isPreview)
+            switch (abbreviation) {
+                case "sn":
+                    return R.drawable.weather_sn;
+                case "sl":
+                    return R.drawable.weather_sl;
+                case "h":
+                    return R.drawable.weather_h;
+                case "t":
+                    return R.drawable.weather_t;
+                case "hr":
+                    return R.drawable.weather_hr;
+                case "lr":
+                    return R.drawable.weather_lr;
+                case "s":
+                    return R.drawable.weather_s;
+                case "hc":
+                    return R.drawable.weather_hc;
+                case "lc":
+                    return R.drawable.weather_lc;
+                case "c":
+                    return R.drawable.weather_c;
+                default:
+                    return android.R.drawable.alert_dark_frame;
+            }
+        else
+            switch (abbreviation) {
+                case "sn":
+                    return R.drawable.weather_sn_64;
+                case "sl":
+                    return R.drawable.weather_sl_64;
+                case "h":
+                    return R.drawable.weather_h_64;
+                case "t":
+                    return R.drawable.weather_t_64;
+                case "hr":
+                    return R.drawable.weather_hr_64;
+                case "lr":
+                    return R.drawable.weather_lr_64;
+                case "s":
+                    return R.drawable.weather_s_64;
+                case "hc":
+                    return R.drawable.weather_hc_64;
+                case "lc":
+                    return R.drawable.weather_lc_64;
+                case "c":
+                    return R.drawable.weather_c_64;
+                default:
+                    return android.R.drawable.alert_dark_frame;
+            }
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

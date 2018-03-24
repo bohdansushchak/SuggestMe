@@ -1,6 +1,7 @@
 package bohdan.hushcha.sushchak.suggestme.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +16,20 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.WeatherWeekFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherDayFragment.OnFragmentInteractionListener {
 
     final String TAG = "MainActivity";
 
@@ -154,6 +158,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickItemNavigationDrawer(int group, int child) {
 
+        WeatherDayFragment fragment = WeatherDayFragment.newInstance(new Date());
+
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "HomeFragment")
+                .addToBackStack("null").commit();
+        drawerLayout.closeDrawer(Gravity.LEFT);
+
+        tvTitle.setText(categories.get(group).getCategoryName());
+
+
+
+        /*
         homeFragment = new HomeFragment();
         Bundle bundle = new Bundle();
         bundle.putString("name", categories.get(group).getCategoryName());
@@ -164,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(Gravity.LEFT);
 
         tvTitle.setText(categories.get(group).getCategoryName());
+        */
     }
 
     @Override
@@ -214,5 +232,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             MainActivity.this.finish();
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

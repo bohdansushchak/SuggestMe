@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        NewsApiInterface apiService = NewsClient.getClient(getActivity()).create(NewsApiInterface.class);
+        NewsApiInterface apiService = NewsClient.getClient().create(NewsApiInterface.class);
 
         Call<NewsResponce> call = apiService.TopHeadlines(NewsClient.API_KEY, "us", "business");
         call.enqueue(new Callback<NewsResponce>() {

@@ -25,7 +25,7 @@ public class NewsClient {
 
     private NewsClient(){}
 
-    public static Retrofit getClient(Context context){
+    public static Retrofit getClient(){
 
         if(retrofit == null){
             retrofit = new Retrofit.Builder()

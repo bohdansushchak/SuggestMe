@@ -1,6 +1,9 @@
 package bohdan.hushcha.sushchak.suggestme.rest.interfaces;
 
 
+import java.util.List;
+
+import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.WeatherResponce;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,6 +15,7 @@ public interface WeatherInterface {
     Call<WeatherResponce> GetWeather(@Path("woeid") String Woeid);
 
     @GET("location/{woeid}/{date}")
-    Call<WeatherResponce> GetWeatherByDate(@Path("woeid") String Woeid, @Path("date") String Date);
+    Call<List<ConsolidatedWeather>> GetWeatherByDate(@Path("woeid") String Woeid,
+                                                     @Path("date") String Date);
 
 }
