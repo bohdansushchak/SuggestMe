@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
+    final String TAG = "HomeFragment";
+
     private View view;
 
     private ArrayList<HomeItem> items;
@@ -48,14 +51,7 @@ public class HomeFragment extends Fragment {
     private void init() {
 
         items = new ArrayList<>();
-/*
-        items.add(new HomeItem("IT new smartphone", "rththr", "", "News"));
-        items.add(new HomeItem("New dish", "dfbbdg", "", "Cooking"));
-        items.add(new HomeItem("Today storm", "df", "", "Weather"));
-        items.add(new HomeItem("Bitcoin fall", "dfgdfg", "", "Crypto info"));
-        items.add(new HomeItem("New trek", "trbh", "", "Music"));
-        items.add(new HomeItem("Infinity war new trail", "cdffdfdfddf", "", "Films"));
-*/
+
         final HomeFragmentAdapter adapter = new HomeFragmentAdapter(getContext(), items);
 
         recyclerView.setHasFixedSize(false);
@@ -77,13 +73,11 @@ public class HomeFragment extends Fragment {
                     items.add(item);
                 }
                 adapter.notifyDataSetChanged();
-
-                //Log.d(TAG, "results: " + response.body().getTotalResults());
             }
 
             @Override
             public void onFailure(Call<NewsResponce> call, Throwable t) {
-                //Log.e(TAG, t.toString());
+                Log.e(TAG, t.toString());
             }
         });
 

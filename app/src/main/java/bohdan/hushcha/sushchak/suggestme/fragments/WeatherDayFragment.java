@@ -22,6 +22,7 @@ import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
+import bohdan.hushcha.sushchak.suggestme.utils.ImageUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -96,7 +97,7 @@ public class WeatherDayFragment extends Fragment {
 
          Long temp = Math.round(weather.getTheTemp());
 
-        int iconid = getIconId(weather.getWeatherStateAbbr(), false);
+        int iconid = ImageUtils.getWeatherImageId(weather.getWeatherStateAbbr());
 
         Integer id = iconid;
 
@@ -108,7 +109,7 @@ public class WeatherDayFragment extends Fragment {
 
         tvTemp.setText(temp.toString());
 
-        //ivIconWeather.setImageResource(getIconId(weather.getWeatherStateAbbr(), false));
+        //ivIconWeather.setImageResource(getWeatherIconId(weather.getWeatherStateAbbr(), false));
 
         Drawable drawable =  getActivity().getDrawable(iconid);
 
@@ -140,59 +141,6 @@ public class WeatherDayFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
-
-    public int getIconId(String abbreviation, boolean isPreview) {
-        if (!isPreview)
-            switch (abbreviation) {
-                case "sn":
-                    return R.drawable.weather_sn;
-                case "sl":
-                    return R.drawable.weather_sl;
-                case "h":
-                    return R.drawable.weather_h;
-                case "t":
-                    return R.drawable.weather_t;
-                case "hr":
-                    return R.drawable.weather_hr;
-                case "lr":
-                    return R.drawable.weather_lr;
-                case "s":
-                    return R.drawable.weather_s;
-                case "hc":
-                    return R.drawable.weather_hc;
-                case "lc":
-                    return R.drawable.weather_lc;
-                case "c":
-                    return R.drawable.weather_c;
-                default:
-                    return android.R.drawable.alert_dark_frame;
-            }
-        else
-            switch (abbreviation) {
-                case "sn":
-                    return R.drawable.weather_sn_64;
-                case "sl":
-                    return R.drawable.weather_sl_64;
-                case "h":
-                    return R.drawable.weather_h_64;
-                case "t":
-                    return R.drawable.weather_t_64;
-                case "hr":
-                    return R.drawable.weather_hr_64;
-                case "lr":
-                    return R.drawable.weather_lr_64;
-                case "s":
-                    return R.drawable.weather_s_64;
-                case "hc":
-                    return R.drawable.weather_hc_64;
-                case "lc":
-                    return R.drawable.weather_lc_64;
-                case "c":
-                    return R.drawable.weather_c_64;
-                default:
-                    return android.R.drawable.alert_dark_frame;
-            }
     }
 
     @Override

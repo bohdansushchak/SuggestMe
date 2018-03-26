@@ -16,12 +16,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 import butterknife.BindView;
@@ -149,8 +149,7 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
 
     public void clickItemNavigationDrawer(int group, int child) {
 
-        WeatherDayFragment fragment = WeatherDayFragment.newInstance(new Date());
-
+        WeatherDailyFragment fragment = WeatherDailyFragment.newInstance();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "HomeFragment")
                 .addToBackStack("null").commit();

@@ -1,92 +1,109 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.adapters.DailyWeatherAdapter;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class WeatherDailyFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    final String TAG = " WeatherDailyFragment";
 
-    private OnFragmentInteractionListener mListener;
+    @BindView(R.id.rvDailyWeatherList) RecyclerView recyclerView;
+
+    ArrayList<ConsolidatedWeather> items;
+
+    //private OnFragmentInteractionListener mListener;
 
     public WeatherDailyFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WeatherDailyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static WeatherDailyFragment newInstance(String param1, String param2) {
+    public static WeatherDailyFragment newInstance() {
         WeatherDailyFragment fragment = new WeatherDailyFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weather_week, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather_week, container, false);
+        ButterKnife.bind(this, view);
+        Init();
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
+    private void Init(){
+        items = new ArrayList<>();
+
+        final DailyWeatherAdapter adapter = new DailyWeatherAdapter(getContext(), items);
+
+        recyclerView.setHasFixedSize(false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        WeatherInterface weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
+
+        Call<List<ConsolidatedWeather>> call = weatherClient.GetWeatherByDate("523920", "2018/03/25");
+        call.enqueue(new Callback<List<ConsolidatedWeather>>() {
+            @Override
+            public void onResponse(Call<List<ConsolidatedWeather>> call, Response<List<ConsolidatedWeather>> response) {
+                List<ConsolidatedWeather> list = response.body();
+
+                for (ConsolidatedWeather weather : list){
+                    items.add(weather);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<ConsolidatedWeather>> call, Throwable t) {
+
+            }
+        });
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+
+        /*if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        //mListener = null;
     }
 }

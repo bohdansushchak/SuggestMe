@@ -8,6 +8,7 @@ public class Category {
     private String CategoryName;
     private List<String> CategoryItems;
 
+
     public Category(String categoryName, List<String> categoryItems) {
         CategoryName = categoryName;
         CategoryItems = categoryItems;
