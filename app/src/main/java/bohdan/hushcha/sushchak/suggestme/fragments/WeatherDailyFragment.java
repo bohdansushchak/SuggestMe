@@ -37,7 +37,7 @@ public class WeatherDailyFragment extends Fragment {
     public WeatherDailyFragment() {
     }
 
-    public static WeatherDailyFragment newInstance() {
+    public static WeatherDailyFragment getInstance() {
         WeatherDailyFragment fragment = new WeatherDailyFragment();
         return fragment;
     }

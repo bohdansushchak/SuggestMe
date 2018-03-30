@@ -39,6 +39,13 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() { }
 
+
+    public static HomeFragment getInstance(){
+        HomeFragment homeFragment = new HomeFragment();
+
+        return homeFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,11 +87,6 @@ public class HomeFragment extends Fragment {
                 Log.e(TAG, t.toString());
             }
         });
-
-
-
-
-
 
     }
 }

@@ -8,7 +8,7 @@
     <color name="colorTextError">#fc001d</color>
 
     <color name="colorTextNormal">#000000</color>
-    <color name="colorTextDescription">#767575</color>
+    <color name="colorTextDescription">#ffffff</color>
 
     <color name="colorTextLogo">#f6a6e90b</color>
 </resources>

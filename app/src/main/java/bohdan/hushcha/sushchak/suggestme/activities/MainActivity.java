@@ -3,6 +3,8 @@ package bohdan.hushcha.sushchak.suggestme.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentController;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -16,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
@@ -147,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
         expandableListView.requestLayout();
     }
 
-    public void clickItemNavigationDrawer(int group, int child) {
-
-        WeatherDailyFragment fragment = WeatherDailyFragment.newInstance();
+    public void clickItemNavigationDrawer(int group, int child)
+    {
+        WeatherDailyFragment fragment = WeatherDailyFragment.getInstance();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "HomeFragment")
                 .addToBackStack("null").commit();
@@ -185,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
         categories.add(new Category(getString(R.string.category_music),
                 Arrays.asList(getResources().getStringArray(R.array.music_sub_items))));
 
+/*
+        ArrayList<Class<? extends Fragment>> weatherFragments = new ArrayList<>();
+        weatherFragments.add(WeatherDayFragment.class);
+        weatherFragments.add(WeatherDailyFragment.class);
+*/
         categories.add(new Category(getString(R.string.category_weather),
                 Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
 
@@ -196,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
 
         categories.add(new Category(getString(R.string.category_cooking),
                 Arrays.asList(getResources().getStringArray(R.array.cooking_sub_items))));
+
     }
 
     @OnClick({R.id.btnSignOut, R.id.rlMenu, R.id.rlSettings})
@@ -223,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
     @Override
     protected void onStart() {
         super.onStart();
-
+/*
         if (mAuth.getCurrentUser() != null) {
             String email = mAuth.getCurrentUser().getUid();
 
@@ -231,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
         } else {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             MainActivity.this.finish();
-        }
+        }*/
     }
 
     @Override

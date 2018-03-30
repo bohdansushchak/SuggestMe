@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,9 +55,12 @@ public class WeatherDayFragment extends Fragment {
         weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
     }
 
-    public static WeatherDayFragment newInstance(Date date) {
+    public static WeatherDayFragment getInstance(Date date) {
+
         WeatherDayFragment fragment = new WeatherDayFragment();
         //weatherList = weathers;
+
+
 
         WeatherDate = date;
         /*
