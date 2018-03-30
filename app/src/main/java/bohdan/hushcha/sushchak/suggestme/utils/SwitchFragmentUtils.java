@@ -1,19 +1,9 @@
 package bohdan.hushcha.sushchak.suggestme.utils;
 
-import android.support.v4.app.Fragment;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
-import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
-
 public class SwitchFragmentUtils {
 /*
     public static Fragment GetFragment(int group, int child, Object data) {
-        Fragment fragment = HomeFragment.getInstance();
+        Fragment fragment = TopNewsFragment.getInstance();
 
         switch (group) {
             case 0:

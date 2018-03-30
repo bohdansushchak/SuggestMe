@@ -106,4 +106,5 @@ public class WeatherDailyFragment extends Fragment {
         super.onDetach();
         //mListener = null;
     }
+
 }

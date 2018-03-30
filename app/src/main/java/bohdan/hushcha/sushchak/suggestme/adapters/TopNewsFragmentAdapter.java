@@ -15,18 +15,22 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.models.HomeItem;
+import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapter.ViewHolder> {
+public class TopNewsFragmentAdapter extends RecyclerView.Adapter<TopNewsFragmentAdapter.ViewHolder> {
 
-    private List<HomeItem> items;
+    private List<Article> items;
     private Context context;
+    private TopNewsFragment.TopNewsInteractionListener mListener;
 
-    public HomeFragmentAdapter(Context context, List<HomeItem> items) {
+    public TopNewsFragmentAdapter(Context context, List<Article> items,
+                                  TopNewsFragment.TopNewsInteractionListener mListener) {
         this.items = items;
         this.context = context;
+        this.mListener = mListener;
     }
 
     @Override
@@ -37,19 +41,30 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvTitle.setText(items.get(position).getTitle());
-        holder.tvDecription.setText(items.get(position).getDescription());
-        holder.tvCategory.setText(items.get(position).getCategory());
+        holder.tvDecription.setText(items.get(position).getDecription());
+        holder.tvCategory.setText(items.get(position).getAuthor());
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher_round)
                 .error(R.mipmap.ic_launcher_round);
 
-        Glide.with(context).load(items.get(position).getImageUrl())
+        Glide.with(context).load(items.get(position).getUrlToImage())
                 .apply(options)
                 .into(holder.ivBackground);
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mListener != null){
+                    mListener.topNewsFragmentInteractionClick(items.get(position).getUrl());
+                }
+            }
+        });
+
     }
 
     @Override

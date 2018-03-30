@@ -3,8 +3,6 @@ package bohdan.hushcha.sushchak.suggestme.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentController;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -18,12 +16,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
-import bohdan.hushcha.sushchak.suggestme.fragments.HomeFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
@@ -31,13 +28,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements WeatherDayFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity
+        implements WeatherDayFragment.OnFragmentInteractionListener, TopNewsFragment.TopNewsInteractionListener {
 
     final String TAG = "MainActivity";
 
     private FirebaseAuth mAuth;
     private CategoryAdapter categoryAdapter;
-    private HomeFragment homeFragment;
+    private TopNewsFragment topNewsFragment;
     private ArrayList<Category> categories;
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
@@ -74,13 +72,13 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
 
         setExpandableListViewHeightBasedOnChildren(evList);
 
-        homeFragment = new HomeFragment();
+        topNewsFragment = new TopNewsFragment();
         Bundle bundle = new Bundle();
         bundle.putString("name", categories.get(0).getCategoryName());
         tvHeaderTitle.setText(categories.get(0).getCategoryName());
 
-        homeFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, homeFragment, "HomeFragment")
+        topNewsFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, topNewsFragment, "TopNewsFragment")
                 .addToBackStack("null").commit();
     }
 
@@ -154,19 +152,19 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
     {
         WeatherDailyFragment fragment = WeatherDailyFragment.getInstance();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "HomeFragment")
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "TopNewsFragment")
                 .addToBackStack("null").commit();
         drawerLayout.closeDrawer(Gravity.LEFT);
 
         tvHeaderTitle.setText(categories.get(group).getCategoryName());
 
         /*
-        homeFragment = new HomeFragment();
+        topNewsFragment = new TopNewsFragment();
         Bundle bundle = new Bundle();
         bundle.putString("name", categories.get(group).getCategoryName());
-        homeFragment.setArguments(bundle);
+        topNewsFragment.setArguments(bundle);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, homeFragment, "HomeFragment")
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, topNewsFragment, "TopNewsFragment")
                 .addToBackStack("null").commit();
         drawerLayout.closeDrawer(Gravity.LEFT);
 
@@ -246,5 +244,13 @@ public class MainActivity extends AppCompatActivity implements WeatherDayFragmen
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void topNewsFragmentInteractionClick(String Url) {
+        Intent viewArticle = new Intent(Intent.ACTION_VIEW);
+        viewArticle.putExtra("url", Url);
+
+        startActivity(viewArticle);
     }
 }

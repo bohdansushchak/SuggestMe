@@ -1,5 +1,6 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.adapters.HomeFragmentAdapter;
-import bohdan.hushcha.sushchak.suggestme.models.HomeItem;
+import bohdan.hushcha.sushchak.suggestme.adapters.TopNewsFragmentAdapter;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
@@ -27,29 +27,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class TopNewsFragment extends Fragment {
 
-    final String TAG = "HomeFragment";
+    final String TAG = "TopNewsFragment";
 
-    private View view;
-
-    private ArrayList<HomeItem> items;
+    private ArrayList<Article> items;
+    private TopNewsInteractionListener mListener;
 
     @BindView(R.id.rvMainList) RecyclerView recyclerView;
 
-    public HomeFragment() { }
+    public TopNewsFragment() {
+    }
 
+    public static TopNewsFragment getInstance() {
+        TopNewsFragment topNewsFragment = new TopNewsFragment();
 
-    public static HomeFragment getInstance(){
-        HomeFragment homeFragment = new HomeFragment();
-
-        return homeFragment;
+        return topNewsFragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -59,7 +58,7 @@ public class HomeFragment extends Fragment {
 
         items = new ArrayList<>();
 
-        final HomeFragmentAdapter adapter = new HomeFragmentAdapter(getContext(), items);
+        final TopNewsFragmentAdapter adapter = new TopNewsFragmentAdapter(getContext(), items, mListener);
 
         recyclerView.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -76,9 +75,10 @@ public class HomeFragment extends Fragment {
                 List<Article> articles = response.body().getArticles();
 
                 for (Article article : articles) {
-                    HomeItem item = new HomeItem(article.getTitle(), article.getDecription(), article.getUrlToImage(),article.getPublishedAt());
-                    items.add(item);
+                    //HomeItem item = new HomeItem(article.getTitle(), article.getDecription(), article.getUrlToImage(),article.getPublishedAt());
+                    items.add(article);
                 }
+
                 adapter.notifyDataSetChanged();
             }
 
@@ -87,6 +87,24 @@ public class HomeFragment extends Fragment {
                 Log.e(TAG, t.toString());
             }
         });
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof TopNewsInteractionListener) {
+            mListener = (TopNewsInteractionListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface TopNewsInteractionListener {
+        void topNewsFragmentInteractionClick(String Url);
     }
 }

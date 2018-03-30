@@ -60,8 +60,6 @@ public class WeatherDayFragment extends Fragment {
         WeatherDayFragment fragment = new WeatherDayFragment();
         //weatherList = weathers;
 
-
-
         WeatherDate = date;
         /*
         Bundle args = new Bundle();
