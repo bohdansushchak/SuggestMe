@@ -1,8 +1,32 @@
 package bohdan.hushcha.sushchak.suggestme.utils;
 
+import android.content.Context;
+import android.support.v4.app.Fragment;
+
+import bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
+import retrofit2.Retrofit;
+
 public class SwitchFragmentUtils {
-/*
-    public static Fragment GetFragment(int group, int child, Object data) {
+
+    private NewsApiInterface newsClient;
+    private Retrofit cookingClient;
+    private WeatherInterface weatherClient;
+
+    public SwitchFragmentUtils(Context context){
+
+        weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
+        newsClient = NewsClient.getClient().create(NewsApiInterface.class);
+    }
+
+
+    public static Fragment GetFragment(int group, int child) {
         Fragment fragment = TopNewsFragment.getInstance();
 
         switch (group) {
@@ -40,19 +64,51 @@ public class SwitchFragmentUtils {
                             //todo: top albums by artist
                             break;
                     }
+                    break;
             case 2:
                 switch (child){
                     case 0:
-                        fragment = WeatherDayFragment.getInstance(data);
+                        fragment = WeatherDayFragment.getInstance();
+                        break;
+                    case 1:
+                        fragment = WeatherDailyFragment.getInstance();
                         break;
                 }
+                break;
+            case 3:
+                switch (child){
+                    case 0:
+                        fragment = TopNewsFragment.getInstance();
+                        break;
+                    case 1:
+                        fragment = SearchNewsFragment.getInstance();
+                        break;
+                }
+                break;
+            case 4:
+                switch (child){
+                    case 0:
 
+                        break;
+                    case 1:
 
+                        break;
+                }
+                break;
+            case 5:
+                switch (child){
+                    case 0:
+
+                        break;
+                    case 1:
+
+                        break;
+                }
         }
 
         return fragment;
     }
-
+/*
     public static String GetFragmentTitle(int group, int child) {
         ArrayList<ArrayList<String>> titles = new ArrayList<>();
         titles.add(Arrays.asList(getResources().getStringArray(R.array.cinema_sub_items)))

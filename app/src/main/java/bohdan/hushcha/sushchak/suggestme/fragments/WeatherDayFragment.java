@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WeatherDayFragment extends Fragment {
+public class WeatherDayFragment extends BaseMyFragment {
 
     public final String TAG = "WeatherDayFragment";
 
@@ -55,12 +55,12 @@ public class WeatherDayFragment extends Fragment {
         weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
     }
 
-    public static WeatherDayFragment getInstance(Date date) {
+    public static WeatherDayFragment getInstance() {
 
         WeatherDayFragment fragment = new WeatherDayFragment();
         //weatherList = weathers;
 
-        WeatherDate = date;
+        //WeatherDate = date;
         /*
         Bundle args = new Bundle();
         args.putString(DATE_PARAM, date.toString());

@@ -3,6 +3,7 @@ package bohdan.hushcha.sushchak.suggestme.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -24,6 +25,7 @@ import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
+import bohdan.hushcha.sushchak.suggestme.utils.SwitchFragmentUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -150,27 +152,14 @@ public class MainActivity extends AppCompatActivity
 
     public void clickItemNavigationDrawer(int group, int child)
     {
-        WeatherDailyFragment fragment = WeatherDailyFragment.getInstance();
+        Fragment fragment = SwitchFragmentUtils.GetFragment(group, child);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "TopNewsFragment")
                 .addToBackStack("null").commit();
         drawerLayout.closeDrawer(Gravity.LEFT);
 
         tvHeaderTitle.setText(categories.get(group).getCategoryName());
-
-        /*
-        topNewsFragment = new TopNewsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("name", categories.get(group).getCategoryName());
-        topNewsFragment.setArguments(bundle);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, topNewsFragment, "TopNewsFragment")
-                .addToBackStack("null").commit();
-        drawerLayout.closeDrawer(Gravity.LEFT);
-
-        tvHeaderTitle.setText(categories.get(group).getCategoryName());
-        */
-    }
+            }
 
     @Override
     public void onBackPressed() {

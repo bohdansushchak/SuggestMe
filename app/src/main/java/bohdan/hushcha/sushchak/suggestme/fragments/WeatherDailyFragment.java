@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class WeatherDailyFragment extends Fragment {
+public class WeatherDailyFragment extends BaseMyFragment {
 
     final String TAG = " WeatherDailyFragment";
 
@@ -106,5 +106,4 @@ public class WeatherDailyFragment extends Fragment {
         super.onDetach();
         //mListener = null;
     }
-
 }

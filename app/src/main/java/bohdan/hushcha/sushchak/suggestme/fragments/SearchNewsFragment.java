@@ -3,7 +3,6 @@ package bohdan.hushcha.sushchak.suggestme.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SearchNewsFragment extends Fragment {
+public class SearchNewsFragment extends BaseMyFragment {
 
     private OnFragmentInteractionListener mListener;
 
@@ -28,12 +29,15 @@ public class SearchNewsFragment extends Fragment {
     @BindView(R.id.tvDateAt) TextView tvDateAt;
     @BindView(R.id.tvDateTo) TextView tvDateTo;
 
+    private NewsApiInterface newsClient;
+
 
     public SearchNewsFragment() {
-        // Required empty public constructor
+
+        newsClient = NewsClient.getClient().create(NewsApiInterface.class);
     }
 
-    public static SearchNewsFragment newInstance(String param1, String param2) {
+    public static SearchNewsFragment getInstance() {
         SearchNewsFragment fragment = new SearchNewsFragment();
         return fragment;
     }
