@@ -1,46 +1,107 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="5dp"
+              tools:context="bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment">
 
-
-    <TableLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvNewsSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TableRow>
-            <TextView
-                android:text="Counry:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <Spinner>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_home_fragment">
+    </android.support.v7.widget.RecyclerView>
 
-            </Spinner>
-        </TableRow>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
+        android:orientation="horizontal">
 
-        <TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-            <TextView
-                android:text="Source:"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
-            <Spinner>
+            <TableRow>
 
-            </Spinner>
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Counry:"/>
 
-        <TableRow>
-            <TextView android:text="Date at:"/>
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:text="Any"
+                    android:id="@+id/tvChooseCountry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding"
+                    android:clickable="true"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Source:"/>
+
+                <TextView
+                    android:text="Any"
+                    android:id="@+id/tvChooseSource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding"
+                    android:clickable="true"/>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date at:"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvDateAt"
+                    android:text="10.06.2018"
+                    android:layout_marginStart="@dimen/padding"
+                    android:clickable="true"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date to:"/>
+
+                <TextView
+                    android:text="18/06/2018"
+                    android:layout_marginStart="@dimen/padding"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tvDateTo"/>
+
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_search"
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="58dp"
+        android:layout_gravity="center_horizontal"
         android:text="@string/btn_hint_search"/>
-
-</RelativeLayout>
+</LinearLayout>
