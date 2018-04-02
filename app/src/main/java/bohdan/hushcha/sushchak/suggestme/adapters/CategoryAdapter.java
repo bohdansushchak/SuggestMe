@@ -15,8 +15,8 @@ import bohdan.hushcha.sushchak.suggestme.models.Category;
 
 public class CategoryAdapter extends BaseExpandableListAdapter {
 
-    Context context;
-    ArrayList<Category> categories;
+    private Context context;
+    private ArrayList<Category> categories;
 
     public CategoryAdapter(Context context, ArrayList<Category> categories) {
         this.context = context;

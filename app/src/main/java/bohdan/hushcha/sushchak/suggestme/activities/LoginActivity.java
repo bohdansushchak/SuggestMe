@@ -35,7 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
+import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.passwordLayout) TextInputLayout passwordLayout;
     @BindView(R.id.btnFacebook) LoginButton btnFacebook;
 
-    private AuthUtils authUtils;
+    private AuthService authService;
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager mCallbackManager;
 
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(LoginActivity.this);
 
-        authUtils = new AuthUtils(LoginActivity.this);
+        authService = new AuthService(LoginActivity.this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         try {
-            Task<AuthResult> authResult = authUtils.SignIn(username, password);
+            Task<AuthResult> authResult = authService.SignIn(username, password);
 
             authResult.addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
 
-        } catch (AuthUtils.RegisterException regEx) {
+        } catch (AuthService.RegisterException regEx) {
             String emailError = regEx.getEmailError();
             String passwordError = regEx.getPasswordError();
 
@@ -207,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String emailError = authUtils.GetEmailError(etEmail.getText().toString());
+                String emailError = authService.GetEmailError(etEmail.getText().toString());
                 emailLayout.setError(emailError);
             }
 
@@ -223,7 +223,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String passwordError = authUtils.GetPasswordError(etPassword.getText().toString());
+                String passwordError = authService.GetPasswordError(etPassword.getText().toString());
                 passwordLayout.setError(passwordError);
             }
 

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,10 +38,14 @@ public class WeatherDayFragment extends BaseMyFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    @BindView(R.id.tvLocation) TextView tvLocation;
-    @BindView(R.id.ivIconWeather) ImageView ivIconWeather;
-    @BindView(R.id.tvDate) TextView tvDate;
-    @BindView(R.id.tvTemp) TextView tvTemp;
+    @BindView(R.id.tvLocation)
+    TextView tvLocation;
+    @BindView(R.id.ivIconWeather)
+    ImageView ivIconWeather;
+    @BindView(R.id.tvDate)
+    TextView tvDate;
+    @BindView(R.id.tvTemp)
+    TextView tvTemp;
 
     private static Date WeatherDate;
 
@@ -51,20 +55,11 @@ public class WeatherDayFragment extends BaseMyFragment {
 
     public WeatherDayFragment() {
         this.weatherList = new ArrayList<>();
-
         weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
     }
 
     public static WeatherDayFragment getInstance() {
-
         WeatherDayFragment fragment = new WeatherDayFragment();
-        //weatherList = weathers;
-
-        //WeatherDate = date;
-        /*
-        Bundle args = new Bundle();
-        args.putString(DATE_PARAM, date.toString());
-        fragment.setArguments(args);*/
         return fragment;
     }
 
@@ -72,7 +67,7 @@ public class WeatherDayFragment extends BaseMyFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (WeatherDate != null)
+        if (WeatherDate == null)
             WeatherDate = new Date();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -94,26 +89,26 @@ public class WeatherDayFragment extends BaseMyFragment {
         });
     }
 
-    @SuppressLint("SetTextI18n")
     private void InitIcons(ConsolidatedWeather weather) {
 
-         Long temp = Math.round(weather.getTheTemp());
+        Long temp = Math.round(weather.getTheTemp());
 
-        int iconid = ImageUtils.getWeatherImageId(weather.getWeatherStateAbbr());
+        int iconId = ImageUtils.getWeatherImageId(weather.getWeatherStateAbbr());
 
-        Integer id = iconid;
+        Integer id = iconId;
 
         Log.d(TAG, weather.getTheTemp().toString());
         Log.d(TAG, weather.getMinTemp().toString());
         Log.d(TAG, weather.getMaxTemp().toString());
         Log.d(TAG, id.toString());
 
+        Spanned tempStr = Html.fromHtml(temp.toString() + "&#8451;");
 
-        tvTemp.setText(temp.toString());
+        tvTemp.setText(tempStr);
 
         //ivIconWeather.setImageResource(getWeatherIconId(weather.getWeatherStateAbbr(), false));
 
-        Drawable drawable =  getActivity().getDrawable(iconid);
+        Drawable drawable = getActivity().getDrawable(iconId);
 
         ivIconWeather.setImageDrawable(drawable);
     }
@@ -126,14 +121,14 @@ public class WeatherDayFragment extends BaseMyFragment {
         ButterKnife.bind(this, view);
         return view;
     }
-
+/*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+*/
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

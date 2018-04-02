@@ -17,22 +17,28 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
+import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    @BindView(R.id.etEmail) TextInputEditText etEmail;
-    @BindView(R.id.etPassword) TextInputEditText etPassword;
-    @BindView(R.id.etRePassword) TextInputEditText etRepeatPassword;
+    @BindView(R.id.etEmail)
+    TextInputEditText etEmail;
+    @BindView(R.id.etPassword)
+    TextInputEditText etPassword;
+    @BindView(R.id.etRePassword)
+    TextInputEditText etRepeatPassword;
 
-    @BindView(R.id.emailLayout) TextInputLayout emailLayout;
-    @BindView(R.id.passwordLayout) TextInputLayout passwordLayout;
-    @BindView(R.id.rePasswordLayout) TextInputLayout rePasswordLayout;
+    @BindView(R.id.emailLayout)
+    TextInputLayout emailLayout;
+    @BindView(R.id.passwordLayout)
+    TextInputLayout passwordLayout;
+    @BindView(R.id.rePasswordLayout)
+    TextInputLayout rePasswordLayout;
 
-    private AuthUtils authUtils;
+    private AuthService authService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(RegisterActivity.this);
 
-        authUtils = new AuthUtils(RegisterActivity.this);
+        authService = new AuthService(RegisterActivity.this);
     }
 
     @Override
@@ -49,34 +55,46 @@ public class RegisterActivity extends AppCompatActivity {
         InitTextWatcher();
     }
 
-    private void InitTextWatcher(){
+    /**
+     * Function to init text watcher for all EditText views
+     */
+    private void InitTextWatcher() {
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String emailError = authUtils.GetEmailError(etEmail.getText().toString());
+                String emailError = authService.GetEmailError(etEmail.getText().toString());
                 emailLayout.setError(emailError);
             }
+
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String passwordError = authUtils.GetPasswordError(etPassword.getText().toString());
+                String passwordError = authService.GetPasswordError(etPassword.getText().toString());
                 passwordLayout.setError(passwordError);
             }
+
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
         etRepeatPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -90,10 +108,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) { }
+            public void afterTextChanged(Editable editable) {
+            }
         });
     }
 
+    /**
+     * Method to register new user
+     * @param view
+     */
     @OnClick(R.id.btnRegister)
     public void clickRegister(View view) {
         String email = etEmail.getText().toString();
@@ -102,25 +125,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         try {
 
-           Task<AuthResult> authResult = authUtils.SignUp(email, password, repeatPassword);
+            Task<AuthResult> authResult = authService.SignUp(email, password, repeatPassword);
 
-           authResult.addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-               @Override
-               public void onComplete(@NonNull Task<AuthResult> task) {
-                   if(task.isSuccessful() && task.getResult().getUser() != null){
-                       startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                       RegisterActivity.this.finish();
-                   }
-               }
-           }).addOnFailureListener(new OnFailureListener() {
-               @Override
-               public void onFailure(@NonNull Exception e) {
-                   Toast.makeText(RegisterActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-               }
-           });
-        }
-
-        catch (AuthUtils.RegisterException regEx){
+            authResult.addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful() && task.getResult().getUser() != null) {
+                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        RegisterActivity.this.finish();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(RegisterActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (AuthService.RegisterException regEx) {
             String emailError = regEx.getEmailError();
             String passwordError = regEx.getPasswordError();
             String rePasswordError = regEx.getRepeatError();
@@ -128,13 +149,15 @@ public class RegisterActivity extends AppCompatActivity {
             emailLayout.setError(emailError);
             passwordLayout.setError(passwordError);
             rePasswordLayout.setError(rePasswordError);
-        }
-
-        finally {
+        } finally {
 
         }
     }
 
+    /**
+     * When user click back button
+     * function back to login screen
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

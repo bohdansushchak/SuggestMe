@@ -26,6 +26,8 @@
     <string name="category_crypto">Crypto Info</string>
     <string name="category_cooking">Cooking book</string>
 
+    <string name="SymbolDegreesAndCelsius"><![CDATA[&#8451;]]></string>
+
     <array name="cinema_sub_items">
         <item>Top rated movies</item>
         <item>Top rated TV shows</item>
@@ -133,6 +135,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
 
 
 </resources>

@@ -1,9 +1,9 @@
 package bohdan.hushcha.sushchak.suggestme.adapters;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
@@ -37,31 +34,43 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
        View view = LayoutInflater.from(parent.getContext())
                .inflate(R.layout.item_weather_week, parent, false);
        return new ViewHolder(view);
-
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(DailyWeatherAdapter.ViewHolder holder, int position) {
         ConsolidatedWeather weather = weatherList.get(position);
+/*
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
 
-        holder.ivIcon.setImageResource(ImageUtils.getWeatherIconId(weather.getWeatherStateAbbr()));
+        Date date = new Date();
+        try {
 
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
-        //LocalDate date = LocalDate.parse(weather.getApplicableDate(), formatter);
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEE");
+            date =  formatter.parse(weather.getCreatedDate().split("[.]")[0]);
 
-        holder.tvDay.setText(weather.getCreatedDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        DateFormatSymbols dfs = new DateFormatSymbols();
+*/
+
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEEE");
+        
         Long temp = Math.round(weather.getTheTemp());
-        holder.tvTemp.setText(temp.toString());
+        Spanned tempStr = Html.fromHtml(temp.toString() + context.getString(R.string.SymbolDegreesAndCelsius));
+
+        holder.tvDay.setText(formatter.format(weather.getCreatedDate()));
+        holder.tvTemp.setText(tempStr);
+        holder.ivIcon.setImageResource(ImageUtils.getWeatherIconId(weather.getWeatherStateAbbr()));
     }
 
     @Override
     public int getItemCount() {
         return weatherList.size();
     }
-
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -75,6 +84,4 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
             ButterKnife.bind(this, itemView);
         }
     }
-
-
 }

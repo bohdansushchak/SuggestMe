@@ -19,10 +19,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthUtils;
+import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
-import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 import bohdan.hushcha.sushchak.suggestme.utils.SwitchFragmentUtils;
@@ -37,33 +36,43 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private CategoryAdapter categoryAdapter;
-    private TopNewsFragment topNewsFragment;
     private ArrayList<Category> categories;
 
-    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @BindView(R.id.ev_menu) ExpandableListView evList;
-    @BindView(R.id.tvHeaderTitle) TextView tvHeaderTitle;
-    @BindView(R.id.tvEmail) TextView tvUserEmail;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.ev_menu)
+    ExpandableListView evList;
+    @BindView(R.id.tvHeaderTitle)
+    TextView tvHeaderTitle;
+    @BindView(R.id.tvEmail)
+    TextView tvUserEmail;
+
+
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(MainActivity.this);
 
         this.mAuth = FirebaseAuth.getInstance();
+        this.categories = new ArrayList<>();
 
-        categories = new ArrayList<>();
         InitNavigationItems();
 
         init();
     }
 
+    /**
+     * Function to initialize first fragment in main activity and
+     */
     private void init() {
 
-        categoryAdapter = new CategoryAdapter(MainActivity.this, categories);
-        evList.setAdapter(categoryAdapter);
-        evList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        this.categoryAdapter = new CategoryAdapter(MainActivity.this, categories);
+        this.evList.setAdapter(categoryAdapter);
+        this.evList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
             @Override
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
@@ -74,15 +83,16 @@ public class MainActivity extends AppCompatActivity
 
         setExpandableListViewHeightBasedOnChildren(evList);
 
-        topNewsFragment = new TopNewsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("name", categories.get(0).getCategoryName());
+        currentFragment = new TopNewsFragment();
+        //Bundle bundle = new Bundle();
+        //bundle.putString("name", categories.get(0).getCategoryName());
         tvHeaderTitle.setText(categories.get(0).getCategoryName());
 
-        topNewsFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, topNewsFragment, "TopNewsFragment")
+        //topNewsFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
                 .addToBackStack("null").commit();
     }
+
 
     private void setListViewHeight(ExpandableListView listView, int group) {
         ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
@@ -117,7 +127,8 @@ public class MainActivity extends AppCompatActivity
         listView.requestLayout();
     }
 
-    public static void setExpandableListViewHeightBasedOnChildren(ExpandableListView expandableListView) {
+
+    public void setExpandableListViewHeightBasedOnChildren(ExpandableListView expandableListView) {
         CategoryAdapter adapter = (CategoryAdapter) expandableListView.getExpandableListAdapter();
         if (adapter == null) {
             return;
@@ -150,23 +161,40 @@ public class MainActivity extends AppCompatActivity
         expandableListView.requestLayout();
     }
 
-    public void clickItemNavigationDrawer(int group, int child)
-    {
+    /**
+     * Function change fragment in main screen
+     *
+     * @param group category id
+     * @param child item id in catagory
+     */
+    public void clickItemNavigationDrawer(int group, int child) {
         Fragment fragment = SwitchFragmentUtils.GetFragment(group, child);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "TopNewsFragment")
-                .addToBackStack("null").commit();
+        if (fragment != null) {
+
+            currentFragment = fragment;
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
+                    .addToBackStack("null").commit();
+
+            tvHeaderTitle.setText(categories.get(group).getCategoryName());
+        }
+
         drawerLayout.closeDrawer(Gravity.LEFT);
+    }
 
-        tvHeaderTitle.setText(categories.get(group).getCategoryName());
-            }
-
+    /**
+     * Function called when user click back button
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         //finish();
     }
 
+    /**
+     * Function to initialize items in navigation drawer menu
+     */
     private void InitNavigationItems() {
 
         categories.add(new Category(getString(R.string.category_cinema),
@@ -175,11 +203,6 @@ public class MainActivity extends AppCompatActivity
         categories.add(new Category(getString(R.string.category_music),
                 Arrays.asList(getResources().getStringArray(R.array.music_sub_items))));
 
-/*
-        ArrayList<Class<? extends Fragment>> weatherFragments = new ArrayList<>();
-        weatherFragments.add(WeatherDayFragment.class);
-        weatherFragments.add(WeatherDailyFragment.class);
-*/
         categories.add(new Category(getString(R.string.category_weather),
                 Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
 
@@ -191,14 +214,17 @@ public class MainActivity extends AppCompatActivity
 
         categories.add(new Category(getString(R.string.category_cooking),
                 Arrays.asList(getResources().getStringArray(R.array.cooking_sub_items))));
-
     }
 
+    /**
+     * Function to get all clicked buttons
+     *
+     * @param view item which did click
+     */
     @OnClick({R.id.btnSignOut, R.id.rlMenu, R.id.rlSettings})
     public void SignOut(View view) {
 
-        switch (view.getId()){
-
+        switch (view.getId()) {
             case R.id.rlMenu:
                 drawerLayout.openDrawer(Gravity.LEFT);
                 break;
@@ -209,25 +235,32 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.btnSignOut:
-                new AuthUtils(MainActivity.this).SignOut();
+                new AuthService(MainActivity.this).SignOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 MainActivity.this.finish();
                 break;
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-/*
+    /**
+     * Method to check if user logined if not
+     * back to login screen
+     */
+    private void CheckIfUserLogined() {
         if (mAuth.getCurrentUser() != null) {
             String email = mAuth.getCurrentUser().getUid();
 
-            tvUserEmail.setText(email);
+            this.tvUserEmail.setText(email);
         } else {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             MainActivity.this.finish();
-        }*/
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CheckIfUserLogined();
     }
 
     @Override
@@ -235,11 +268,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Method call when user click on item in news fragment
+     * and view the article in web browser
+     *
+     * @param url url to news article
+     */
     @Override
-    public void topNewsFragmentInteractionClick(String Url) {
-        Intent viewArticle = new Intent(Intent.ACTION_VIEW);
-        viewArticle.putExtra("url", Url);
-
-        startActivity(viewArticle);
+    public void topNewsFragmentInteractionClick(String url) {
+        Intent viewArticleIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(viewArticleIntent);
     }
 }

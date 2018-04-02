@@ -7,27 +7,11 @@ import bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
-import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
-import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
-import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
-import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
-import retrofit2.Retrofit;
 
 public class SwitchFragmentUtils {
 
-    private NewsApiInterface newsClient;
-    private Retrofit cookingClient;
-    private WeatherInterface weatherClient;
-
-    public SwitchFragmentUtils(Context context){
-
-        weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
-        newsClient = NewsClient.getClient().create(NewsApiInterface.class);
-    }
-
-
     public static Fragment GetFragment(int group, int child) {
-        Fragment fragment = TopNewsFragment.getInstance();
+        Fragment fragment = null;
 
         switch (group) {
             case 0:
@@ -43,7 +27,7 @@ public class SwitchFragmentUtils {
                         break;
                     case 3:
                         //todo: popular tc shows
-                         break;
+                        break;
                     case 4:
                         //todo: moview description
                         break;
@@ -52,21 +36,21 @@ public class SwitchFragmentUtils {
                         break;
                 }
                 break;
-                case 1:
-                    switch (child){
-                        case 0:
-                            //todo: popular artist
-                            break;
-                        case 1:
-                            //todo: popular tracks;
-                            break;
-                        case 2:
-                            //todo: top albums by artist
-                            break;
-                    }
-                    break;
+            case 1:
+                switch (child) {
+                    case 0:
+                        //todo: popular artist
+                        break;
+                    case 1:
+                        //todo: popular tracks;
+                        break;
+                    case 2:
+                        //todo: top albums by artist
+                        break;
+                }
+                break;
             case 2:
-                switch (child){
+                switch (child) {
                     case 0:
                         fragment = WeatherDayFragment.getInstance();
                         break;
@@ -76,7 +60,7 @@ public class SwitchFragmentUtils {
                 }
                 break;
             case 3:
-                switch (child){
+                switch (child) {
                     case 0:
                         fragment = TopNewsFragment.getInstance();
                         break;
@@ -86,7 +70,7 @@ public class SwitchFragmentUtils {
                 }
                 break;
             case 4:
-                switch (child){
+                switch (child) {
                     case 0:
 
                         break;
@@ -96,7 +80,7 @@ public class SwitchFragmentUtils {
                 }
                 break;
             case 5:
-                switch (child){
+                switch (child) {
                     case 0:
 
                         break;

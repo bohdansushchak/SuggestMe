@@ -2,7 +2,6 @@ package bohdan.hushcha.sushchak.suggestme.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,7 +55,6 @@ public class WeatherDailyFragment extends BaseMyFragment {
         return view;
     }
 
-
     private void Init(){
         items = new ArrayList<>();
 
@@ -70,7 +68,7 @@ public class WeatherDailyFragment extends BaseMyFragment {
 
         WeatherInterface weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
 
-        Call<List<ConsolidatedWeather>> call = weatherClient.GetWeatherByDate("523920", "2018/03/25");
+        Call<List<ConsolidatedWeather>> call = weatherClient.GetWeatherByDate("523920", "2018/04/10");
         call.enqueue(new Callback<List<ConsolidatedWeather>>() {
             @Override
             public void onResponse(Call<List<ConsolidatedWeather>> call, Response<List<ConsolidatedWeather>> response) {

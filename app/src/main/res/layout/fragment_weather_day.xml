@@ -60,16 +60,18 @@
                 <TableRow>
 
                     <ImageView
+                        android:layout_marginStart="10dp"
                         android:id="@+id/ivTempIcon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/weather_lc_64"/>
 
                     <TextView
+                        android:layout_marginStart="10dp"
                         android:id="@+id/tvTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13"
+                        android:text="13&#8451;"
                         android:textSize="@dimen/WeatherTempSize"/>
 
                 </TableRow>
@@ -101,7 +103,7 @@
                         android:id="@+id/tvWindSpeed3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="122rpm"/>
+                        android:text="12rpm"/>
                 </TableRow>
 
                 <TableRow>

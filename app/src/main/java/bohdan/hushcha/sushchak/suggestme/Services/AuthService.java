@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 
-public class AuthUtils {
+public class AuthService {
 
     private final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
@@ -31,7 +31,7 @@ public class AuthUtils {
     private Context context;
     private GoogleApiClient mGoogleApiClient;
 
-    public AuthUtils(Context context) {
+    public AuthService(Context context) {
 
         this.context = context;
         mAuth = FirebaseAuth.getInstance();

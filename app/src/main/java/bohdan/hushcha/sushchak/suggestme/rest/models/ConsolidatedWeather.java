@@ -2,6 +2,8 @@ package bohdan.hushcha.sushchak.suggestme.rest.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class ConsolidatedWeather {
 
     @SerializedName("id")
@@ -17,10 +19,10 @@ public class ConsolidatedWeather {
     private String WindDirectionCompass;
 
     @SerializedName("created")
-    private String CreatedDate;
+    private Date CreatedDate;
 
     @SerializedName("applicable_date")
-    private String ApplicableDate;
+    private Date ApplicableDate;
 
     @SerializedName("min_temp")
     private Double MinTemp;
@@ -51,8 +53,8 @@ public class ConsolidatedWeather {
 
 
     public ConsolidatedWeather(String id, String weatherState, String weatherStateAbbr,
-                               String windDirectionCompass, String createdDate,
-                               String applicableDate, Double minTemp, Double maxTemp,
+                               String windDirectionCompass, Date createdDate,
+                               Date applicableDate, Double minTemp, Double maxTemp,
                                Double theTemp, Double windSpeed, Double windDirection,
                                Double airPresure, Double huminidy, Double visibility,
                                Double predictability) {
@@ -105,19 +107,19 @@ public class ConsolidatedWeather {
         WindDirectionCompass = windDirectionCompass;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return CreatedDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         CreatedDate = createdDate;
     }
 
-    public String getApplicableDate() {
+    public Date getApplicableDate() {
         return ApplicableDate;
     }
 
-    public void setApplicableDate(String applicableDate) {
+    public void setApplicableDate(Date applicableDate) {
         ApplicableDate = applicableDate;
     }
 
