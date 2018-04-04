@@ -58,7 +58,7 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
 */
 
         SimpleDateFormat formatter = new SimpleDateFormat("EEEEE");
-        
+
         Long temp = Math.round(weather.getTheTemp());
         Spanned tempStr = Html.fromHtml(temp.toString() + context.getString(R.string.SymbolDegreesAndCelsius));
 

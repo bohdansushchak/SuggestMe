@@ -30,14 +30,14 @@ public interface NewsApiInterface {
                                      @Query("from") String from);
 
     @GET("sources")
-    Call<SourcesResponce> GetSources(@Query("apiKey") String apiKey);
+    Call<SourcesResponce> GetAllSources(@Query("apiKey") String apiKey);
 
     @GET("sources")
-    Call<SourcesResponce> GetSources(@Query("apiKey") String apiKey,
-                                     @Query("language") String language);
+    Call<SourcesResponce> GetSourcesByCountry(@Query("apiKey") String apiKey,
+                                     @Query("country") String country);
 
     @GET("sources")
-    Call<SourcesResponce> GetSources(@Query("apiKey") String apiKey,
+    Call<SourcesResponce> GetSourcesByCriterias(@Query("apiKey") String apiKey,
                                      @Query("language") String language,
                                      @Query("country") String country);
 }

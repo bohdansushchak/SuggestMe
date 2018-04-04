@@ -28,6 +28,61 @@
 
     <string name="SymbolDegreesAndCelsius"><![CDATA[&#8451;]]></string>
 
+    <string name="dialog_title_choose_country">Choose country</string>
+    <string name="dialog_btn_cancel">Cancel</string>
+    <string name="dialog_btn_submit">Submit</string>
+    <string name="dialog_btn_ok">Ok</string>
+    <string name="dialog_title_nothing_to_show">Nothing to show</string>
+    <string name="dialog_message">At the moment we don\'t have any source for this country,
+        please choose another country</string>
+    <string name="dialog_title_no_criterias">No criterias</string>
+    <string name="dialog_message_no_criterias">Please choose criterias</string>
+
+    <array name="countries_names">
+        <item>Argentina</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Belgium</item>
+        <item>Brazil</item>
+        <item>Canada</item>
+        <item>China</item>
+        <item>Colombia</item>
+        <item>Cuba</item>
+        <item>France</item>
+        <item>Japan</item>
+        <item>Mexico</item>
+        <item>Morocco</item>
+        <item>Poland</item>
+        <item>Russia</item>
+        <item>Serbia</item>
+        <item>Ukraine</item>
+        <item>United Kingdom</item>
+        <item>United States</item>
+    </array>
+
+    <array name="countries_arg">
+        <item>ar</item>
+        <item>au</item>
+        <item>at</item>
+        <item>be</item>
+        <item>br</item>
+        <item>ca</item>
+        <item>ch</item>
+        <item>co</item>
+        <item>cu</item>
+        <item>fr</item>
+        <item>jp</item>
+        <item>mx</item>
+        <item>ma</item>
+        <item>pl</item>
+        <item>ru</item>
+        <item>rs</item>
+        <item>ua</item>
+        <item>gb</item>
+        <item>us</item>
+    </array>
+
+
     <array name="cinema_sub_items">
         <item>Top rated movies</item>
         <item>Top rated TV shows</item>
@@ -122,7 +177,7 @@
         <item>3</item>
     </string-array>
 
-    <string-array name="multi_select_list_preference_default_value"/>
+    <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
@@ -135,7 +190,6 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-
 
 
 </resources>
