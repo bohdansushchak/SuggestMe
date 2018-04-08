@@ -38,6 +38,11 @@
     <string name="dialog_title_no_criterias">No criterias</string>
     <string name="dialog_message_no_criterias">Please choose criterias</string>
 
+
+    <string name="tv_pick_sourse">Pick source</string>
+    <string name="tv_pick_country">Pick country</string>
+    <string name="tv_pick_date">Pick date</string>
+
     <array name="countries_names">
         <item>Argentina</item>
         <item>Australia</item>

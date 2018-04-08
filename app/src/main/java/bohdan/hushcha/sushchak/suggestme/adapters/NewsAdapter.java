@@ -1,6 +1,5 @@
 package bohdan.hushcha.sushchak.suggestme.adapters;
 
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,19 +14,18 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TopNewsFragmentAdapter extends RecyclerView.Adapter<TopNewsFragmentAdapter.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<Article> items;
     private Context context;
-    private TopNewsFragment.TopNewsInteractionListener mListener;
+    private InteractionListener mListener;
 
-    public TopNewsFragmentAdapter(Context context, List<Article> items,
-                                  TopNewsFragment.TopNewsInteractionListener mListener) {
+    public NewsAdapter(Context context, List<Article> items, InteractionListener mListener) {
         this.items = items;
         this.context = context;
         this.mListener = mListener;
@@ -55,12 +53,11 @@ public class TopNewsFragmentAdapter extends RecyclerView.Adapter<TopNewsFragment
                 .apply(options)
                 .into(holder.ivBackground);
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mListener != null){
-                    mListener.topNewsFragmentInteractionClick(items.get(position).getUrl());
+                    mListener.OnClick(items.get(position).getUrl());
                 }
             }
         });

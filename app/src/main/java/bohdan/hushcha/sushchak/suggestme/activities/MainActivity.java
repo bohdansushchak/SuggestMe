@@ -21,6 +21,7 @@ import java.util.Arrays;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
+import bohdan.hushcha.sushchak.suggestme.fragments.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements WeatherDayFragment.OnFragmentInteractionListener, TopNewsFragment.TopNewsInteractionListener {
+        implements WeatherDayFragment.OnFragmentInteractionListener, InteractionListener<String> {
 
     final String TAG = "MainActivity";
 
@@ -268,6 +269,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
     /**
      * Method call when user click on item in news fragment
      * and view the article in web browser
@@ -275,8 +277,13 @@ public class MainActivity extends AppCompatActivity
      * @param url url to news article
      */
     @Override
-    public void topNewsFragmentInteractionClick(String url) {
+    public void OnClick(String url) {
         Intent viewArticleIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(viewArticleIntent);
+    }
+
+    @Override
+    public void OnLongClick(String parametr) {
+
     }
 }

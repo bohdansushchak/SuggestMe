@@ -1,26 +1,31 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Arrays;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.adapters.NewsAdapter;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import bohdan.hushcha.sushchak.suggestme.rest.models.NewsSource;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.NewsResponce;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.SourcesResponce;
@@ -33,7 +38,9 @@ import retrofit2.Response;
 
 public class SearchNewsFragment extends BaseMyFragment {
 
-    private OnFragmentInteractionListener mListener;
+    private final String TAG = "SearchNewsFragment";
+
+    private InteractionListener mListener;
 
     @BindView(R.id.rvNewsSearch)
     RecyclerView recyclerViewNews;
@@ -53,12 +60,16 @@ public class SearchNewsFragment extends BaseMyFragment {
 
     private String CoutryArg;
     private String SourceId;
-    private Date DateAt;
-    private Date DateTo;
+    private String DateAt;
+    private String DateTo;
+
+    private List<Article> articleList;
+    private NewsAdapter newsAdapter;
 
     public SearchNewsFragment() {
 
         newsApiInterface = NewsClient.getClient().create(NewsApiInterface.class);
+        articleList = new ArrayList<>();
     }
 
     public static SearchNewsFragment getInstance() {
@@ -76,21 +87,26 @@ public class SearchNewsFragment extends BaseMyFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_news, container, false);
         ButterKnife.bind(this, view);
+        init();
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void init() {
+        articleList = new ArrayList<>();
+        newsAdapter = new NewsAdapter(getContext(), articleList, mListener);
+
+        recyclerViewNews.setHasFixedSize(false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        recyclerViewNews.setLayoutManager(layoutManager);
+        recyclerViewNews.setAdapter(newsAdapter);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof InteractionListener) {
+            mListener = (InteractionListener) context;
         }
     }
 
@@ -111,11 +127,14 @@ public class SearchNewsFragment extends BaseMyFragment {
             case R.id.btnSearch:
                 Call<NewsResponce> callNews = null;
 
-                if (SourceId != null && CoutryArg != null) {
+                if (SourceId != null && DateTo != null && DateAt != null) {
+                    callNews = newsApiInterface.GetEverything(NewsClient.API_KEY, DateAt, DateTo, SourceId);
 
-                } else if (SourceId != null) {
+                } else if (SourceId != null && DateAt != null) {
+                    callNews = newsApiInterface.GetEverything(NewsClient.API_KEY, DateAt, SourceId);
 
-                } else if (CoutryArg != null) {
+                } else if (SourceId != null && DateTo != null) {
+                    callNews = newsApiInterface.GetEverythingDateTo(NewsClient.API_KEY, DateTo, SourceId);
 
                 } else {
                     DialogAlert(R.string.dialog_title_no_criterias, R.string.dialog_message_no_criterias);
@@ -125,13 +144,25 @@ public class SearchNewsFragment extends BaseMyFragment {
 
                 callNews.enqueue(new Callback<NewsResponce>() {
                     @Override
-                    public void onResponse(Call<NewsResponce> call, Response<NewsResponce> response) {
+                    public void onResponse(Call<NewsResponce> call, final Response<NewsResponce> response) {
 
+                        articleList.clear();
+                        articleList.addAll(response.body().getArticles());
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                newsAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+                        Log.d(TAG, articleList.size() + "");
                     }
 
                     @Override
                     public void onFailure(Call<NewsResponce> call, Throwable t) {
-
+                        Log.e(TAG, t.getMessage());
                     }
                 });
                 break;
@@ -171,8 +202,26 @@ public class SearchNewsFragment extends BaseMyFragment {
                 break;
             case R.id.tvDateAt:
 
+                DateDialogPicker(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                        DateAt = year + "-" + month + "-" + day;
+                        tvDateAt.setText(DateAt);
+                    }
+                });
+
                 break;
             case R.id.tvDateTo:
+
+                DateDialogPicker(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                        DateTo = year + "-" + month + "-" + day;
+                        tvDateTo.setText(DateTo);
+                    }
+                });
 
                 break;
         }
@@ -204,6 +253,10 @@ public class SearchNewsFragment extends BaseMyFragment {
                 CoutryArg = countryArgs.get(i);
 
                 tvChooseCountry.setText(countryNames.get(i));
+                if(SourceId != null){
+                    SourceId = null;
+                    tvChooseSource.setText(R.string.tv_pick_sourse);
+                }
             }
         });
         dialog.show();
@@ -250,8 +303,10 @@ public class SearchNewsFragment extends BaseMyFragment {
     }
 
     /**
-     * @param StringResorceTitle
-     * @param StringResourceMessage
+     * Method to view dialog with some message
+     *
+     * @param StringResorceTitle    title dialog
+     * @param StringResourceMessage message in dialog
      */
     private void DialogAlert(int StringResorceTitle, int StringResourceMessage) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
@@ -266,8 +321,18 @@ public class SearchNewsFragment extends BaseMyFragment {
         dialog.show();
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    /**
+     * Method to pick date as a dialog
+     */
+    private void DateDialogPicker(DatePickerDialog.OnDateSetListener listener) {
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                listener, year, month, day);
+
+        datePickerDialog.show();
     }
 }

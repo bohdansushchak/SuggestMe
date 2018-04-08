@@ -17,8 +17,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/padding">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -30,15 +30,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Counry:"/>
+                    android:text="Counry:"
+                    android:textSize="@dimen/textSizeLarge" />
 
                 <TextView
-                    android:text="Any"
                     android:id="@+id/tvChooseCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/padding"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:text="@string/tv_pick_country"
+                    android:textSize="@dimen/textSizeLarge" />
             </TableRow>
 
             <TableRow>
@@ -46,15 +48,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Source:"/>
+                    android:text="Source:"
+                    android:textSize="@dimen/textSizeLarge" />
 
                 <TextView
-                    android:text="Any"
                     android:id="@+id/tvChooseSource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/padding"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:text="@string/tv_pick_sourse"
+                    android:textSize="@dimen/textSizeLarge" />
             </TableRow>
         </TableLayout>
 
@@ -68,15 +72,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date at:"/>
+                    android:text="Date at:"
+                    android:textSize="@dimen/textSizeLarge" />
 
                 <TextView
+                    android:id="@+id/tvDateAt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvDateAt"
-                    android:text="10.06.2018"
                     android:layout_marginStart="@dimen/padding"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:text="@string/tv_pick_date"
+                    android:textSize="@dimen/textSizeLarge" />
 
             </TableRow>
 
@@ -85,14 +91,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date to:"/>
+                    android:text="Date to:"
+                    android:textSize="@dimen/textSizeLarge" />
 
                 <TextView
-                    android:text="18/06/2018"
-                    android:layout_marginStart="@dimen/padding"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tvDateTo"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tvDateTo"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding"
+                    android:text="@string/tv_pick_date"
+                    android:textSize="@dimen/textSizeLarge" />
 
             </TableRow>
         </TableLayout>

@@ -26,9 +26,20 @@ public interface NewsApiInterface {
     Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey, @Query("q") String query);
 
     @GET("everything")
-    Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey, @Query("q") String query,
-                                     @Query("from") String from);
+    Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey,
+                                     @Query("from") String from,
+                                     @Query("to") String to,
+                                     @Query("sources") String source);
 
+    @GET("everything")
+    Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey,
+                                     @Query("from") String from,
+                                     @Query("sources") String sources);
+
+    @GET("everything")
+    Call<NewsResponce> GetEverythingDateTo(@Query("apiKey") String apiKey,
+                                     @Query("to") String to,
+                                     @Query("sources") String sources);
     @GET("sources")
     Call<SourcesResponce> GetAllSources(@Query("apiKey") String apiKey);
 

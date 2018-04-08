@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.adapters.TopNewsFragmentAdapter;
+import bohdan.hushcha.sushchak.suggestme.adapters.NewsAdapter;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
@@ -31,7 +31,7 @@ public class TopNewsFragment extends BaseMyFragment {
     final String TAG = "TopNewsFragment";
 
     private ArrayList<Article> items;
-    private TopNewsInteractionListener mListener;
+    private InteractionListener mListener;
 
     @BindView(R.id.rvMainList) RecyclerView recyclerView;
 
@@ -57,7 +57,7 @@ public class TopNewsFragment extends BaseMyFragment {
 
         items = new ArrayList<>();
 
-        final TopNewsFragmentAdapter adapter = new TopNewsFragmentAdapter(getContext(), items, mListener);
+        final NewsAdapter adapter = new NewsAdapter(getContext(), items, mListener);
 
         recyclerView.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -72,6 +72,8 @@ public class TopNewsFragment extends BaseMyFragment {
             @Override
             public void onResponse(Call<NewsResponce> call, Response<NewsResponce> response) {
                 List<Article> articles = response.body().getArticles();
+
+                //items = new ArrayList<>();
 
                 for (Article article : articles) {
                     //HomeItem item = new HomeItem(article.getTitle(), article.getDecription(), article.getUrlToImage(),article.getPublishedAt());
@@ -88,12 +90,14 @@ public class TopNewsFragment extends BaseMyFragment {
         });
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof TopNewsInteractionListener) {
-            mListener = (TopNewsInteractionListener) context;
+        if (context instanceof InteractionListener) {
+            mListener = (InteractionListener) context;
         }
     }
 
@@ -101,9 +105,5 @@ public class TopNewsFragment extends BaseMyFragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public interface TopNewsInteractionListener {
-        void topNewsFragmentInteractionClick(String Url);
     }
 }
