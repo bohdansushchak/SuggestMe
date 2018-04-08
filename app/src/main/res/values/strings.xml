@@ -43,6 +43,10 @@
     <string name="tv_pick_country">Pick country</string>
     <string name="tv_pick_date">Pick date</string>
 
+    <string name="tv_hint_publisher">Publisher: </string>
+    <string name="tv_hint_socialRate">Social rate: </string>
+
+
     <array name="countries_names">
         <item>Argentina</item>
         <item>Australia</item>

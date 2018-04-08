@@ -16,6 +16,7 @@ import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.NewsAdapter;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
@@ -33,7 +34,8 @@ public class TopNewsFragment extends BaseMyFragment {
     private ArrayList<Article> items;
     private InteractionListener mListener;
 
-    @BindView(R.id.rvMainList) RecyclerView recyclerView;
+    @BindView(R.id.rvMainList)
+    RecyclerView recyclerView;
 
     public TopNewsFragment() {
     }
@@ -89,7 +91,6 @@ public class TopNewsFragment extends BaseMyFragment {
             }
         });
     }
-
 
 
     @Override

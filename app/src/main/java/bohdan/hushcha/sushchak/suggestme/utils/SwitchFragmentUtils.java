@@ -1,8 +1,8 @@
 package bohdan.hushcha.sushchak.suggestme.utils;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import bohdan.hushcha.sushchak.suggestme.fragments.PopularRecipesFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
@@ -85,7 +85,7 @@ public class SwitchFragmentUtils {
 
                         break;
                     case 1:
-
+                        fragment = PopularRecipesFragment.getInstance();
                         break;
                 }
         }

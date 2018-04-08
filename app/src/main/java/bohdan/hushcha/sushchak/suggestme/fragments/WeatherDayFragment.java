@@ -1,6 +1,5 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -21,7 +20,7 @@ import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
-import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
 import bohdan.hushcha.sushchak.suggestme.utils.ImageUtils;
 import butterknife.BindView;
@@ -49,13 +48,13 @@ public class WeatherDayFragment extends BaseMyFragment {
 
     private static Date WeatherDate;
 
-    private WeatherInterface weatherClient;
+    private WeatherApiInterface weatherClient;
 
     private static List<ConsolidatedWeather> weatherList;
 
     public WeatherDayFragment() {
         this.weatherList = new ArrayList<>();
-        weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
+        weatherClient = WeatherClient.getClient().create(WeatherApiInterface.class);
     }
 
     public static WeatherDayFragment getInstance() {

@@ -14,7 +14,7 @@ import java.util.List;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.DailyWeatherAdapter;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
-import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +66,7 @@ public class WeatherDailyFragment extends BaseMyFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        WeatherInterface weatherClient = WeatherClient.getClient().create(WeatherInterface.class);
+        WeatherApiInterface weatherClient = WeatherClient.getClient().create(WeatherApiInterface.class);
 
         Call<List<ConsolidatedWeather>> call = weatherClient.GetWeatherByDate("523920", "2018/04/10");
         call.enqueue(new Callback<List<ConsolidatedWeather>>() {

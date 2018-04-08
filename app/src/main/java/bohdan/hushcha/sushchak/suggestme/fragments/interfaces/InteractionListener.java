@@ -1,4 +1,4 @@
-package bohdan.hushcha.sushchak.suggestme.fragments;
+package bohdan.hushcha.sushchak.suggestme.fragments.interfaces;
 
 import butterknife.OnClick;
 

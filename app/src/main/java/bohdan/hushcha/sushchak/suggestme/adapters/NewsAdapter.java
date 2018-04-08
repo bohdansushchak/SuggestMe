@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.fragments.InteractionListener;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +34,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_home_fragment, parent, false);
+                .inflate(R.layout.item_news, parent, false);
         return new ViewHolder(view);
     }
 

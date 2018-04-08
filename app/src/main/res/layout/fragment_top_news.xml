@@ -10,7 +10,7 @@
         android:padding="@dimen/paddingRvItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_home_fragment">
+        tools:listitem="@layout/item_news">
     </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

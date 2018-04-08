@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvRoot"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_marginBottom="5dp"
+    android:background="#ea9393"
+    android:padding="@dimen/padding"
+    card_view:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvRecipeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/paddingRvItems"
+            android:layout_marginStart="@dimen/paddingRvItems"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/textSizeLarge" />
+
+        <TableLayout
+            android:id="@+id/tl_Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvRecipeTitle"
+            android:layout_marginEnd="@dimen/paddingRvItems"
+            android:layout_marginStart="@dimen/paddingRvItems">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_hint_publisher"
+                    android:textSize="@dimen/textSizeLarge" />
+
+                <TextView
+                    android:id="@+id/tv_publisher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_hint_socialRate"
+                    android:textSize="@dimen/textSizeLarge" />
+
+                <TextView
+                    android:id="@+id/tv_socialRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tl_Info"
+            card_view:cardCornerRadius="10dp">
+
+            <ImageView
+                android:id="@+id/ivRecipe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/weather_background" />
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

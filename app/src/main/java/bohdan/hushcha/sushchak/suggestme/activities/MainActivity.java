@@ -21,7 +21,7 @@ import java.util.Arrays;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
-import bohdan.hushcha.sushchak.suggestme.fragments.InteractionListener;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
@@ -48,6 +48,16 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.tvEmail)
     TextView tvUserEmail;
 
+
+    /*
+1)  Api LastFm – топ альбоми, виконавці та пісні
+2)  Api News – останні новини із відомих сайтів. Там типу приходить масив із статтями (назва, автор, короткий опис та посилання, щоб почитати.
+3)  Api food2fork – накидуєш інгридієнти і він тобі повертає рецепти
+4)  Api CoinMarketCap – тут можна відстежувати курс криптовалют
+5)  Api MetaWeather (or openweathermap) – погода
+6)  Api tmdb – топ фільмів, серіалів і т.д.
+
+     */
 
     private Fragment currentFragment;
 

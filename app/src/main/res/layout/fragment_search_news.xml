@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:listitem="@layout/item_home_fragment">
+        tools:listitem="@layout/item_news">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
