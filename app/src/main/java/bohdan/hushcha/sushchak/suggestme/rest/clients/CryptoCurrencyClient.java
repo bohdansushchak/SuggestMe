@@ -4,15 +4,13 @@ import bohdan.hushcha.sushchak.suggestme.utils.ClientUtils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NewsClient {
+public class CryptoCurrencyClient {
 
     private static Retrofit retrofit = null;
 
-    private static final String BASE_URL = "https://newsapi.org/v2/";
+    private static final String BASE_URL = "https://api.coinmarketcap.com/v1/";
 
-    public static final String API_KEY = "e6b3ff96de8545beb079944d729c2e5a";
-
-    private NewsClient(){}
+    private CryptoCurrencyClient(){}
 
     public static Retrofit getClient(){
 

@@ -39,23 +39,6 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
     @Override
     public void onBindViewHolder(DailyWeatherAdapter.ViewHolder holder, int position) {
         ConsolidatedWeather weather = weatherList.get(position);
-/*
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
-
-        Date date = new Date();
-        try {
-
-            date =  formatter.parse(weather.getCreatedDate().split("[.]")[0]);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        DateFormatSymbols dfs = new DateFormatSymbols();
-*/
 
         SimpleDateFormat formatter = new SimpleDateFormat("EEEEE");
 

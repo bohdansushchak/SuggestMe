@@ -41,7 +41,9 @@ public class PopularRecipesFragment extends Fragment implements LoadNextItems {
     RecyclerView recyclerView;
 
     public PopularRecipesFragment() {
+        items = new ArrayList<>();
         CurrentPage = 1;
+        apiService = CookingBookClient.getClient().create(CookingBookApiInterface.class);
     }
 
     public static PopularRecipesFragment getInstance() {
@@ -58,8 +60,6 @@ public class PopularRecipesFragment extends Fragment implements LoadNextItems {
 
     private void init() {
 
-        items = new ArrayList<>();
-
         adapter = new RecipeAdapter(items, getContext(), mListener, this);
 
         recyclerView.setHasFixedSize(false);
@@ -67,8 +67,6 @@ public class PopularRecipesFragment extends Fragment implements LoadNextItems {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-        apiService = CookingBookClient.getClient().create(CookingBookApiInterface.class);
 
         Call<CookingBookResponce> call = apiService.TopRecipes(CookingBookClient.API_KEY, "r", CurrentPage);
 

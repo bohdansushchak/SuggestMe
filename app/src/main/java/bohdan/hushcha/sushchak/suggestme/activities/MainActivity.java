@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity
                 Arrays.asList(getResources().getStringArray(R.array.news_sub_items))));
 
         categories.add(new Category(getString(R.string.category_crypto),
-                Arrays.asList(getResources().getStringArray(R.array.weather_sub_items))));
+                Arrays.asList(getResources().getStringArray(R.array.crypto_sub_items))));
 
         categories.add(new Category(getString(R.string.category_cooking),
                 Arrays.asList(getResources().getStringArray(R.array.cooking_sub_items))));

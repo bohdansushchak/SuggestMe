@@ -2,6 +2,7 @@ package bohdan.hushcha.sushchak.suggestme.utils;
 
 import android.support.v4.app.Fragment;
 
+import bohdan.hushcha.sushchak.suggestme.fragments.CryptoCurrencyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.PopularRecipesFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.RecipesByCriteriasFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment;
@@ -73,10 +74,7 @@ public class SwitchFragmentUtils {
             case 4:
                 switch (child) {
                     case 0:
-
-                        break;
-                    case 1:
-
+                        fragment = CryptoCurrencyFragment.getInstance();
                         break;
                 }
                 break;
@@ -93,14 +91,4 @@ public class SwitchFragmentUtils {
 
         return fragment;
     }
-/*
-    public static String GetFragmentTitle(int group, int child) {
-        ArrayList<ArrayList<String>> titles = new ArrayList<>();
-        titles.add(Arrays.asList(getResources().getStringArray(R.array.cinema_sub_items)))
-
-
-        String title = "Home Fragment";
-    }
-*/
-
 }

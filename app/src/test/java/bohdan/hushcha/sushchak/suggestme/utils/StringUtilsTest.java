@@ -25,7 +25,7 @@ public class StringUtilsTest {
     }
 
     @Test
-    public void CheckWithSomeChar() {
+    public void CheckToMutchComma() {
         String text = "  , chicken,   potato, , , ,";
         String expected = "chicken,potato";
         String formatedText = StringUtils.FormatIngredients(text);
@@ -76,6 +76,36 @@ public class StringUtilsTest {
         expected = "chicken,potato";
         formatedText = StringUtils.FormatIngredients(text);
         assertEquals(expected, formatedText);
+    }
+
+    @Test
+    public void IsNUmberTest() {
+        String text = "897";
+        boolean expected = true;
+        boolean actual = StringUtils.isNumeric(text);
+
+        assertEquals(expected, actual);
+
+        text = "78 sdf";
+        expected = false;
+        actual = StringUtils.isNumeric(text);
+
+        assertEquals(expected, actual);
+
+        text = "koka";
+        expected = false;
+        actual = StringUtils.isNumeric(text);
+        assertEquals(expected, actual);
+
+        text = "null";
+        expected = false;
+        actual = StringUtils.isNumeric(text);
+        assertEquals(expected, actual);
+
+        text = "12.5";
+        expected = true;
+        actual = StringUtils.isNumeric(text);
+        assertEquals(expected, actual);
     }
 
 }

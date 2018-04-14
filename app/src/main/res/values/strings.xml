@@ -118,11 +118,18 @@
         <item>Search by criteria</item>
     </array>
 
+    <array name="crypto_sub_items">
+        <item>Crypto info in top</item>
+    </array>
+
     <array name="cooking_sub_items">
         <item>Search recipes by ingredients</item>
         <item>Popular recipes</item>
     </array>
 
     <string name="btn_hint_search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
