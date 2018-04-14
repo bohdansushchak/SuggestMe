@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity
         listView.requestLayout();
     }
 
-
     public void setExpandableListViewHeightBasedOnChildren(ExpandableListView expandableListView) {
         CategoryAdapter adapter = (CategoryAdapter) expandableListView.getExpandableListAdapter();
         if (adapter == null) {
