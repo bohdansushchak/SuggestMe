@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:layout_marginBottom="5dp"
-    android:background="#ea9393"
     android:padding="@dimen/padding"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="10dp">
 
     <RelativeLayout

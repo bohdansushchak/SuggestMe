@@ -11,4 +11,10 @@ public interface CookingBookApiInterface {
     Call<CookingBookResponce> TopRecipes(@Query("key") String apiKey,
                                          @Query("sort") String sort,
                                          @Query("page") Integer page);
+
+    @GET("search")
+    Call<CookingBookResponce> SearchRecipes(@Query("key") String apiKey,
+                                            @Query("sort") String sort,
+                                            @Query("q") String ingredients,
+                                            @Query("page") Integer page);
 }

@@ -3,6 +3,7 @@ package bohdan.hushcha.sushchak.suggestme.utils;
 import android.support.v4.app.Fragment;
 
 import bohdan.hushcha.sushchak.suggestme.fragments.PopularRecipesFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.RecipesByCriteriasFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
@@ -82,7 +83,7 @@ public class SwitchFragmentUtils {
             case 5:
                 switch (child) {
                     case 0:
-
+                        fragment = RecipesByCriteriasFragment.getInstance();
                         break;
                     case 1:
                         fragment = PopularRecipesFragment.getInstance();

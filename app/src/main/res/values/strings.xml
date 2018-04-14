@@ -46,6 +46,7 @@
     <string name="tv_hint_publisher">Publisher: </string>
     <string name="tv_hint_socialRate">Social rate: </string>
 
+    <string name="tv_hint_search_recipes">Input ingredients by comma</string>
 
     <array name="countries_names">
         <item>Argentina</item>

@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity
 4)  Api CoinMarketCap – тут можна відстежувати курс криптовалют
 5)  Api MetaWeather (or openweathermap) – погода
 6)  Api tmdb – топ фільмів, серіалів і т.д.
-
      */
 
     private Fragment currentFragment;
