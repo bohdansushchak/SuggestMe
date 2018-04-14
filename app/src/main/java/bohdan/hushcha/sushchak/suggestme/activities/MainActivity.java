@@ -231,17 +231,12 @@ public class MainActivity extends AppCompatActivity
      *
      * @param view item which did click
      */
-    @OnClick({R.id.btnSignOut, R.id.rlMenu, R.id.rlSettings})
+    @OnClick({R.id.btnSignOut, R.id.rlMenu})
     public void SignOut(View view) {
 
         switch (view.getId()) {
             case R.id.rlMenu:
                 drawerLayout.openDrawer(Gravity.LEFT);
-                break;
-
-            case R.id.rlSettings:
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
                 break;
 
             case R.id.btnSignOut:

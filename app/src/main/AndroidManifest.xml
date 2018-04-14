@@ -41,10 +41,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_facebook_id"/>
 
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings">
-        </activity>
     </application>
 
 </manifest>

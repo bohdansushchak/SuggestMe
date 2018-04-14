@@ -50,21 +50,6 @@
                         android:src="@android:drawable/star_big_on"/>
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rlSettings"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="30dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_settings"/>
-
-                </RelativeLayout>
-
             </RelativeLayout>
 
             <FrameLayout
