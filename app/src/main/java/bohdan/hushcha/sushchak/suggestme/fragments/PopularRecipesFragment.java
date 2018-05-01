@@ -17,7 +17,7 @@ import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListene
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.CookingBookClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.CookingBookApiInterface;
-import bohdan.hushcha.sushchak.suggestme.rest.models.Recipe;
+import bohdan.hushcha.sushchak.suggestme.rest.models.CookingBook.Recipe;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.CookingBookResponce;
 import butterknife.BindView;
 import butterknife.ButterKnife;

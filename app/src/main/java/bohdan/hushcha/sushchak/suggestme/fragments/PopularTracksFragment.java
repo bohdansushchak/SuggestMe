@@ -1,23 +1,64 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import bohdan.hushcha.sushchak.suggestme.rest.models.Music.MusicTag;
+import bohdan.hushcha.sushchak.suggestme.rest.responces.Music.MusicResponce;
+import retrofit2.Call;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.adapters.TrackAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
+import bohdan.hushcha.sushchak.suggestme.rest.clients.MusicClient;
+import bohdan.hushcha.sushchak.suggestme.rest.interfaces.MusicApiInterface;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Track;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class PopularTracksFragment extends Fragment {
 
+    public final String TAG = "PopularTracksFragment";
     private InteractionListener mListener;
 
+    private MusicApiInterface musicApi;
+
+
+    @BindView(R.id.rvTrackList)
+    RecyclerView rvTracks;
+
+    @BindView(R.id.tvTag)
+    TextView tvTag;
+
+
+    private TrackAdapter adapter;
+    private List<Track> tracks;
+
+    private String TagName;
+
     public PopularTracksFragment() {
-        // Required empty public constructor
+
+        musicApi = MusicClient.getClient().create(MusicApiInterface.class);
+        tracks = new ArrayList<>();
     }
 
     public static PopularTracksFragment getInstance() {
@@ -34,10 +75,83 @@ public class PopularTracksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_popular_tracks, container, false);
+        View view = inflater.inflate(R.layout.fragment_popular_tracks, container, false);
+        ButterKnife.bind(this, view);
+        init();
+        return view;
     }
 
+    private void init() {
+        adapter = new TrackAdapter(tracks);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        rvTracks.setLayoutManager(layoutManager);
+        rvTracks.setAdapter(adapter);
+    }
+
+    @OnClick(R.id.tvTag)
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvTag:
+
+                Call<MusicResponce> call = musicApi.GetTopMusicTags(MusicClient.API_KEY, "json");
+
+                Log.d(TAG, call.request().url().toString());
+
+                call.enqueue(new Callback<MusicResponce>() {
+                    @Override
+                    public void onResponse(Call<MusicResponce> call, Response<MusicResponce> response) {
+                        ActionChooseTag(response.body().getTopTagsResponce().getTags());
+                    }
+
+                    @Override
+                    public void onFailure(Call<MusicResponce> call, Throwable t) {
+
+                    }
+                });
+
+                break;
+        }
+
+
+    }
+
+    private void ActionChooseTag(final List<MusicTag> tagList) {
+        if (tagList == null)
+            return;
+
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setTitle(getString(R.string.dialog_title_choose_country));
+
+        final List<String> TagNames = new ArrayList<>();
+
+
+        for (MusicTag source : tagList) {
+            TagNames.add(source.getName());
+        }
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
+        arrayAdapter.addAll(TagNames);
+
+        dialog.setNegativeButton(getString(R.string.dialog_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        dialog.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                TagName = TagNames.get(i);
+                tvTag.setText(TagName);
+            }
+        });
+
+        dialog.show();
+    }
 
     @Override
     public void onAttach(Context context) {

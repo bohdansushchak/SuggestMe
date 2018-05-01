@@ -1,4 +1,0 @@
-package bohdan.hushcha.sushchak.suggestme.rest.interfaces;
-
-public interface MovieApiInterface {
-}

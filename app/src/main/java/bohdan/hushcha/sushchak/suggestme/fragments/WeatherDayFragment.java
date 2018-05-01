@@ -22,7 +22,7 @@ import java.util.List;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherApiInterface;
-import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Weather.ConsolidatedWeather;
 import bohdan.hushcha.sushchak.suggestme.utils.ImageUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;

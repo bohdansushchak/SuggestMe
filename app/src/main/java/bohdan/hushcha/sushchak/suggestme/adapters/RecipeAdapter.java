@@ -17,7 +17,7 @@ import java.util.List;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
-import bohdan.hushcha.sushchak.suggestme.rest.models.Recipe;
+import bohdan.hushcha.sushchak.suggestme.rest.models.CookingBook.Recipe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

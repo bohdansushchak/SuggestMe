@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import bohdan.hushcha.sushchak.suggestme.rest.models.Recipe;
+import bohdan.hushcha.sushchak.suggestme.rest.models.CookingBook.Recipe;
 
 public class CookingBookResponce {
 

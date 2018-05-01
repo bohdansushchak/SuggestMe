@@ -3,7 +3,7 @@ package bohdan.hushcha.sushchak.suggestme.rest.interfaces;
 
 import java.util.List;
 
-import bohdan.hushcha.sushchak.suggestme.rest.models.ConsolidatedWeather;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Weather.ConsolidatedWeather;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.WeatherResponce;
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -8,7 +8,7 @@ public class MusicClient {
 
     private static Retrofit retrofit = null;
 
-    private static final String BASE_URL = "http://www.last.fm/api/";
+    private static final String BASE_URL = "http://ws.audioscrobbler.com/2.0/";
 
     public static final String API_KEY = "fff7dd669de09627d571011fd6d524fc";
 

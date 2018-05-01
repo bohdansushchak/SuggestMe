@@ -16,7 +16,7 @@ import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.CryptoAdapter;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.CryptoCurrencyClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.CryptoCurrencyInterface;
-import bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency;
+import bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency.CryptoCurrency;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;

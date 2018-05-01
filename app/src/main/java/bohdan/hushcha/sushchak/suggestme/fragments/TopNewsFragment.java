@@ -18,7 +18,7 @@ import java.util.List;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.NewsAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
-import bohdan.hushcha.sushchak.suggestme.rest.models.Article;
+import bohdan.hushcha.sushchak.suggestme.rest.models.News.Article;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.NewsResponce;

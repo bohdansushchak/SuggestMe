@@ -1,4 +1,4 @@
-package bohdan.hushcha.sushchak.suggestme.rest.models;
+package bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency;
 
 import com.google.gson.annotations.SerializedName;
 

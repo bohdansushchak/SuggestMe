@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency;
+import bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency.CryptoCurrency;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

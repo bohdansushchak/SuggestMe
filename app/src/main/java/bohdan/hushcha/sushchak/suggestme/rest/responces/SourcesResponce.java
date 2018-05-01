@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import bohdan.hushcha.sushchak.suggestme.rest.models.NewsSource;
+import bohdan.hushcha.sushchak.suggestme.rest.models.News.NewsSource;
 
 
 public class SourcesResponce {
