@@ -3,10 +3,16 @@ package bohdan.hushcha.sushchak.suggestme.utils;
 import android.support.v4.app.Fragment;
 
 import bohdan.hushcha.sushchak.suggestme.fragments.CryptoCurrencyFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.MovieDescriptionFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.PopularArtistsFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.PopularMoviesFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.PopularRecipesFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.PopularTracksFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.RecipesByCriteriasFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.SearchNewsFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.TopAlbumsByArtistFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.TopRatedMoviesFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 
@@ -19,22 +25,27 @@ public class SwitchFragmentUtils {
             case 0:
                 switch (child) {
                     case 0:
-                        //todo: top rated movies
+                        fragment = TopRatedMoviesFragment.getInstance();
                         break;
                     case 1:
-                        //todo: top rated tv shows
+                        fragment = TopRatedMoviesFragment.getInstance();
                         break;
                     case 2:
                         //todo: popular movies
+                        fragment = PopularMoviesFragment.newInstance();
+
                         break;
                     case 3:
                         //todo: popular tc shows
+                        fragment = PopularMoviesFragment.newInstance();
                         break;
                     case 4:
                         //todo: moview description
+                        fragment = MovieDescriptionFragment.newInstance();
                         break;
                     case 5:
                         //todo tv shows description
+                        fragment = MovieDescriptionFragment.newInstance();
                         break;
                 }
                 break;
@@ -42,12 +53,16 @@ public class SwitchFragmentUtils {
                 switch (child) {
                     case 0:
                         //todo: popular artist
+
+                        fragment = PopularArtistsFragment.getInstance();
                         break;
                     case 1:
                         //todo: popular tracks;
+                        fragment = PopularTracksFragment.getInstance();
                         break;
                     case 2:
                         //todo: top albums by artist
+                        fragment = TopAlbumsByArtistFragment.newInstance();
                         break;
                 }
                 break;
