@@ -1,4 +1,4 @@
-package bohdan.hushcha.sushchak.suggestme.rest.responces.Music;
+package bohdan.hushcha.sushchak.suggestme.rest.responces.music;
 
 import com.google.gson.annotations.SerializedName;
 

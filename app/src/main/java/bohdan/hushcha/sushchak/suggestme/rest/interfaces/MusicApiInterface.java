@@ -1,10 +1,8 @@
 package bohdan.hushcha.sushchak.suggestme.rest.interfaces;
 
-import bohdan.hushcha.sushchak.suggestme.rest.responces.Music.MusicResponce;
-import bohdan.hushcha.sushchak.suggestme.rest.responces.Music.TopTagsResponce;
+import bohdan.hushcha.sushchak.suggestme.rest.responces.music.MusicResponce;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MusicApiInterface {

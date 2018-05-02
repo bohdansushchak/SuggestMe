@@ -24,7 +24,7 @@ import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.MusicClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.MusicApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Album;
-import bohdan.hushcha.sushchak.suggestme.rest.responces.Music.MusicResponce;
+import bohdan.hushcha.sushchak.suggestme.rest.responces.music.MusicResponce;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;

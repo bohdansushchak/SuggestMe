@@ -35,7 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
+import bohdan.hushcha.sushchak.suggestme.services.AuthService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

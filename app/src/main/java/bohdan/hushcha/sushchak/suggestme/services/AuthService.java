@@ -1,4 +1,4 @@
-package bohdan.hushcha.sushchak.suggestme.Services;
+package bohdan.hushcha.sushchak.suggestme.services;
 
 import android.content.Context;
 

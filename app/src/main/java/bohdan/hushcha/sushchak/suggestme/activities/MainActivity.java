@@ -1,5 +1,6 @@
 package bohdan.hushcha.sushchak.suggestme.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
+import bohdan.hushcha.sushchak.suggestme.services.AuthService;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
@@ -47,16 +48,6 @@ public class MainActivity extends AppCompatActivity
     TextView tvHeaderTitle;
     @BindView(R.id.tvEmail)
     TextView tvUserEmail;
-
-
-    /*
-1)  Api LastFm – топ альбоми, виконавці та пісні
-2)  Api News – останні новини із відомих сайтів. Там типу приходить масив із статтями (назва, автор, короткий опис та посилання, щоб почитати.
-3)  Api food2fork – накидуєш інгридієнти і він тобі повертає рецепти
-4)  Api CoinMarketCap – тут можна відстежувати курс криптовалют
-5)  Api MetaWeather (or openweathermap) – погода
-6)  Api tmdb – топ фільмів, серіалів і т.д.
-     */
 
     private Fragment currentFragment;
 
@@ -105,7 +96,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void setListViewHeight(ExpandableListView listView, int group) {
-        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
+        ExpandableListAdapter listAdapter = listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
                 View.MeasureSpec.EXACTLY);
@@ -176,6 +167,7 @@ public class MainActivity extends AppCompatActivity
      * @param group category id
      * @param child item id in catagory
      */
+    @SuppressLint("RtlHardcoded")
     public void clickItemNavigationDrawer(int group, int child) {
         Fragment fragment = SwitchFragmentUtils.GetFragment(group, child);
 

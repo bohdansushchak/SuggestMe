@@ -8,9 +8,9 @@ public class CinemaClient {
 
     private static Retrofit retrofit = null;
 
-    private static final String BASE_URL = "https://www.themoviedb.org/documentation/api";
+    private static final String BASE_URL = "https://api.themoviedb.org/3/";
 
-    public static final String API_KEY = "fff7dd669de09627d571011fd6d524fc";
+    public static final String API_KEY = "b1bb6f197a83c987d3a0029cf710607e";
 
     private CinemaClient(){}
 

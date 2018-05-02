@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Music.MusicTag;
-import bohdan.hushcha.sushchak.suggestme.rest.responces.Music.MusicResponce;
+import bohdan.hushcha.sushchak.suggestme.rest.responces.music.MusicResponce;
 import retrofit2.Call;
 
 import android.util.Log;

@@ -7,79 +7,79 @@ import static org.junit.Assert.*;
 public class StringUtilsTest {
 
     @Test
-    public void TestWithSpace() {
+    public void WhiteSpaceTest() {
         String text = "chicken, potato";
         String expected = "chicken,potato";
-        String formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        String formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = "    chicken, potato    ";
         expected = "chicken,potato";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = "    chicken,   potato";
         expected = "chicken,potato";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
     }
 
     @Test
-    public void CheckToMutchComma() {
+    public void ToMutchCommasTest() {
         String text = "  , chicken,   potato, , , ,";
         String expected = "chicken,potato";
-        String formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        String formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = ",,chicken  ,  potato    ";
         expected = "chicken,potato";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = "chicken,,meat,,,";
         expected = "chicken,meat";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
     }
 
     @Test
-    public void CheckWithSomeNumber() {
+    public void SomeNumberTest() {
         String text = "chicken,8,meat,,,";
         String expected = "chicken,meat";
-        String formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        String formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = ",89,chicken  ,  potato    ";
         expected = "chicken,potato";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = "chicken,   potato, 8888";
         expected = "chicken,potato";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
     }
 
     @Test
-    public void CheckOnlyNumber() {
+    public void OnlyNumberTest() {
         String text = "89,8,meat,,,";
         String expected = "meat";
-        String formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        String formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = ",89";
         expected = "";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
 
         text = "chicken,   potato, 8888";
         expected = "chicken,potato";
-        formatedText = StringUtils.FormatIngredients(text);
-        assertEquals(expected, formatedText);
+        formattedText = StringUtils.FormatIngredients(text);
+        assertEquals(expected, formattedText);
     }
 
     @Test
-    public void IsNUmberTest() {
+    public void IsNumberTest() {
         String text = "897";
         boolean expected = true;
         boolean actual = StringUtils.isNumeric(text);

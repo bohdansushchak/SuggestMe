@@ -105,7 +105,7 @@
     <array name="music_sub_items">
         <item>Popular artists</item>
         <item>Popular tracks</item>
-        <item>Top album by Artist</item>
+        <item>Top albums by Artist</item>
     </array>
 
     <array name="weather_sub_items">

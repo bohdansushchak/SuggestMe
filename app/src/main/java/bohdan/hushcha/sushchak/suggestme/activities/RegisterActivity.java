@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import bohdan.hushcha.sushchak.suggestme.R;
-import bohdan.hushcha.sushchak.suggestme.Services.AuthService;
+import bohdan.hushcha.sushchak.suggestme.services.AuthService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
