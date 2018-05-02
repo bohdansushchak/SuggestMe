@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Music.MusicTag;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.Music.MusicResponce;
 import retrofit2.Call;
@@ -35,13 +36,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PopularTracksFragment extends Fragment {
+public class PopularTracksFragment extends Fragment implements LoadNextItems {
 
     public final String TAG = "PopularTracksFragment";
     private InteractionListener mListener;
 
     private MusicApiInterface musicApi;
-
 
     @BindView(R.id.rvTrackList)
     RecyclerView rvTracks;
@@ -49,16 +49,17 @@ public class PopularTracksFragment extends Fragment {
     @BindView(R.id.tvTag)
     TextView tvTag;
 
-
     private TrackAdapter adapter;
     private List<Track> tracks;
 
     private String TagName;
+    private Integer CurrentPage;
 
     public PopularTracksFragment() {
 
         musicApi = MusicClient.getClient().create(MusicApiInterface.class);
         tracks = new ArrayList<>();
+        CurrentPage = 1;
     }
 
     public static PopularTracksFragment getInstance() {
@@ -82,7 +83,7 @@ public class PopularTracksFragment extends Fragment {
     }
 
     private void init() {
-        adapter = new TrackAdapter(tracks);
+        adapter = new TrackAdapter(tracks, this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
@@ -113,8 +114,6 @@ public class PopularTracksFragment extends Fragment {
 
                 break;
         }
-
-
     }
 
     private void ActionChooseTag(final List<MusicTag> tagList) {
@@ -145,12 +144,50 @@ public class PopularTracksFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                TagName = TagNames.get(i);
-                tvTag.setText(TagName);
+                if (TagName == null){
+                    TagName = TagNames.get(i);
+                    tvTag.setText(TagName);
+                    CurrentPage = 1;
+                    ActionViewTracks(false);
+                }
+                else if(!TagName.equals(TagNames.get(i))){
+                    TagName = TagNames.get(i);
+                    tvTag.setText(TagName);
+                    CurrentPage = 1;
+                    ActionViewTracks(false);
+                }
             }
         });
 
         dialog.show();
+    }
+
+
+    private void ActionViewTracks(boolean isLoadNext){
+        if(TagName == null)
+            return;
+
+        if(!isLoadNext){
+            tracks.clear();
+            adapter.notifyDataSetChanged();
+        }
+
+        Call<MusicResponce> call = musicApi.GetTopTracks(MusicClient.API_KEY, TagName, CurrentPage, "json");
+
+        call.enqueue(new Callback<MusicResponce>() {
+            @Override
+            public void onResponse(Call<MusicResponce> call, Response<MusicResponce> response) {
+
+                tracks.addAll(response.body().getTracksResponce().getTracks());
+                ++CurrentPage;
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<MusicResponce> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -167,4 +204,8 @@ public class PopularTracksFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void LoadNextItems() {
+        ActionViewTracks(true);
+    }
 }

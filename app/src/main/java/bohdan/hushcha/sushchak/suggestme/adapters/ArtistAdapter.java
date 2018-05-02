@@ -10,51 +10,45 @@ import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
-import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Track;
+import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Artist;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> {
+public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
 
-    private List<Track> tracks;
+    private List<Artist> artists;
     private LoadNextItems loadNextItems;
 
-
-    public TrackAdapter(List<Track> tracks, LoadNextItems loadNextItems) {
-        this.tracks = tracks;
+    public ArtistAdapter(List<Artist> artists, LoadNextItems loadNextItems) {
+        this.artists = artists;
         this.loadNextItems = loadNextItems;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ArtistAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_track, parent, false);
-        return new ViewHolder(view);
+                .inflate(R.layout.item_artist, parent, false);
+        return new ArtistAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ArtistAdapter.ViewHolder holder, int position) {
 
-        holder.tvArtist.setText(tracks.get(position).getArtist().getName());
+        holder.tvArtist.setText(artists.get(position).getName());
 
-        holder.tvTrack.setText(tracks.get(position).getName());
-
-        if (position == tracks.size() - 1){
+        if (position == artists.size() - 1){
             loadNextItems.LoadNextItems();
         }
     }
 
     @Override
     public int getItemCount() {
-        return tracks.size();
+        return artists.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder  {
         @BindView(R.id.tvArtistName)
         TextView tvArtist;
-
-        @BindView(R.id.tvTrackName)
-        TextView tvTrack;
 
         public ViewHolder(View itemView) {
             super(itemView);

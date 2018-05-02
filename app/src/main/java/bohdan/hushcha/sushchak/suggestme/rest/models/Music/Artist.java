@@ -19,6 +19,25 @@ public class Artist {
         this.Url = url;
     }
 
+    @SerializedName("@attr")
+    private Attr attr;
+
+    public Attr getAttr() {
+        return attr;
+    }
+
+    public void setAttr(Attr attr) {
+        this.attr = attr;
+    }
+
+    public Artist(String name, String id, String url, Attr attr) {
+
+        Name = name;
+        Id = id;
+        Url = url;
+        this.attr = attr;
+    }
+
     public String getName() {
         return Name;
     }

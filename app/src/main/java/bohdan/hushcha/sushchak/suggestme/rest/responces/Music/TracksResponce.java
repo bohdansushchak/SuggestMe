@@ -10,10 +10,10 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Track;
 public class TracksResponce {
 
     @SerializedName("track")
-    public List<Track> Tracks;
+    private List<Track> Tracks;
 
     @SerializedName("@attr")
-    public Attr Attr;
+    private Attr Attr;
 
     public TracksResponce(List<Track> tracks, bohdan.hushcha.sushchak.suggestme.rest.models.Music.Attr attr) {
         this.Tracks = tracks;

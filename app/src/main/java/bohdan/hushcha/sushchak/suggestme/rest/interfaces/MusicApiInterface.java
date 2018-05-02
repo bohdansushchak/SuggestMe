@@ -15,6 +15,19 @@ public interface MusicApiInterface {
 
     @GET("?method=tag.gettoptracks")
     Call<MusicResponce> GetTopTracks(@Query("api_key") String ApiKey,
-                                       @Query("tag") String Tag,
-                                       @Query("format") String Format);
+                                     @Query("tag") String Tag,
+                                     @Query("page") Integer page,
+                                     @Query("format") String Format);
+
+    @GET("?method=tag.gettopartists")
+    Call<MusicResponce> GetTopArtist(@Query("api_key") String ApiKey,
+                                     @Query("tag") String Tag,
+                                     @Query("page") Integer page,
+                                     @Query("format") String Format);
+
+    @GET("?method=artist.gettopalbums")
+    Call<MusicResponce> GetTopAlbumsByArtist(@Query("api_key") String ApiKey,
+                                     @Query("artist") String Artist,
+                                     @Query("page") Integer page,
+                                     @Query("format") String Format);
 }

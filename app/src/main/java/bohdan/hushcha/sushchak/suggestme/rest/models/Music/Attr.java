@@ -25,6 +25,29 @@ public class Attr {
     @SerializedName("totalPages")
     private Integer TotalPages;
 
+    @SerializedName("rank")
+    private Integer Rank;
+
+    public Integer getRank() {
+        return Rank;
+    }
+
+    public void setRank(Integer rank) {
+        Rank = rank;
+    }
+
+    public Attr(Integer offset, Integer numRes, Long total, String tag, Integer page, Integer perPage, Integer totalPages, Integer rank) {
+
+        Offset = offset;
+        NumRes = numRes;
+        Total = total;
+        Tag = tag;
+        Page = page;
+        PerPage = perPage;
+        TotalPages = totalPages;
+        Rank = rank;
+    }
+
     public Attr(Integer offset, Integer numRes, Long total, String tag, Integer page, Integer perPage, Integer totalPages) {
         this.Offset = offset;
         this.NumRes = numRes;
