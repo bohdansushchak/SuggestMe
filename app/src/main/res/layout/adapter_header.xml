@@ -10,8 +10,8 @@
         android:textSize="@dimen/textSizeNormal"
         android:paddingLeft="10dp"
         android:gravity="center_vertical"
-        android:textColor="@color/colorWhite"
-        android:background="#6ab5ef"
+        android:textColor="@color/textIconsColor"
+        android:background="@color/colorPrimary"
         android:id="@+id/tvTitle"/>
 
 </LinearLayout>

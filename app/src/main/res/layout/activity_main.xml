@@ -26,8 +26,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="#234E6F"
-                android:layout_height="60dp">
+                android:background="@color/colorPrimaryDark"
+                android:layout_height="50dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -60,13 +60,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FFFFFF">
+        android:background="@color/dividersColor">
 
         <include layout="@layout/menu_layout">
 

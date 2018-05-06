@@ -5,7 +5,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="180dp"
                                     android:layout_marginBottom="5dp"
-                                    android:background="#ea2727"
                                     card_view:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -26,7 +25,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:lines="1"
-                android:text="Title"
+                android:text="@string/tv_title"
                 android:textSize="@dimen/textSizeLarge"/>
         </FrameLayout>
 
@@ -52,15 +51,15 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category"
+                    android:text="@string/tv_category"
                     android:textSize="@dimen/textSizeNormal"/>
 
                 <TextView
                     android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description"
-                    android:textColor="@color/colorTextDescription"
+                    android:text="@string/tv_description"
+                    android:textColor="@color/textColorSecondary"
                     android:textSize="@dimen/textSizeSmall"/>
             </LinearLayout>
         </FrameLayout>

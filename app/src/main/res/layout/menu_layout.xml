@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
-                android:textColor="@color/colorTextNormal"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/textSizeLarge"/>
 
             <Button
@@ -33,13 +33,12 @@
                 android:text="@string/btn_hint_log_out"
                 android:textSize="@dimen/textSizeNormal"/>
 
-
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#4ef21c">
+            android:background="@color/dividersColor">
         </View>
 
         <ExpandableListView
@@ -48,6 +47,7 @@
             android:layout_height="wrap_content"
             android:groupIndicator="@null"
             android:nestedScrollingEnabled="false"
+            android:divider="@color/dividersColor"
             tools:listitem="@layout/adapter_header">
         </ExpandableListView>
     </LinearLayout>

@@ -130,5 +130,18 @@
     <string name="tv_change_24h">Change(24h)</string>
     <string name="tv_price">Price</string>
     <string name="tv_name">Name</string>
+    <string name="tv_hint_facebook">FaceBook</string>
+    <string name="lb_text_facebook">Facebook</string>
+    <string name="tv_title">Title</string>
+    <string name="tv_category">Category</string>
+    <string name="tv_description">Description</string>
+    <string name="tv_movie_release_date">Release date:</string>
+    <string name="tv_movie_popularity">Popularity:</string>
+    <string name="tv_movie_genre">Genre:</string>
+    <string name="tv_movie_revenue">Revenue:</string>
+    <string name="tv_movie_status">Status:</string>
+    <string name="tv_movie_original_language">Original language:</string>
+    <string name="tv_movie_budget">Budget:</string>
+    <string name="tv_movie_votes">Votes:</string>
 
 </resources>

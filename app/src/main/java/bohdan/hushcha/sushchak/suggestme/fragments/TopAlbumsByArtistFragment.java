@@ -93,8 +93,13 @@ public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ArtistName = charSequence.toString();
-                ActionViewAlbums(ArtistName, false);
+                if (charSequence != null) {
+                    ArtistName = charSequence.toString();
+                    ActionViewAlbums(ArtistName, false);
+                } else {
+                    albums.clear();
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -121,13 +126,15 @@ public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems
         call.enqueue(new Callback<MusicResponce>() {
             @Override
             public void onResponse(Call<MusicResponce> call, Response<MusicResponce> response) {
-                if (response.body().getTopAlbumsResponce() != null) {
-                    List<Album> newAlbums = response.body().getTopAlbumsResponce().getAlbums();
+                if (response.body() != null) {
+                    if (response.body().getTopAlbumsResponce() != null) {
+                        List<Album> newAlbums = response.body().getTopAlbumsResponce().getAlbums();
 
-                    if (newAlbums != null) {
-                        albums.addAll(newAlbums);
-                        adapter.notifyDataSetChanged();
-                        ++CurrentPage;
+                        if (newAlbums != null) {
+                            albums.addAll(newAlbums);
+                            adapter.notifyDataSetChanged();
+                            ++CurrentPage;
+                        }
                     }
                 }
             }

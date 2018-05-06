@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Movie title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/accentColor"
             android:textSize="22sp" />
 
         <FrameLayout
@@ -33,8 +32,7 @@
 
             <TextView
                 android:id="@+id/tvVoteAverage"
-                android:text="10"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/accentColor"
                 android:textSize="32sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
@@ -65,14 +63,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="Votes:"
+                android:text="@string/tv_movie_votes"
                 android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tvVote"
-                android:text="1224"
                 android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -85,7 +82,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Budget: "
+                android:text="@string/tv_movie_budget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -103,7 +100,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Original language: "
+                android:text="@string/tv_movie_original_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -121,7 +118,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Genre: "
+                android:text="@string/tv_movie_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -139,7 +136,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Popularity: "
+                android:text="@string/tv_movie_popularity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -157,7 +154,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Release date: "
+                android:text="@string/tv_movie_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -175,7 +172,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Status: "
+                android:text="@string/tv_movie_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -194,7 +191,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Revenue: "
+                android:text="@string/tv_movie_revenue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -204,8 +201,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvCompany"

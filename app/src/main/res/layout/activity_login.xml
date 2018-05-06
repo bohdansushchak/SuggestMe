@@ -3,24 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTintMode="multiply"
     android:fitsSystemWindows="true"
     tools:context="bohdan.hushcha.sushchak.suggestme.activities.LoginActivity">
-
-    <!--
-    <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/marginTopLogo"
-        android:text="@string/app_name"
-        android:textColor="@color/colorTextLogo"
-        android:textSize="@dimen/textSizeLogo"
-        android:typeface="serif"/> -->
 
     <ImageView
         android:layout_width="match_parent"
@@ -49,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/et_hint_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/colorTextNormal"/>
+                android:textColor="@color/textColorPrimary"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -69,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/et_hint_password"
                 android:inputType="textPassword"
-                android:textColor="@color/colorTextNormal"/>
+                android:textColor="@color/textColorPrimary"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -96,8 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:text="FaceBook"/>
+            facebook:com_facebook_login_text="@string/lb_text_facebook"
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:id="@+id/tvRegister_Login"
@@ -105,7 +94,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginTop="20dp"
-            android:clickable="true"
             android:text="@string/tv_hint_sing_up"
             android:textColor="#fff"
             android:textSize="@dimen/textSizeSmall"/>
