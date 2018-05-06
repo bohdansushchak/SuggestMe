@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.fragments.MovieDescriptionFragment;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.ViewMovieDescription;
+import bohdan.hushcha.sushchak.suggestme.rest.responces.cinema.MovieDetails;
 import bohdan.hushcha.sushchak.suggestme.services.AuthService;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
@@ -32,7 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements WeatherDayFragment.OnFragmentInteractionListener, InteractionListener<String> {
+        implements WeatherDayFragment.OnFragmentInteractionListener, InteractionListener<String> , ViewMovieDescription {
 
     final String TAG = "MainActivity";
 
@@ -278,7 +281,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void OnLongClick(String parametr) {
+    public void OnLongClick(String parameter) {
 
+    }
+
+    @Override
+    public void ViewMovieDetails(String movieId)
+    {
+        currentFragment = MovieDescriptionFragment.newInstance(movieId);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
+                .addToBackStack("null").commit();
+
+        tvHeaderTitle.setText("Movie description");
     }
 }

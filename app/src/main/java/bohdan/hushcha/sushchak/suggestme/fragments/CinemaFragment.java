@@ -1,5 +1,6 @@
 package bohdan.hushcha.sushchak.suggestme.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,14 +24,14 @@ import bohdan.hushcha.sushchak.suggestme.rest.clients.CinemaClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.CinemaApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Cinema.Movie;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.cinema.TopRatedMoviesResponce;
+import bohdan.hushcha.sushchak.suggestme.utils.MovieFragmentEnum;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class TopRatedMoviesFragment extends Fragment implements LoadNextItems {
+public class CinemaFragment extends Fragment implements LoadNextItems {
 
     private final String TAG = "TopRatedMovies";
     private InteractionListener mListener;
@@ -39,19 +40,28 @@ public class TopRatedMoviesFragment extends Fragment implements LoadNextItems {
     private List<Movie> movies;
     private Integer CurrentPage;
     private MovieAdapter adapter;
+    private MovieFragmentEnum fragmentEnum;
 
     @BindView(R.id.rvMovies)
     RecyclerView rvMovies;
 
-    public TopRatedMoviesFragment() {
-        movies = new ArrayList<>();
-        cinemaApi = CinemaClient.getClient().create(CinemaApiInterface.class);
-        CurrentPage = 1;
-
+    public CinemaFragment() {
+        this.movies = new ArrayList<>();
+        this.cinemaApi = CinemaClient.getClient().create(CinemaApiInterface.class);
+        this.CurrentPage = 1;
+        fragmentEnum = MovieFragmentEnum.PopularMovie;
     }
 
-    public static TopRatedMoviesFragment getInstance() {
-        TopRatedMoviesFragment fragment = new TopRatedMoviesFragment();
+    @SuppressLint("ValidFragment")
+    public CinemaFragment(MovieFragmentEnum fragmentEnum) {
+        this.movies = new ArrayList<>();
+        this.cinemaApi = CinemaClient.getClient().create(CinemaApiInterface.class);
+        this.CurrentPage = 1;
+        this.fragmentEnum = fragmentEnum;
+    }
+
+    public static CinemaFragment getInstance(MovieFragmentEnum fragmentEnum) {
+        CinemaFragment fragment = new CinemaFragment(fragmentEnum);
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -105,7 +115,7 @@ public class TopRatedMoviesFragment extends Fragment implements LoadNextItems {
         genres.put(10767, "Talk");
         genres.put(10768, "War & Politics");
 
-        adapter = new MovieAdapter(movies, this, mListener, genres);
+        adapter = new MovieAdapter(getContext(), movies, this, mListener, genres);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvMovies.setLayoutManager(layoutManager);
@@ -115,7 +125,25 @@ public class TopRatedMoviesFragment extends Fragment implements LoadNextItems {
     }
 
     private void LoadItems() {
-        Call<TopRatedMoviesResponce> call = cinemaApi.GetTopRatedMovies(CinemaClient.API_KEY, CurrentPage);
+        Call<TopRatedMoviesResponce> call;
+
+        switch (fragmentEnum) {
+            case TopRatedMovie:
+                call = cinemaApi.GetTopRatedMovies(CinemaClient.API_KEY, CurrentPage);
+                break;
+            case TopRatedTV:
+                call = cinemaApi.GetTopRatedTVShows(CinemaClient.API_KEY, CurrentPage);
+                break;
+            case PopularMovie:
+                call = cinemaApi.GetPopularMovies(CinemaClient.API_KEY, CurrentPage);
+                break;
+            case PopularTV:
+                call = cinemaApi.GetPopularTVShows(CinemaClient.API_KEY, CurrentPage);
+                break;
+            default:
+                call = cinemaApi.GetTopRatedMovies(CinemaClient.API_KEY, CurrentPage);
+                break;
+        }
 
         Log.d(TAG, call.request().url().toString());
 

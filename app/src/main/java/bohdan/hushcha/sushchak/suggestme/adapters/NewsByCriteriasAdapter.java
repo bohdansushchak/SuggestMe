@@ -19,8 +19,6 @@ public class NewsByCriteriasAdapter extends RecyclerView.Adapter<NewsByCriterias
     private List<Article> items;
     private Context context;
 
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
@@ -33,7 +31,7 @@ public class NewsByCriteriasAdapter extends RecyclerView.Adapter<NewsByCriterias
 
     @Override
     public int getItemCount() {
-        return 0;
+        return items.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

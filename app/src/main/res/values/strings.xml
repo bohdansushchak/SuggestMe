@@ -92,14 +92,12 @@
         <item>us</item>
     </array>
 
-
     <array name="cinema_sub_items">
         <item>Top rated movies</item>
         <item>Top rated TV shows</item>
         <item>Popular movies</item>
         <item>Popular TV shows</item>
-        <item>Movie description</item>
-        <item>TV show description</item>
+        <item>Search movie description</item>
     </array>
 
     <array name="music_sub_items">

@@ -6,12 +6,12 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp">
+        android:layout_height="510dp">
 
         <ImageView
             android:id="@+id/ivMovieBackground"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:scaleType="fitXY"
             android:src="@color/cardview_dark_background" />

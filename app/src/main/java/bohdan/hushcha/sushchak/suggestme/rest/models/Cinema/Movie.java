@@ -22,6 +22,9 @@ public class Movie {
     @SerializedName("title")
     private String Title;
 
+    @SerializedName("name")
+    private String Name;
+
     @SerializedName("popularity")
     private Double Popularity;
 
@@ -54,20 +57,46 @@ public class Movie {
                  String posterPath, String originalLanguage, String originalTitle,
                  String backgroundPath, Boolean adult,
                  String overview, String releaseDate, List<Integer> idGenres) {
-        VoteCount = voteCount;
-        Id = id;
-        IsVideo = isVideo;
-        VoteAverange = voteAverange;
-        Title = title;
-        Popularity = popularity;
-        PosterPath = posterPath;
-        OriginalLanguage = originalLanguage;
-        OriginalTitle = originalTitle;
-        BackgroundPath = backgroundPath;
-        Adult = adult;
-        Overview = overview;
-        ReleaseDate = releaseDate;
-        IdGenres = idGenres;
+
+        this.VoteCount = voteCount;
+        this.Id = id;
+        this.IsVideo = isVideo;
+        this.VoteAverange = voteAverange;
+        this.Title = title;
+        this.Popularity = popularity;
+        this.PosterPath = posterPath;
+        this.OriginalLanguage = originalLanguage;
+        this.OriginalTitle = originalTitle;
+        this.BackgroundPath = backgroundPath;
+        this.Adult = adult;
+        this.Overview = overview;
+        this.ReleaseDate = releaseDate;
+        this.IdGenres = idGenres;
+    }
+
+    public Movie(String voteCount, String id, Boolean isVideo,
+                 String voteAverange, String title,
+                 String name, Double popularity, String posterPath,
+                 String originalLanguage, String originalTitle,
+                 String backgroundPath,
+                 Boolean adult, String overview,
+                 String releaseDate, List<Integer> idGenres) {
+
+        this.VoteCount = voteCount;
+        this.Id = id;
+        this.IsVideo = isVideo;
+        this.VoteAverange = voteAverange;
+        this.Title = title;
+        this.Name = name;
+        this.Popularity = popularity;
+        this.PosterPath = posterPath;
+        this.OriginalLanguage = originalLanguage;
+        this.OriginalTitle = originalTitle;
+        this.BackgroundPath = backgroundPath;
+        this.Adult = adult;
+        this.Overview = overview;
+        this.ReleaseDate = releaseDate;
+        this.IdGenres = idGenres;
     }
 
     public Movie(String voteCount, String id, Boolean isVideo, String voteAverange, String title,
@@ -88,6 +117,15 @@ public class Movie {
         this.Adult = adult;
         this.Overview = overview;
         this.ReleaseDate = releaseDate;
+    }
+
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 
     public List<Integer> getIdGenres() {
@@ -163,7 +201,7 @@ public class Movie {
     }
 
     public String getPosterPath() {
-        return PosterPath;
+        return "https://image.tmdb.org/t/p/w500" + PosterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -187,7 +225,7 @@ public class Movie {
     }
 
     public String getBackgroundPath() {
-        return BackgroundPath;
+        return "https://image.tmdb.org/t/p/w500" + BackgroundPath;
     }
 
     public void setBackgroundPath(String backgroundPath) {

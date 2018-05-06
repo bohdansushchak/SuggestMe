@@ -1,5 +1,6 @@
 package bohdan.hushcha.sushchak.suggestme.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.HashMap;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 import java.util.Map;
 
@@ -26,9 +29,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private LoadNextItems loadNextItems;
     private InteractionListener interactionListener;
     private Map<Integer, String> genresMap;
+    private Context context;
 
-    public MovieAdapter(List<Movie> movies, LoadNextItems loadNextItems,
+    public MovieAdapter(Context context, List<Movie> movies, LoadNextItems loadNextItems,
                         InteractionListener interactionListener, Map<Integer, String> genres) {
+        this.context = context;
         this.movies = movies;
         this.loadNextItems = loadNextItems;
         this.interactionListener = interactionListener;
@@ -47,11 +52,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         Movie movie = movies.get(position);
 
-        holder.tvMovieTitle.setText(movie.getTitle());
+        String name = movie.getTitle() != null ? movie.getTitle() : movie.getName();
+
+        holder.tvMovieTitle.setText(name);
         holder.tvReleaseDate.setText(movie.getReleaseDate());
         holder.tvOverview.setText(movie.getOverview());
         holder.tvPopularity.setText(movie.getPopularity().toString());
         holder.tvVoteAverange.setText(movie.getVoteAverange());
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round);
+
+        Glide.with(context).load(movie.getPosterPath())
+                .apply(options)
+                .into(holder.ivBackground);
 
         String genres = "";
 
