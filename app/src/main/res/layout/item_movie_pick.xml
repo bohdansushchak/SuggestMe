@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true"
     android:layout_marginBottom="5dp"
     card_view:cardCornerRadius="10dp">
 
@@ -13,9 +15,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:text="ddfgrg"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:gravity="center_horizontal"
             android:id="@+id/tvMovieTitle"
+            android:textSize="@dimen/textSizeLarge"
+            android:textColor="@color/textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

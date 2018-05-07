@@ -38,7 +38,7 @@ public class NewsByCriteriasAdapter extends RecyclerView.Adapter<NewsByCriterias
 
         @BindView(R.id.ivBackground) ImageView ivBackground;
         @BindView(R.id.tvTitle) TextView tvTitle;
-        @BindView(R.id.tvCategory) TextView tvCategory;
+        @BindView(R.id.tvAuthor) TextView tvAuthor;
         @BindView(R.id.tvDescription) TextView tvDecription;
 
         public ViewHolder(View itemView) {

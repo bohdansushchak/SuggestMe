@@ -12,7 +12,7 @@ public interface NewsApiInterface {
     @GET("top-headlines")
     Call<NewsResponce> TopHeadlines(@Query("apiKey") String apiKey,
                                     @Query("country") String country,
-                                    @Query("category") String category);
+                                    @Query("page") Integer page);
 
     @GET("top-headlines")
     Call<NewsResponce> TopHeadlinesByCountry(@Query("apiKey") String apiKey,
@@ -29,16 +29,19 @@ public interface NewsApiInterface {
     Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey,
                                      @Query("from") String from,
                                      @Query("to") String to,
+                                     @Query("page") Integer page,
                                      @Query("sources") String source);
 
     @GET("everything")
     Call<NewsResponce> GetEverything(@Query("apiKey") String apiKey,
                                      @Query("from") String from,
+                                     @Query("page") Integer page,
                                      @Query("sources") String sources);
 
     @GET("everything")
     Call<NewsResponce> GetEverythingDateTo(@Query("apiKey") String apiKey,
                                      @Query("to") String to,
+                                     @Query("page") Integer page,
                                      @Query("sources") String sources);
     @GET("sources")
     Call<SourcesResponce> GetAllSources(@Query("apiKey") String apiKey);

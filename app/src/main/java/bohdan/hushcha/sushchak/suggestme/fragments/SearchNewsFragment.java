@@ -25,6 +25,7 @@ import java.util.List;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.NewsAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.News.Article;
@@ -38,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchNewsFragment extends Fragment {
+public class SearchNewsFragment extends Fragment implements LoadNextItems {
 
     private final String TAG = "SearchNewsFragment";
 
@@ -59,6 +60,7 @@ public class SearchNewsFragment extends Fragment {
     TextView tvDateTo;
 
     private NewsApiInterface newsApiInterface;
+    private Integer currentPage;
 
     private String CoutryArg;
     private String SourceId;
@@ -72,6 +74,7 @@ public class SearchNewsFragment extends Fragment {
 
         newsApiInterface = NewsClient.getClient().create(NewsApiInterface.class);
         articleList = new ArrayList<>();
+        currentPage = 1;
     }
 
     public static SearchNewsFragment getInstance() {
@@ -95,7 +98,7 @@ public class SearchNewsFragment extends Fragment {
 
     private void init() {
         articleList = new ArrayList<>();
-        newsAdapter = new NewsAdapter(getContext(), articleList, mListener);
+        newsAdapter = new NewsAdapter(getContext(), articleList, mListener, this);
 
         recyclerViewNews.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -127,46 +130,9 @@ public class SearchNewsFragment extends Fragment {
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btnSearch:
-                Call<NewsResponce> callNews = null;
 
-                if (SourceId != null && DateTo != null && DateAt != null) {
-                    callNews = newsApiInterface.GetEverything(NewsClient.API_KEY, DateAt, DateTo, SourceId);
+                LoadItems();
 
-                } else if (SourceId != null && DateAt != null) {
-                    callNews = newsApiInterface.GetEverything(NewsClient.API_KEY, DateAt, SourceId);
-
-                } else if (SourceId != null && DateTo != null) {
-                    callNews = newsApiInterface.GetEverythingDateTo(NewsClient.API_KEY, DateTo, SourceId);
-
-                } else {
-                    DialogAlert(R.string.dialog_title_no_criterias, R.string.dialog_message_no_criterias);
-
-                    break;
-                }
-
-                callNews.enqueue(new Callback<NewsResponce>() {
-                    @Override
-                    public void onResponse(Call<NewsResponce> call, final Response<NewsResponce> response) {
-
-                        articleList.clear();
-                        articleList.addAll(response.body().getArticles());
-
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                newsAdapter.notifyDataSetChanged();
-                            }
-                        });
-
-                        Log.d(TAG, articleList.size() + "");
-                    }
-
-                    @Override
-                    public void onFailure(Call<NewsResponce> call, Throwable t) {
-                        Log.e(TAG, t.getMessage());
-                    }
-                });
                 break;
             case R.id.tvChooseCountry:
                 ActionChooseCountry();
@@ -197,7 +163,6 @@ public class SearchNewsFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<SourcesResponce> call, Throwable t) {
-
                     }
                 });
 
@@ -255,9 +220,10 @@ public class SearchNewsFragment extends Fragment {
                 CoutryArg = countryArgs.get(i);
 
                 tvChooseCountry.setText(countryNames.get(i));
-                if(SourceId != null){
+                if (SourceId != null) {
                     SourceId = null;
                     tvChooseSource.setText(R.string.tv_pick_sourse);
+                    currentPage = 1;
                 }
             }
         });
@@ -296,7 +262,7 @@ public class SearchNewsFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SourceId = SourcesId.get(i);
-
+                currentPage = 1;
                 tvChooseSource.setText(SourcesNames.get(i));
             }
         });
@@ -336,5 +302,52 @@ public class SearchNewsFragment extends Fragment {
                 listener, year, month, day);
 
         datePickerDialog.show();
+    }
+
+    /**
+     * Function to load articles from newsApi and view in list
+     */
+    private void LoadItems() {
+
+        Call<NewsResponce> callNews = null;
+
+        if (SourceId != null && DateTo != null && DateAt != null) {
+            callNews = newsApiInterface.GetEverything(NewsClient.API_KEY, DateAt, DateTo, currentPage, SourceId);
+
+        } else if (SourceId != null && DateAt != null) {
+            callNews = newsApiInterface.GetEverything(NewsClient.API_KEY, DateAt, currentPage, SourceId);
+
+        } else if (SourceId != null && DateTo != null) {
+            callNews = newsApiInterface.GetEverythingDateTo(NewsClient.API_KEY, DateTo, currentPage, SourceId);
+
+        } else {
+            DialogAlert(R.string.dialog_title_no_criterias, R.string.dialog_message_no_criterias);
+        }
+
+        callNews.enqueue(new Callback<NewsResponce>() {
+            @Override
+            public void onResponse(Call<NewsResponce> call, final Response<NewsResponce> response) {
+                if (response.body() != null) {
+                    if (response.body().getTotalResults() > articleList.size()) {
+                        articleList.addAll(response.body().getArticles());
+                        newsAdapter.notifyDataSetChanged();
+                        ++currentPage;
+                    }
+                } else
+                    articleList.clear();
+
+                Log.d(TAG, articleList.size() + "");
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponce> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void LoadNextItems() {
+        LoadItems();
     }
 }

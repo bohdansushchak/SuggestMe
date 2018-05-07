@@ -133,7 +133,7 @@
     <string name="tv_hint_facebook">FaceBook</string>
     <string name="lb_text_facebook">Facebook</string>
     <string name="tv_title">Title</string>
-    <string name="tv_category">Category</string>
+    <string name="tv_author">Author:</string>
     <string name="tv_description">Description</string>
     <string name="tv_movie_release_date">Release date:</string>
     <string name="tv_movie_popularity">Popularity:</string>

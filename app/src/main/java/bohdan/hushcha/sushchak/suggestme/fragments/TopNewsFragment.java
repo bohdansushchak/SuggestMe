@@ -18,6 +18,7 @@ import java.util.List;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.NewsAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.models.News.Article;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.NewsClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.NewsApiInterface;
@@ -28,17 +29,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TopNewsFragment extends Fragment {
+public class TopNewsFragment extends Fragment implements LoadNextItems {
 
     final String TAG = "TopNewsFragment";
 
     private ArrayList<Article> items;
     private InteractionListener mListener;
+    private NewsAdapter adapter;
+    private Integer currentPage;
+    private NewsApiInterface apiService;
 
     @BindView(R.id.rvMainList)
     RecyclerView recyclerView;
 
     public TopNewsFragment() {
+        currentPage = 1;
+        apiService = NewsClient.getClient().create(NewsApiInterface.class);
+        items = new ArrayList<>();
     }
 
     public static TopNewsFragment getInstance() {
@@ -59,9 +66,7 @@ public class TopNewsFragment extends Fragment {
 
     private void init() {
 
-        items = new ArrayList<>();
-
-        final NewsAdapter adapter = new NewsAdapter(getContext(), items, mListener);
+        adapter = new NewsAdapter(getContext(), items, mListener, this);
 
         recyclerView.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -69,17 +74,25 @@ public class TopNewsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        NewsApiInterface apiService = NewsClient.getClient().create(NewsApiInterface.class);
+        LoadItems();
+    }
 
-        Call<NewsResponce> call = apiService.TopHeadlines(NewsClient.API_KEY, "us", "business");
+    private void LoadItems() {
+
+        Call<NewsResponce> call = apiService.TopHeadlines(NewsClient.API_KEY, "us", currentPage);
+        Log.d(TAG, call.request().url().toString());
+
         call.enqueue(new Callback<NewsResponce>() {
             @Override
             public void onResponse(Call<NewsResponce> call, Response<NewsResponce> response) {
-                List<Article> articles = response.body().getArticles();
-                if(articles != null){
-                    items.addAll(articles);
+                if (response.body().getTotalResults() > items.size()) {
+                    List<Article> articles = response.body().getArticles();
 
-                    adapter.notifyDataSetChanged();
+                    if (articles != null) {
+                        items.addAll(articles);
+                        adapter.notifyDataSetChanged();
+                        ++currentPage;
+                    }
                 }
             }
 
@@ -89,7 +102,6 @@ public class TopNewsFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -104,5 +116,10 @@ public class TopNewsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void LoadNextItems() {
+        LoadItems();
     }
 }
