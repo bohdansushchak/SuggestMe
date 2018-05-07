@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,9 @@ import java.util.Arrays;
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.fragments.MovieDescriptionFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.ViewMovieDescription;
-import bohdan.hushcha.sushchak.suggestme.rest.responces.cinema.MovieDetails;
 import bohdan.hushcha.sushchak.suggestme.services.AuthService;
 import bohdan.hushcha.sushchak.suggestme.adapters.CategoryAdapter;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
-import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
-import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 import bohdan.hushcha.sushchak.suggestme.utils.SwitchFragmentUtils;
 import butterknife.BindView;
@@ -35,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements WeatherDayFragment.OnFragmentInteractionListener, InteractionListener<String> , ViewMovieDescription {
+        implements InteractionListener<String>, ViewMovieDescription {
 
     final String TAG = "MainActivity";
 
@@ -87,22 +85,15 @@ public class MainActivity extends AppCompatActivity
 
         setExpandableListViewHeightBasedOnChildren(evList);
 
-        currentFragment = new TopNewsFragment();
-        //Bundle bundle = new Bundle();
-        //bundle.putString("name", categories.get(0).getCategoryName());
-        tvHeaderTitle.setText(categories.get(0).getCategoryName());
-
-        //topNewsFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
-                .addToBackStack("null").commit();
+        clickItemNavigationDrawer(3, 0);
     }
-
 
     private void setListViewHeight(ExpandableListView listView, int group) {
         ExpandableListAdapter listAdapter = listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
                 View.MeasureSpec.EXACTLY);
+
         for (int i = 0; i < listAdapter.getGroupCount(); i++) {
             View groupItem = listAdapter.getGroupView(i, false, null, listView);
             groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
@@ -137,6 +128,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
         int totalHeight = expandableListView.getPaddingTop() + expandableListView.getPaddingBottom();
+
         for (int i = 0; i < adapter.getGroupCount(); i++) {
             View groupItem = adapter.getGroupView(i, false, null, expandableListView);
             groupItem.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
@@ -176,12 +168,15 @@ public class MainActivity extends AppCompatActivity
 
         if (fragment != null) {
 
-            currentFragment = fragment;
+            if (currentFragment != fragment) {
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
-                    .addToBackStack("null").commit();
+                currentFragment = fragment;
 
-            tvHeaderTitle.setText(categories.get(group).getCategoryName());
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
+                        .addToBackStack("null").commit();
+
+                tvHeaderTitle.setText(categories.get(group).getCategoryItems().get(child));
+            }
         }
 
         drawerLayout.closeDrawer(Gravity.LEFT);
@@ -192,8 +187,12 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onBackPressed() {
+        Log.d(TAG, getSupportFragmentManager().getFragments().size() + "");
+
         super.onBackPressed();
-        //finish();
+
+        if(getSupportFragmentManager().getFragments().size() <= 1)
+            finish();
     }
 
     /**
@@ -262,11 +261,6 @@ public class MainActivity extends AppCompatActivity
         CheckIfUserLogined();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
     /**
      * Method call when user click on item in news fragment
      * and view the article in web browser
@@ -286,11 +280,11 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * View movie details fragment
+     *
      * @param movieId id movie in database
      */
     @Override
-    public void ViewMovieDetails(String movieId)
-    {
+    public void ViewMovieDetails(String movieId) {
         currentFragment = MovieDescriptionFragment.newInstance(movieId);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")

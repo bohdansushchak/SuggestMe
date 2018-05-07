@@ -50,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:elevation="0dp"
-                    android:text="8,6"
                     android:textStyle="normal"
                     android:textAlignment="center"
                     android:textColor="@color/textColorPrimary"
