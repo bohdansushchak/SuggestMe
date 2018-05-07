@@ -26,15 +26,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.etEmail)
     TextInputEditText etEmail;
+
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
+
     @BindView(R.id.etRePassword)
     TextInputEditText etRepeatPassword;
 
     @BindView(R.id.emailLayout)
     TextInputLayout emailLayout;
+
     @BindView(R.id.passwordLayout)
     TextInputLayout passwordLayout;
+
     @BindView(R.id.rePasswordLayout)
     TextInputLayout rePasswordLayout;
 

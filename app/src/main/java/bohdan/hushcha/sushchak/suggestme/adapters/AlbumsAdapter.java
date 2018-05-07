@@ -22,7 +22,6 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
     private LoadNextItems loadNextItems;
     private InteractionListener mListener;
 
-
     public AlbumsAdapter(List<Album> albums, LoadNextItems loadNextItems, InteractionListener mListener) {
         this.albums = albums;
         this.loadNextItems = loadNextItems;

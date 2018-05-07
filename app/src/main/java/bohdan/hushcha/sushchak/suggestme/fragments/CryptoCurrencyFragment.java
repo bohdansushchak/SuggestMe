@@ -58,6 +58,9 @@ public class CryptoCurrencyFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Initialise adapter and recycler view
+     */
     private void init(){
         adapter = new CryptoAdapter(items, getContext());
 

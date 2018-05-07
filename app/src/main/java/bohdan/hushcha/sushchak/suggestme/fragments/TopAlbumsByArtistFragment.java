@@ -79,6 +79,9 @@ public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems
         return view;
     }
 
+    /**
+     * Initialise method
+     */
     private void Init() {
 
         adapter = new AlbumsAdapter(albums, this, mListener);
@@ -111,7 +114,11 @@ public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems
         });
     }
 
-
+    /**
+     * View list albums by artist name
+     * @param artistName artist name for query
+     * @param isLoadNext load next items
+     */
     private void ActionViewAlbums(String artistName, boolean isLoadNext) {
 
         if (artistName == null)
@@ -163,6 +170,9 @@ public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems
         mListener = null;
     }
 
+    /**
+     * Load more items to list
+     */
     @Override
     public void LoadNextItems() {
         ActionViewAlbums(ArtistName, true);

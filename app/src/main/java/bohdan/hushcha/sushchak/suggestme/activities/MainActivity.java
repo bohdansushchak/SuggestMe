@@ -267,12 +267,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
     /**
      * Method call when user click on item in news fragment
      * and view the article in web browser
      *
-     * @param url url to news article
+     * @param url url to source
      */
     @Override
     public void OnClick(String url) {
@@ -285,6 +284,10 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * View movie details fragment
+     * @param movieId id movie in database
+     */
     @Override
     public void ViewMovieDetails(String movieId)
     {

@@ -118,6 +118,10 @@ public class PopularTracksFragment extends Fragment implements LoadNextItems {
         }
     }
 
+    /**
+     * View dialogs with list of music tags
+     * @param tagList list of music tags
+     */
     private void ActionChooseTag(final List<MusicTag> tagList) {
         if (tagList == null)
             return;
@@ -165,6 +169,10 @@ public class PopularTracksFragment extends Fragment implements LoadNextItems {
     }
 
 
+    /**
+     * get data from server by tags and view list of tracks
+     * @param isLoadNext if is true load next items else clear list and load items
+     */
     private void ActionViewTracks(boolean isLoadNext){
         if(TagName == null)
             return;

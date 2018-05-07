@@ -129,6 +129,9 @@ public class MovieDescriptionFragment extends Fragment {
         });
     }
 
+    /**
+     * Set response data from server to views
+     */
     public void ViewMovie(){
 
         tvBundget.setText(movieDetails.getBudget());
@@ -172,12 +175,6 @@ public class MovieDescriptionFragment extends Fragment {
         rvCompany.setAdapter(adapter);
     }
 
-    private void setText(TextView view, String text){
-        if(text != null)
-            view.setText(text);
-        else
-            view.setVisibility(View.GONE);
-    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

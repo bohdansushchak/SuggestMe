@@ -32,8 +32,6 @@ public class WeatherDailyFragment extends Fragment {
 
     ArrayList<ConsolidatedWeather> items;
 
-    //private OnFragmentInteractionListener mListener;
-
     public WeatherDailyFragment() {
     }
 

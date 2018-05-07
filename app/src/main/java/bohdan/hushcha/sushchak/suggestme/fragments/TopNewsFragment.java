@@ -76,15 +76,11 @@ public class TopNewsFragment extends Fragment {
             @Override
             public void onResponse(Call<NewsResponce> call, Response<NewsResponce> response) {
                 List<Article> articles = response.body().getArticles();
+                if(articles != null){
+                    items.addAll(articles);
 
-                //items = new ArrayList<>();
-
-                for (Article article : articles) {
-                    //HomeItem item = new HomeItem(article.getTitle(), article.getDecription(), article.getUrlToImage(),article.getPublishedAt());
-                    items.add(article);
+                    adapter.notifyDataSetChanged();
                 }
-
-                adapter.notifyDataSetChanged();
             }
 
             @Override

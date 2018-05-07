@@ -89,6 +89,9 @@ public class LoginActivity extends AppCompatActivity {
         SignInByFacebookInit();
     }
 
+    /**
+     * Method to sign in
+     */
     private void SignIn() {
         String username = etEmail.getText().toString();
         String password = etPassword.getText().toString();
@@ -118,11 +121,13 @@ public class LoginActivity extends AppCompatActivity {
 
             emailLayout.setError(emailError);
             passwordLayout.setError(passwordError);
-        } finally {
-
         }
     }
 
+    /**
+     * Function called when user click to buttons
+     * @param v clicked item
+     */
     @OnClick({R.id.sing_in_button, R.id.btnLogin, R.id.tvRegister_Login})
     public void onClick(View v) {
         switch (v.getId()) {
@@ -146,6 +151,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Medthod to sign in by facebook account
+     */
     private void SignInByFacebookInit() {
         mCallbackManager = CallbackManager.Factory.create();
         btnFacebook.setReadPermissions("email", "public_profile");
@@ -169,6 +177,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * method call when user back to application
+     * @param requestCode  contain call code
+     * @param resultCode contain code if user click ok button or cancel
+     * @param data returned result data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -186,6 +200,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param credential auth data to login by firebase
+     */
     private void SignInWithCredential(AuthCredential credential) {
         FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -199,6 +217,9 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method to add textwatcher for all edit text views
+     */
     private void InitTextWatcher() {
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -253,5 +274,4 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (NoSuchAlgorithmException e) {
 
                 }
-
  */

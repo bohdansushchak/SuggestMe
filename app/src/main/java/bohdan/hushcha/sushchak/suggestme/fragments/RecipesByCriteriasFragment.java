@@ -66,6 +66,9 @@ public class RecipesByCriteriasFragment extends Fragment implements LoadNextItem
 
     }
 
+    /**
+     * Initialise method
+     */
     private void Init() {
         items = new ArrayList<>();
 
@@ -89,6 +92,10 @@ public class RecipesByCriteriasFragment extends Fragment implements LoadNextItem
         return view;
     }
 
+    /**
+     * Method to call when user click by search button
+     * @param view clicked item
+     */
     @OnClick(R.id.ivSearch)
     public void Search(View view) {
         Log.d(TAG, "iTempIngredients: " + TempIngredients);
@@ -136,6 +143,9 @@ public class RecipesByCriteriasFragment extends Fragment implements LoadNextItem
         mListener = null;
     }
 
+    /**
+     * Method to load more items to list
+     */
     @Override
     public void LoadNextItems() {
         ++CurrentPage;

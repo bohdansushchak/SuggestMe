@@ -81,6 +81,9 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
         return view;
     }
 
+    /**
+     * Initialise method
+     */
     private void Init() {
         artists = new ArrayList<>();
 
@@ -117,6 +120,10 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
         }
     }
 
+    /**
+     * Method to view dialog with music tag list
+     * @param tagList list of music tags
+     */
     private void ActionChooseArtistTag(final List<MusicTag> tagList) {
         if (tagList == null)
             return;
@@ -162,6 +169,10 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
         dialog.show();
     }
 
+    /**
+     *
+     * @param isLoadNext if is true load more items to list, if is false clear list and load items
+     */
     private void ActionViewArtist(boolean isLoadNext) {
         if (TagName == null)
             return;
@@ -216,6 +227,9 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
         mListener = null;
     }
 
+    /**
+     * Called if user go to end list
+     */
     @Override
     public void LoadNextItems() {
         ActionViewArtist(true);

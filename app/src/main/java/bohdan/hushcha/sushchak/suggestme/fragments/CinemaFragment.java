@@ -124,6 +124,9 @@ public class CinemaFragment extends Fragment implements LoadNextItems {
         LoadItems();
     }
 
+    /**
+     * Method to load items to recycler view
+     */
     private void LoadItems() {
         Call<TopRatedMoviesResponce> call;
 
@@ -205,6 +208,9 @@ public class CinemaFragment extends Fragment implements LoadNextItems {
         mListener = null;
     }
 
+    /**
+     * call when user go to end of list
+     */
     @Override
     public void LoadNextItems() {
         LoadItems();

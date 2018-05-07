@@ -58,6 +58,9 @@ public class PopularRecipesFragment extends Fragment implements LoadNextItems {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Initialise method
+     */
     private void init() {
 
         adapter = new RecipeAdapter(items, getContext(), mListener, this);
@@ -107,6 +110,9 @@ public class PopularRecipesFragment extends Fragment implements LoadNextItems {
         mListener = null;
     }
 
+    /**
+     * Method to load next items if user go to end of list
+     */
     @Override
     public void LoadNextItems() {
         ++CurrentPage;
