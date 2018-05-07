@@ -14,9 +14,9 @@ public class MusicTag {
     private String Reach;
 
     public MusicTag(String name, String count, String reach) {
-        Name = name;
-        Count = count;
-        Reach = reach;
+        this.Name = name;
+        this.Count = count;
+        this.Reach = reach;
     }
 
     public String getName() {

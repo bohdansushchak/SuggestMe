@@ -62,8 +62,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .placeholder(R.drawable.movie_image_default)
+                .error(R.drawable.image_error);
 
         Glide.with(context).load(movie.getPosterPath())
                 .apply(options)

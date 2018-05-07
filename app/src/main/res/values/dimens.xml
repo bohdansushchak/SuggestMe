@@ -19,4 +19,5 @@
     <dimen name="WeatherIconWidth">200dp</dimen>
     <dimen name="WeatherLocationSize">28sp</dimen>
     <dimen name="WeatherTempSize">60sp</dimen>
+    <dimen name="textSizeVote">32sp</dimen>
 </resources>

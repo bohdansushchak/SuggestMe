@@ -52,8 +52,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .placeholder(R.drawable.news_placeholder)
+                .error(R.drawable.news_placeholder);
 
         Glide.with(context).load(items.get(position).getUrlToImage())
                 .apply(options)

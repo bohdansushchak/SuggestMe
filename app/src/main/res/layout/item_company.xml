@@ -10,9 +10,9 @@
         android:id="@+id/civCompany"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         android:adjustViewBounds="true"
-        android:src="@drawable/googleg_standard_color_18"/>
+        android:src="@drawable/company_logo"/>
 
     <TextView
         android:gravity="center_horizontal"

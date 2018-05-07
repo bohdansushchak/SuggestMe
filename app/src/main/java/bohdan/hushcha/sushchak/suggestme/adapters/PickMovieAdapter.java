@@ -48,8 +48,8 @@ public class PickMovieAdapter extends RecyclerView.Adapter<PickMovieAdapter.View
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .placeholder(R.drawable.movie_image_default)
+                .error(R.drawable.image_error);
 
         Glide.with(context).load(movieList.get(position).getBackgroundPath())
                 .apply(options)

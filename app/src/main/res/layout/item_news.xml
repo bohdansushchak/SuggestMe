@@ -17,7 +17,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#bdf7e1">
+            android:background="@color/colorPrimaryLight">
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/news_placeholder" />
 
             <ImageButton
                 android:id="@+id/ivNewInfo"

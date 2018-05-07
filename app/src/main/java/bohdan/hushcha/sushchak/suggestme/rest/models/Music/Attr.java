@@ -38,14 +38,14 @@ public class Attr {
 
     public Attr(Integer offset, Integer numRes, Long total, String tag, Integer page, Integer perPage, Integer totalPages, Integer rank) {
 
-        Offset = offset;
-        NumRes = numRes;
-        Total = total;
-        Tag = tag;
-        Page = page;
-        PerPage = perPage;
-        TotalPages = totalPages;
-        Rank = rank;
+        this.Offset = offset;
+        this.NumRes = numRes;
+        this.Total = total;
+        this.Tag = tag;
+        this.Page = page;
+        this.PerPage = perPage;
+        this.TotalPages = totalPages;
+        this.Rank = rank;
     }
 
     public Attr(Integer offset, Integer numRes, Long total, String tag, Integer page, Integer perPage, Integer totalPages) {

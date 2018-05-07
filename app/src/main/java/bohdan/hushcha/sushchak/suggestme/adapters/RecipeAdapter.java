@@ -54,8 +54,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .placeholder(R.drawable.dish_error)
+                .error(R.drawable.dish_error);
 
         Glide.with(context).load(recipe.getImageUrl())
                 .apply(options)

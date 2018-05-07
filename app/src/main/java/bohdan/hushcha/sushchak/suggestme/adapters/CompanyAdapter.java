@@ -42,9 +42,9 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
         holder.tvCompanyCountry.setText(genres.get(position).getOriginalCountry());
 
         RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .centerInside()
+                .placeholder(R.drawable.company_logo)
+                .error(R.drawable.company_logo);
 
         Glide.with(context).load(genres.get(position).getLogoPath())
                 .apply(options)

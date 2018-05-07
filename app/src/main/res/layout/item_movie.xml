@@ -1,112 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="510dp">
-
-        <ImageView
-            android:id="@+id/ivMovieBackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:scaleType="fitXY"
-            android:src="@color/cardview_dark_background" />
-
-        <ImageButton
-            android:id="@+id/ibMoreInfo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:src="@color/accentColor" />
-
-        <TextView
-            android:id="@+id/tvVoteAverage"
-            android:textSize="@dimen/textSizeExtraLarge"
-            android:layout_gravity="start"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/accentColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvMovieTitle"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/textSizeLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_gravity="top|center_horizontal"/>
-    </FrameLayout>
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/llMovieInfo"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvOverview"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="510dp">
+
+            <ImageView
+                android:id="@+id/ivMovieBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/movie_image_default" />
+
+            <ImageButton
+                android:id="@+id/ibMoreInfo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@color/accentColor" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="25dp"
+                card_view:cardCornerRadius="27dp"
+                card_view:cardElevation="2dp"
+                card_view:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/tvVoteAverage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="0dp"
+                    android:text="8,6"
+                    android:textStyle="normal"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/textSizeVote" />
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvMovieTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:gravity="center_horizontal"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/textSizeLarge" />
+        </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/llMovieInfo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:visibility="gone"
+            android:orientation="vertical">
 
             <TextView
-                android:text="@string/tv_movie_release_date"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvOverview"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/textColorSecondary"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tvReleaseDate"
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_movie_release_date" />
+
+                <TextView
+                    android:id="@+id/tvReleaseDate"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_movie_popularity" />
+
+                <TextView
+                    android:id="@+id/tvPopularity"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_movie_genre" />
+
+                <TextView
+                    android:id="@+id/tvGenre"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="@string/tv_movie_popularity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/tvPopularity"
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="@string/tv_movie_genre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/tvGenre"
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
     </LinearLayout>
-</LinearLayout>
+</android.support.v7.widget.CardView>

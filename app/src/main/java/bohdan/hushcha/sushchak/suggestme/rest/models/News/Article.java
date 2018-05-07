@@ -23,12 +23,12 @@ public class Article {
     private String PublishedAt;
 
     public Article(String author, String title, String decription, String url, String urlToImage, String publishedAt) {
-        Author = author;
-        Title = title;
-        Decription = decription;
-        Url = url;
-        UrlToImage = urlToImage;
-        PublishedAt = publishedAt;
+        this.Author = author;
+        this.Title = title;
+        this.Decription = decription;
+        this.Url = url;
+        this.UrlToImage = urlToImage;
+        this.PublishedAt = publishedAt;
     }
 
     public String getAuthor() {

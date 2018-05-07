@@ -159,8 +159,8 @@ public class MovieDescriptionFragment extends Fragment {
 
         RequestOptions options = new RequestOptions()
                 .centerInside()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .placeholder(R.drawable.movie_image_default)
+                .error(R.drawable.image_error);
 
         Glide.with(getContext()).load(movieDetails.getPosterPath())
                 .apply(options)
