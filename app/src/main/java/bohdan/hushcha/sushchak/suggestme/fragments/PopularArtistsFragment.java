@@ -81,12 +81,12 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
         return view;
     }
 
-    private void Init(){
+    private void Init() {
         artists = new ArrayList<>();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
-        adapter = new ArtistAdapter(artists, this);
+        adapter = new ArtistAdapter(artists, this, mListener);
 
         rvArtist.setLayoutManager(layoutManager);
         rvArtist.setAdapter(adapter);
@@ -145,13 +145,12 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                if (TagName == null){
+                if (TagName == null) {
                     TagName = TagNames.get(i);
                     tvArtistTag.setText(TagName);
                     CurrentPage = 1;
                     ActionViewArtist(false);
-                }
-                else if(!TagName.equals(TagNames.get(i))){
+                } else if (!TagName.equals(TagNames.get(i))) {
                     TagName = TagNames.get(i);
                     tvArtistTag.setText(TagName);
                     CurrentPage = 1;
@@ -164,10 +163,10 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
     }
 
     private void ActionViewArtist(boolean isLoadNext) {
-        if(TagName == null)
+        if (TagName == null)
             return;
 
-        if(!isLoadNext){
+        if (!isLoadNext) {
             artists.clear();
             adapter.notifyDataSetChanged();
         }
@@ -179,10 +178,21 @@ public class PopularArtistsFragment extends Fragment implements LoadNextItems {
         call.enqueue(new Callback<MusicResponce>() {
             @Override
             public void onResponse(Call<MusicResponce> call, Response<MusicResponce> response) {
-
-                artists.addAll(response.body().getTopArtistResponce().getArtists());
-                ++CurrentPage;
-                adapter.notifyDataSetChanged();
+                if (response.body() != null) {
+                    if (response.body().getTopArtistResponce() != null) {
+                        artists.addAll(response.body().getTopArtistResponce().getArtists());
+                        ++CurrentPage;
+                        adapter.notifyDataSetChanged();
+                    }
+                    else {
+                        artists.clear();
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+                else {
+                    artists.clear();
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

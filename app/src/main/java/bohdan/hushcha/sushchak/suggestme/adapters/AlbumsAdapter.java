@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvAlbum.setText(albums.get(position).getName());
         holder.tvPlayCount.setText(albums.get(position).getPlayCount());
+        holder.tvArtist.setText(albums.get(position).getArtist().getName());
 
         if (position == albums.size() - 1){
             loadNextItems.LoadNextItems();
@@ -65,6 +67,9 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
 
         @BindView(R.id.tvPlayCount)
         TextView tvPlayCount;
+
+        @BindView(R.id.tvArtist)
+        TextView tvArtist;
 
         public ViewHolder(View itemView) {
             super(itemView);

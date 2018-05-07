@@ -4,14 +4,34 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <TextView
+        android:layout_marginStart="5dp"
         android:id="@+id/tvTrackName"
+        android:textSize="@dimen/textSizeLarge"
+        android:textColor="@color/textColorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/tvArtistName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="@dimen/textSizeNormal"
+            android:textColor="@color/textColorSecondary"
+            android:text="@string/tv_music_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvArtistName"
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSizeNormal"
+            android:textColor="@color/textColorSecondary"/>
+    </LinearLayout>
+
 </LinearLayout>

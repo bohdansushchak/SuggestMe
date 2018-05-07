@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
+            android:background="@color/textIconsColor"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent"
+                  android:layout_height="0dp"
                   android:background="#FFFFFF"
                   android:orientation="vertical">
 
@@ -44,11 +45,11 @@
         <ExpandableListView
             android:id="@+id/ev_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:groupIndicator="@null"
             android:nestedScrollingEnabled="false"
-            android:divider="@color/dividersColor"
             tools:listitem="@layout/adapter_header">
         </ExpandableListView>
+
     </LinearLayout>
 </ScrollView>

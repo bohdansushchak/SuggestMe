@@ -143,5 +143,11 @@
     <string name="tv_movie_original_language">Original language:</string>
     <string name="tv_movie_budget">Budget:</string>
     <string name="tv_movie_votes">Votes:</string>
+    <string name="tv_music_tag">Tag:</string>
+    <string name="tv_music_pick_music_tag">pick music tag</string>
+    <string name="tv_music_play_count">Play count:</string>
+    <string name="tv_music_artist">Artist:</string>
+    <string name="btn_music_open_page">Open Page</string>
+    <string name="ed_music_enter_artist_name">Enter artist name</string>
 
 </resources>

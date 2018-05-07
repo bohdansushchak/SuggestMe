@@ -14,6 +14,7 @@ import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.CryptoAdapter;
+import bohdan.hushcha.sushchak.suggestme.adapters.SimpleDividerItem;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.CryptoCurrencyClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.CryptoCurrencyInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency.CryptoCurrency;
@@ -58,7 +59,7 @@ public class CryptoCurrencyFragment extends Fragment {
     }
 
     private void init(){
-        adapter = new CryptoAdapter(items);
+        adapter = new CryptoAdapter(items, getContext());
 
         recyclerView.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -66,6 +67,7 @@ public class CryptoCurrencyFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        recyclerView.addItemDecoration(new SimpleDividerItem(getContext()));
 
         Call<List<CryptoCurrency>> call = apiService.TopCryptoCurrency();
 
@@ -73,9 +75,10 @@ public class CryptoCurrencyFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CryptoCurrency>> call, Response<List<CryptoCurrency>> response)
             {
-                items.addAll(response.body());
-
-                adapter.notifyDataSetChanged();
+                if(response.body() != null){
+                    items.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

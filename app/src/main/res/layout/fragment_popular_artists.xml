@@ -7,21 +7,25 @@
     tools:context=".fragments.PopularArtistsFragment">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/colorPrimaryLight"
         android:padding="@dimen/padding">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Tag:" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/textSizeLarge"
+            android:text="@string/tv_music_tag" />
 
         <TextView
             android:id="@+id/tvArtistTag"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="rasfsmda"/>
+            android:layout_marginStart="5dp"
+            android:text="@string/tv_music_pick_music_tag"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

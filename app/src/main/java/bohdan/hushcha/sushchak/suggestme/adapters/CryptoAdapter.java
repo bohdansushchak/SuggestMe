@@ -1,9 +1,11 @@
 package bohdan.hushcha.sushchak.suggestme.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,8 +18,10 @@ import butterknife.ButterKnife;
 public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder> {
 
     private List<CryptoCurrency> items;
+    private Context context;
 
-    public CryptoAdapter(List<CryptoCurrency> items) {
+    public CryptoAdapter(List<CryptoCurrency> items, Context context) {
+        this.context = context;
         this.items = items;
     }
 
@@ -36,6 +40,18 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
         holder.tvName.setText(item.getName());
         holder.tvChange.setText(item.getPercentChange24h());
         holder.tvPrice.setText(item.getPriceUSD());
+
+        try {
+            Double percentChange = Double.parseDouble(item.getPercentChange24h());
+
+            if(percentChange >= 0)
+                holder.llBackground.setBackgroundColor(context.getResources().getColor(R.color.colorItemGreen));
+            else
+                holder.llBackground.setBackgroundColor(context.getResources().getColor(R.color.colorItemRed));
+        }
+        catch (Exception e){
+
+        }
     }
 
     @Override
@@ -53,6 +69,9 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
 
         @BindView(R.id.tvChange)
         TextView tvChange;
+
+        @BindView(R.id.llBackground)
+        LinearLayout llBackground;
 
         public ViewHolder(View itemView) {
             super(itemView);

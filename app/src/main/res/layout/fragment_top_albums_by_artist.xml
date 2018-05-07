@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/padding"
+    android:padding="5dp"
     tools:context=".fragments.TopAlbumsByArtistFragment">
 
     <EditText
+        android:hint="@string/ed_music_enter_artist_name"
         android:padding="@dimen/padding"
         android:id="@+id/edArtist"
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvAlbums"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         tools:listitem="@layout/item_album">
     </android.support.v7.widget.RecyclerView>

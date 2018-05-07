@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Artist;
 import butterknife.BindView;
@@ -18,10 +20,12 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     private List<Artist> artists;
     private LoadNextItems loadNextItems;
+    private InteractionListener<String> interactionListener;
 
-    public ArtistAdapter(List<Artist> artists, LoadNextItems loadNextItems) {
+    public ArtistAdapter(List<Artist> artists, LoadNextItems loadNextItems, InteractionListener<String> interactionListener) {
         this.artists = artists;
         this.loadNextItems = loadNextItems;
+        this.interactionListener = interactionListener;
     }
 
     @Override
@@ -32,13 +36,20 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ArtistAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ArtistAdapter.ViewHolder holder, final int position) {
 
         holder.tvArtist.setText(artists.get(position).getName());
 
         if (position == artists.size() - 1){
             loadNextItems.LoadNextItems();
         }
+
+        holder.btnGoToArtistPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                interactionListener.OnClick(artists.get(position).getUrl());
+            }
+        });
     }
 
     @Override
@@ -49,6 +60,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder  {
         @BindView(R.id.tvArtistName)
         TextView tvArtist;
+
+        @BindView(R.id.btnGoToArtistPage)
+        Button btnGoToArtistPage;
 
         public ViewHolder(View itemView) {
             super(itemView);

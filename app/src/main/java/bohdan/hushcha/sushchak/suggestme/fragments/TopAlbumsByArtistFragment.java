@@ -19,6 +19,7 @@ import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.adapters.AlbumsAdapter;
+import bohdan.hushcha.sushchak.suggestme.adapters.SimpleDividerItem;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.MusicClient;
@@ -85,6 +86,8 @@ public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems
 
         rvAlbums.setAdapter(adapter);
         rvAlbums.setLayoutManager(layoutManager);
+
+        rvAlbums.addItemDecoration(new SimpleDividerItem(getContext()));
 
         edArtist.addTextChangedListener(new TextWatcher() {
             @Override

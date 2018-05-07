@@ -12,4 +12,7 @@
 
     <color name="dividersColor">#BDBDBD</color>
     <color name="textColorError">#ea1e35</color>
+
+    <color name="colorItemGreen">#caf280</color>
+    <color name="colorItemRed">#f57b7b</color>
 </resources>

@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import bohdan.hushcha.sushchak.suggestme.adapters.SimpleDividerItem;
 import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Music.MusicTag;
 import bohdan.hushcha.sushchak.suggestme.rest.responces.music.MusicResponce;
@@ -89,6 +90,7 @@ public class PopularTracksFragment extends Fragment implements LoadNextItems {
 
         rvTracks.setLayoutManager(layoutManager);
         rvTracks.setAdapter(adapter);
+        rvTracks.addItemDecoration(new SimpleDividerItem(getContext()));
     }
 
     @OnClick(R.id.tvTag)
