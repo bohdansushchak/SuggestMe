@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.fragments.MovieDescriptionFragment;
@@ -43,14 +44,15 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+
     @BindView(R.id.ev_menu)
     ExpandableListView evList;
+
     @BindView(R.id.tvHeaderTitle)
     TextView tvHeaderTitle;
+
     @BindView(R.id.tvEmail)
     TextView tvUserEmail;
-
-    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,15 +170,12 @@ public class MainActivity extends AppCompatActivity
 
         if (fragment != null) {
 
-            if (currentFragment != fragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack("null").commit();
 
-                currentFragment = fragment;
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
-                        .addToBackStack("null").commit();
-
-                tvHeaderTitle.setText(categories.get(group).getCategoryItems().get(child));
-            }
+            tvHeaderTitle.setText(categories.get(group).getCategoryItems().get(child));
         }
 
         drawerLayout.closeDrawer(Gravity.LEFT);
@@ -191,7 +190,7 @@ public class MainActivity extends AppCompatActivity
 
         super.onBackPressed();
 
-        if(getSupportFragmentManager().getFragments().size() <= 1)
+        if (getSupportFragmentManager().getFragments().size() <= 1)
             finish();
     }
 
@@ -285,9 +284,11 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void ViewMovieDetails(String movieId) {
-        currentFragment = MovieDescriptionFragment.newInstance(movieId);
+        Fragment fragment = MovieDescriptionFragment.newInstance(movieId);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, currentFragment, "TopNewsFragment")
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, fragment)
                 .addToBackStack("null").commit();
 
         tvHeaderTitle.setText("Movie description");

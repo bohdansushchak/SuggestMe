@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
+import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.InteractionListener;
 import bohdan.hushcha.sushchak.suggestme.rest.clients.WeatherClient;
 import bohdan.hushcha.sushchak.suggestme.rest.interfaces.WeatherApiInterface;
 import bohdan.hushcha.sushchak.suggestme.rest.models.Weather.ConsolidatedWeather;
@@ -36,7 +37,7 @@ public class WeatherDayFragment extends Fragment {
 
     private static final String DATE_PARAM = "date";
 
-    private OnFragmentInteractionListener mListener;
+    private InteractionListener mListener;
 
     @BindView(R.id.tvLocation)
     TextView tvLocation;
@@ -121,22 +122,12 @@ public class WeatherDayFragment extends Fragment {
         ButterKnife.bind(this, view);
         return view;
     }
-/*
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-*/
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        if (context instanceof InteractionListener) {
+            mListener = (InteractionListener) context;
         }
     }
 
@@ -146,8 +137,4 @@ public class WeatherDayFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

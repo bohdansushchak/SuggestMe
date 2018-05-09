@@ -75,10 +75,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.ivNewsInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.llArticleInfo.getVisibility() == View.VISIBLE)
+                if (holder.llArticleInfo.getVisibility() == View.VISIBLE){
                     holder.llArticleInfo.setVisibility(View.GONE);
-                else
+                    holder.ivNewsInfo.setRotation(0);
+                }
+
+                else{
                     holder.llArticleInfo.setVisibility(View.VISIBLE);
+                    holder.ivNewsInfo.setRotation(180);
+                }
+
             }
         });
     }

@@ -93,7 +93,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     holder.ibMoreInfo.setRotation(180);
                 } else {
                     holder.llMoviewInfo.setVisibility(View.GONE);
-                    holder.ibMoreInfo.setRotation(-180);
+                    holder.ibMoreInfo.setRotation(0);
                 }
             }
         });
