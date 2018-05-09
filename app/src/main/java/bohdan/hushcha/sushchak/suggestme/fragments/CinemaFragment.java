@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CinemaFragment extends Fragment implements LoadNextItems {
+public class CinemaFragment extends BaseFragment implements LoadNextItems {
 
     private final String TAG = "TopRatedMovies";
     private InteractionListener mListener;

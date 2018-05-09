@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchNewsFragment extends Fragment implements LoadNextItems {
+public class SearchNewsFragment extends BaseFragment implements LoadNextItems {
 
     private final String TAG = "SearchNewsFragment";
 
@@ -267,25 +266,6 @@ public class SearchNewsFragment extends Fragment implements LoadNextItems {
             }
         });
 
-        dialog.show();
-    }
-
-    /**
-     * Method to view dialog with some message
-     *
-     * @param StringResorceTitle    title dialog
-     * @param StringResourceMessage message in dialog
-     */
-    private void DialogAlert(int StringResorceTitle, int StringResourceMessage) {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle(StringResorceTitle);
-        dialog.setMessage(StringResourceMessage);
-        dialog.setNegativeButton(R.string.dialog_btn_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
         dialog.show();
     }
 

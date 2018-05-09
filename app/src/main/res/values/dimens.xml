@@ -15,8 +15,8 @@
     <dimen name="paddingRvItems">5dp</dimen>
 
 
-    <dimen name="WeatherIconHeight">200dp</dimen>
-    <dimen name="WeatherIconWidth">200dp</dimen>
+    <dimen name="WeatherIconHeight">150dp</dimen>
+    <dimen name="WeatherIconWidth">150dp</dimen>
     <dimen name="WeatherLocationSize">28sp</dimen>
     <dimen name="WeatherTempSize">60sp</dimen>
     <dimen name="textSizeVote">32sp</dimen>

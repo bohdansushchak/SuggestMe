@@ -2,7 +2,6 @@ package bohdan.hushcha.sushchak.suggestme.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class WeatherDailyFragment extends Fragment {
+public class WeatherDailyFragment extends BaseFragment {
 
     final String TAG = " WeatherDailyFragment";
 

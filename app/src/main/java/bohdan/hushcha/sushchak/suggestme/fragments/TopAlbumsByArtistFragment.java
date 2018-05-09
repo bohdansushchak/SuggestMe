@@ -2,7 +2,6 @@ package bohdan.hushcha.sushchak.suggestme.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -33,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TopAlbumsByArtistFragment extends Fragment implements LoadNextItems {
+public class TopAlbumsByArtistFragment extends BaseFragment implements LoadNextItems {
 
     public final String TAG = "TopAlbumsBy";
 

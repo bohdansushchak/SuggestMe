@@ -3,7 +3,6 @@ package bohdan.hushcha.sushchak.suggestme.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 @SuppressLint("ValidFragment")
-public class MovieDescriptionFragment extends Fragment {
+public class MovieDescriptionFragment extends BaseFragment {
 
     public final String TAG = "MovieDescription";
 
