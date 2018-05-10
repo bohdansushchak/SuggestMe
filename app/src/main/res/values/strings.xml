@@ -28,7 +28,6 @@
 
     <string name="SymbolDegreesAndCelsius"><![CDATA[&#8451;]]></string>
 
-
     <string name="dialog_title_not_found_city">Alert</string>
     <string name="dialog_message_not_found_city">Sorry, but can\'t found city by your query</string>
     <string name="dialog_title_choose_country">Choose country</string>
@@ -154,8 +153,8 @@
     <string name="btn_music_open_page">Open Page</string>
     <string name="ed_music_enter_artist_name">Enter artist name</string>
     <string name="et_weather_enter_your_city">Enter your city</string>
-    <string name="tv_weather_max_temp">: max temp</string>
-    <string name="tv_weather_min_temp">: min temp</string>
+    <string name="tv_weather_max_temp"> : max</string>
+    <string name="tv_weather_min_temp"> : min</string>
     <string name="tv_weather_predictability">Predictability:</string>
     <string name="tv_weather_visibility">Visibility:</string>
     <string name="tv_weather_humidity">Humidity:</string>

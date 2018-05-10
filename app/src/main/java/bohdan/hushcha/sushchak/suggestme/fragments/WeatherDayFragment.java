@@ -75,7 +75,7 @@ public class WeatherDayFragment extends BaseFragment {
     @BindView(R.id.tvVisibility)
     TextView tvVisibility;
 
-    private static Date WeatherDate;
+    private Date WeatherDate;
     private String Woeid;
     private String Location;
 
@@ -212,14 +212,14 @@ public class WeatherDayFragment extends BaseFragment {
         Long maxTemp = Math.round(weather.getMaxTemp());
         Long minTemp = Math.round(weather.getMinTemp());
 
-        tvTemp.setText(Html.fromHtml(avgTemp.toString() + "&#8451;"));
-        tvMaxTemp.setText(Html.fromHtml(maxTemp.toString() + "&#8451;"));
-        tvMinTemp.setText(Html.fromHtml(minTemp.toString() + "&#8451;"));
-        tvVisibility.setText(String.valueOf(Math.round(weather.getVisibility())));
-        tvWindSpeed.setText(String.valueOf(weather.getWindSpeed()));
-        tvPredictability.setText(String.valueOf(weather.getPredictability()));
-        tvAirPressure.setText(String.valueOf(weather.getAirPresure()));
-        tvHumidity.setText(String.valueOf(weather.getHuminidy()));
+        tvTemp.setText(Html.fromHtml(avgTemp.toString() + getString(R.string.SymbolDegreesAndCelsius)));
+        tvMaxTemp.setText(Html.fromHtml(maxTemp.toString() + getString(R.string.SymbolDegreesAndCelsius)));
+        tvMinTemp.setText(Html.fromHtml(minTemp.toString() + getString(R.string.SymbolDegreesAndCelsius)));
+        tvVisibility.setText(String.format("%.1f", weather.getVisibility()));
+        tvWindSpeed.setText(String.format("%.2f", weather.getWindSpeed()));
+        tvPredictability.setText(String.format("%.1f", weather.getPredictability()));
+        tvAirPressure.setText(String.format("%.2f", weather.getAirPresure()));
+        tvHumidity.setText(String.format("%.2f", weather.getHuminidy()));
 
         tvDate.setText(new SimpleDateFormat("MM.dd.yyyy").format(WeatherDate));
 

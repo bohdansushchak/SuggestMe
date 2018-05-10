@@ -1,16 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:hint="@string/et_weather_enter_your_city"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/textSizeLarge" />
+
+        <ImageButton
+            android:id="@+id/ivSearchLocation"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_search_black" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/rvDailyWeatherList"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_weather_week"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_weather_week">
 
     </android.support.v7.widget.RecyclerView>
 
 
-</FrameLayout>
+</LinearLayout>

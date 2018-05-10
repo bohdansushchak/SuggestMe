@@ -3,7 +3,6 @@ package bohdan.hushcha.sushchak.suggestme.adapters;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,14 +39,16 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
     public void onBindViewHolder(DailyWeatherAdapter.ViewHolder holder, int position) {
         ConsolidatedWeather weather = weatherList.get(position);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEEE");
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
 
         Long temp = Math.round(weather.getTheTemp());
-        Spanned tempStr = Html.fromHtml(temp.toString() + context.getString(R.string.SymbolDegreesAndCelsius));
 
-        holder.tvDay.setText(formatter.format(weather.getCreatedDate()));
-        holder.tvTemp.setText(tempStr);
+        holder.tvDay.setText(formatter.format(weather.getApplicableDate()));
+        holder.tvTemp.setText(Html.fromHtml(temp.toString() + context.getString(R.string.SymbolDegreesAndCelsius)));
         holder.ivIcon.setImageResource(ImageUtils.getWeatherIconId(weather.getWeatherStateAbbr()));
+        holder.tvDate.setText(new SimpleDateFormat("MM.dd.yyyy").format(weather.getApplicableDate()));
+        holder.tvAirPressure.setText(String.format("%.2f", weather.getAirPresure()));
+        holder.tvWindSpeed.setText(String.format("%.2f",weather.getWindSpeed()));
     }
 
     @Override
@@ -61,6 +62,9 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
         @BindView(R.id.tvDay) TextView tvDay;
         @BindView(R.id.tvTemp) TextView tvTemp;
         @BindView(R.id.ivWeatherIcon) ImageView ivIcon;
+        @BindView(R.id.tvDate) TextView tvDate;
+        @BindView(R.id.tvWindSpeed) TextView tvWindSpeed;
+        @BindView(R.id.tvAirPressure) TextView tvAirPressure;
 
         public ViewHolder(View itemView) {
             super(itemView);
