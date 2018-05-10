@@ -75,8 +75,12 @@ public class PopularRecipesFragment extends BaseFragment implements LoadNextItem
         call.enqueue(new Callback<CookingBookResponce>() {
             @Override
             public void onResponse(Call<CookingBookResponce> call, Response<CookingBookResponce> response) {
-                items.addAll(response.body().getRecipes());
-                adapter.notifyDataSetChanged();
+                if (response.body() != null) {
+                    if (response.body().getRecipes() != null) {
+                        items.addAll(response.body().getRecipes());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
@@ -121,8 +125,12 @@ public class PopularRecipesFragment extends BaseFragment implements LoadNextItem
         call.enqueue(new Callback<CookingBookResponce>() {
             @Override
             public void onResponse(Call<CookingBookResponce> call, Response<CookingBookResponce> response) {
-                items.addAll(response.body().getRecipes());
-                adapter.notifyDataSetChanged();
+                if (response.body() != null) {
+                    if (response.body().getRecipes() != null) {
+                        items.addAll(response.body().getRecipes());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override

@@ -46,15 +46,19 @@ public class SearchNewsFragment extends BaseFragment implements LoadNextItems {
 
     @BindView(R.id.rvNewsSearch)
     RecyclerView recyclerViewNews;
+
     @BindView(R.id.btnSearch)
     Button btnSearch;
 
     @BindView(R.id.tvChooseSource)
     TextView tvChooseSource;
+
     @BindView(R.id.tvChooseCountry)
     TextView tvChooseCountry;
+
     @BindView(R.id.tvDateAt)
     TextView tvDateAt;
+
     @BindView(R.id.tvDateTo)
     TextView tvDateTo;
 
@@ -304,26 +308,27 @@ public class SearchNewsFragment extends BaseFragment implements LoadNextItems {
             DialogAlert(R.string.dialog_title_no_criterias, R.string.dialog_message_no_criterias);
         }
 
-        callNews.enqueue(new Callback<NewsResponce>() {
-            @Override
-            public void onResponse(Call<NewsResponce> call, final Response<NewsResponce> response) {
-                if (response.body() != null) {
-                    if (response.body().getTotalResults() > articleList.size()) {
-                        articleList.addAll(response.body().getArticles());
-                        newsAdapter.notifyDataSetChanged();
-                        ++currentPage;
-                    }
-                } else
-                    articleList.clear();
+        if (callNews != null)
+            callNews.enqueue(new Callback<NewsResponce>() {
+                @Override
+                public void onResponse(Call<NewsResponce> call, final Response<NewsResponce> response) {
+                    if (response.body() != null) {
+                        if (response.body().getTotalResults() > articleList.size()) {
+                            articleList.addAll(response.body().getArticles());
+                            newsAdapter.notifyDataSetChanged();
+                            ++currentPage;
+                        }
+                    } else
+                        articleList.clear();
 
-                Log.d(TAG, articleList.size() + "");
-            }
+                    Log.d(TAG, articleList.size() + "");
+                }
 
-            @Override
-            public void onFailure(Call<NewsResponce> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<NewsResponce> call, Throwable t) {
+                    Log.e(TAG, t.getMessage());
+                }
+            });
     }
 
     @Override

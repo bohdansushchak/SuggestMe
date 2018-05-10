@@ -93,6 +93,7 @@ public class RecipesByCriteriasFragment extends BaseFragment implements LoadNext
 
     /**
      * Method to call when user click by search button
+     *
      * @param view clicked item
      */
     @OnClick(R.id.ivSearch)
@@ -108,16 +109,25 @@ public class RecipesByCriteriasFragment extends BaseFragment implements LoadNext
 
             Log.d(TAG, "Ingredients: " + Ingredients);
 
-            Call<CookingBookResponce> call = apiService.SearchRecipes(CookingBookClient.API_KEY, "r", Ingredients ,CurrentPage);
+            Call<CookingBookResponce> call = apiService.SearchRecipes(CookingBookClient.API_KEY, "r", Ingredients, CurrentPage);
+
+            Log.d(TAG, call.request().url().toString());
 
             call.enqueue(new Callback<CookingBookResponce>() {
                 @Override
                 public void onResponse(Call<CookingBookResponce> call, Response<CookingBookResponce> response) {
-                    items.clear();
-                    items.addAll(response.body().getRecipes());
+                    if (response.body() != null) {
+                        if (response.body().getRecipes() != null) {
 
-                    Log.d(TAG,"Item.size: " + items.size());
-                    adapter.notifyDataSetChanged();
+                            items.clear();
+                            items.addAll(response.body().getRecipes());
+
+                            Log.d(TAG, "getRecipes.size: " + response.body().getRecipes().size());
+
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                    Log.d(TAG, "Item.size: " + items.size());
                 }
 
                 @Override
@@ -149,7 +159,7 @@ public class RecipesByCriteriasFragment extends BaseFragment implements LoadNext
     public void LoadNextItems() {
         ++CurrentPage;
 
-        Call<CookingBookResponce> call = apiService.SearchRecipes(CookingBookClient.API_KEY, "r", Ingredients ,CurrentPage);
+        Call<CookingBookResponce> call = apiService.SearchRecipes(CookingBookClient.API_KEY, "r", Ingredients, CurrentPage);
 
         call.enqueue(new Callback<CookingBookResponce>() {
             @Override
