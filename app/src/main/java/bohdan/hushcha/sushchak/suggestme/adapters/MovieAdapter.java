@@ -23,6 +23,13 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.Cinema.Movie;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Class adapter to view movie list in recycler view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private List<Movie> movies;
@@ -31,6 +38,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private Map<Integer, String> genresMap;
     private Context context;
 
+    /**
+     * @param context             context to access to base functions activity
+     * @param movies              movie list
+     * @param loadNextItems       interface for load next elements
+     * @param interactionListener interface for get click by item
+     * @param genres              genres list movie
+     */
     public MovieAdapter(Context context, List<Movie> movies, LoadNextItems loadNextItems,
                         InteractionListener interactionListener, Map<Integer, String> genres) {
         this.context = context;
@@ -113,6 +127,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return movies.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.ivMovieBackground)

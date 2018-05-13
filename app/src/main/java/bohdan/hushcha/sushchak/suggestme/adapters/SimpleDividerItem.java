@@ -8,10 +8,20 @@ import android.view.View;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 
+/**
+ * Class divider item for decoration in recucler view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class SimpleDividerItem extends RecyclerView.ItemDecoration {
 
     private Drawable divider;
 
+    /**
+     * @param context context for access to base functions activity
+     */
     public SimpleDividerItem(Context context) {
         this.divider = context.getResources().getDrawable(R.drawable.item_divider);
     }

@@ -14,12 +14,22 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Track;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Class adapter to view tracks list in recycler view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> {
 
     private List<Track> tracks;
     private LoadNextItems loadNextItems;
 
-
+    /**
+     * @param tracks        list tracks
+     * @param loadNextItems interface for load next elements
+     */
     public TrackAdapter(List<Track> tracks, LoadNextItems loadNextItems) {
         this.tracks = tracks;
         this.loadNextItems = loadNextItems;
@@ -39,7 +49,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
 
         holder.tvTrack.setText(tracks.get(position).getName());
 
-        if (position == tracks.size() - 1){
+        if (position == tracks.size() - 1) {
             loadNextItems.LoadNextItems();
         }
     }
@@ -49,6 +59,9 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         return tracks.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvArtistName)
         TextView tvArtist;

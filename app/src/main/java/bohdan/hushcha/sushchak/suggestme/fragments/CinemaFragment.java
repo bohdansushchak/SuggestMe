@@ -3,7 +3,6 @@ package bohdan.hushcha.sushchak.suggestme.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +30,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Fragment to view movies by list
+ *
+ * @author Bohdan
+ * @since 1.0
+ * @version 1.0
+ */
 public class CinemaFragment extends BaseFragment implements LoadNextItems {
 
     private final String TAG = "TopRatedMovies";
@@ -83,6 +89,9 @@ public class CinemaFragment extends BaseFragment implements LoadNextItems {
         return view;
     }
 
+    /**
+     * Method to initialise all views in fragment
+     */
     private void Init() {
 
         Map<Integer, String> genres = new HashMap<>();
@@ -167,31 +176,6 @@ public class CinemaFragment extends BaseFragment implements LoadNextItems {
 
             }
         });
-/*
-        Call<GenreListResponce> call2 = cinemaApi.GetGenreList(CinemaClient.API_KEY);
-
-        Log.d(TAG, call2.request().url().toString());
-
-        call2.enqueue(new Callback<GenreListResponce>() {
-            @Override
-            public void onResponse(Call<GenreListResponce> call, Response<GenreListResponce> response) {
-                //List<Map<Integer, String>> mapList = response.body().getGenres();
-
-                Map<Integer, String> newMap = response.body().getGenres();//new HashMap<>();
-
-                for (Map<Integer, String> map : mapList)
-                    newMap.putAll(map);
-
-                Log.d(TAG, newMap.get(12));
-                Log.e(TAG, newMap.get(37));
-
-            }
-
-            @Override
-            public void onFailure(Call<GenreListResponce> call, Throwable t) {
-
-            }
-        });*/
     }
 
     @Override

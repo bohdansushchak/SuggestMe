@@ -18,11 +18,22 @@ import bohdan.hushcha.sushchak.suggestme.utils.ImageUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapter.ViewHolder>  {
+/**
+ * Adapter to view weather list in recycler view.
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
+public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapter.ViewHolder> {
 
     private List<ConsolidatedWeather> weatherList;
     private Context context;
 
+    /**
+     * @param context     context to access to base functions activity
+     * @param weatherList list weather
+     */
     public DailyWeatherAdapter(Context context, List<ConsolidatedWeather> weatherList) {
         this.weatherList = weatherList;
         this.context = context;
@@ -30,9 +41,9 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
 
     @Override
     public DailyWeatherAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext())
-               .inflate(R.layout.item_weather_week, parent, false);
-       return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_weather_week, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -48,7 +59,7 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
         holder.ivIcon.setImageResource(ImageUtils.getWeatherIconId(weather.getWeatherStateAbbr()));
         holder.tvDate.setText(new SimpleDateFormat("MM.dd.yyyy").format(weather.getApplicableDate()));
         holder.tvAirPressure.setText(String.format("%.2f", weather.getAirPresure()));
-        holder.tvWindSpeed.setText(String.format("%.2f",weather.getWindSpeed()));
+        holder.tvWindSpeed.setText(String.format("%.2f", weather.getWindSpeed()));
     }
 
     @Override
@@ -56,15 +67,31 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
         return weatherList.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.ivItemBackground) ImageView ivBackground;
-        @BindView(R.id.tvDay) TextView tvDay;
-        @BindView(R.id.tvTemp) TextView tvTemp;
-        @BindView(R.id.ivWeatherIcon) ImageView ivIcon;
-        @BindView(R.id.tvDate) TextView tvDate;
-        @BindView(R.id.tvWindSpeed) TextView tvWindSpeed;
-        @BindView(R.id.tvAirPressure) TextView tvAirPressure;
+        @BindView(R.id.ivItemBackground)
+        ImageView ivBackground;
+
+        @BindView(R.id.tvDay)
+        TextView tvDay;
+
+        @BindView(R.id.tvTemp)
+        TextView tvTemp;
+
+        @BindView(R.id.ivWeatherIcon)
+        ImageView ivIcon;
+
+        @BindView(R.id.tvDate)
+        TextView tvDate;
+
+        @BindView(R.id.tvWindSpeed)
+        TextView tvWindSpeed;
+
+        @BindView(R.id.tvAirPressure)
+        TextView tvAirPressure;
 
         public ViewHolder(View itemView) {
             super(itemView);

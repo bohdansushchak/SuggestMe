@@ -20,6 +20,13 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.Cinema.Movie;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Class adapter to view movie list in recycler view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class PickMovieAdapter extends RecyclerView.Adapter<PickMovieAdapter.ViewHolder> {
 
     private List<Movie> movieList;
@@ -27,6 +34,14 @@ public class PickMovieAdapter extends RecyclerView.Adapter<PickMovieAdapter.View
     private LoadNextItems mLoadNext;
     private Context context;
 
+    /**
+     * Class constructor
+     *
+     * @param movieList list movie
+     * @param mListener interface for get click by item in list
+     * @param mLoadNext interface for load next elements
+     * @param context   context to access to base functions activity
+     */
     public PickMovieAdapter(List<Movie> movieList, ViewMovieDescription mListener, LoadNextItems mLoadNext, Context context) {
         this.movieList = movieList;
         this.mListener = mListener;
@@ -72,6 +87,9 @@ public class PickMovieAdapter extends RecyclerView.Adapter<PickMovieAdapter.View
         return movieList.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tvMovieTitle)

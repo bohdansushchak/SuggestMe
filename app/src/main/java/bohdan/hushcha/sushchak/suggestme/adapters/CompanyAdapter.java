@@ -18,13 +18,24 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.Cinema.Company;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Adapter to view company list in recycler view.
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHolder> {
 
-    private List<Company> genres;
+    private List<Company> companies;
     private Context context;
 
-    public CompanyAdapter(List<Company> genres, Context context) {
-        this.genres = genres;
+    /**
+     * @param companies list companies
+     * @param context   context to access to base functions activity
+     */
+    public CompanyAdapter(List<Company> companies, Context context) {
+        this.companies = companies;
         this.context = context;
     }
 
@@ -38,24 +49,27 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.tvCompanyName.setText(genres.get(position).getName());
-        holder.tvCompanyCountry.setText(genres.get(position).getOriginalCountry());
+        holder.tvCompanyName.setText(companies.get(position).getName());
+        holder.tvCompanyCountry.setText(companies.get(position).getOriginalCountry());
 
         RequestOptions options = new RequestOptions()
                 .centerInside()
                 .placeholder(R.drawable.company_logo)
                 .error(R.drawable.company_logo);
 
-        Glide.with(context).load(genres.get(position).getLogoPath())
+        Glide.with(context).load(companies.get(position).getLogoPath())
                 .apply(options)
                 .into(holder.civCompany);
     }
 
     @Override
     public int getItemCount() {
-        return genres.size();
+        return companies.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.civCompany)
         ImageView civCompany;

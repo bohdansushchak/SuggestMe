@@ -15,11 +15,22 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.CryptoCurrency.CryptoCurren
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Adapter to view crypto currency list in recycler view.
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder> {
 
     private List<CryptoCurrency> items;
     private Context context;
 
+    /**
+     * @param items   list crypto currency
+     * @param context context to access to base functions activity
+     */
     public CryptoAdapter(List<CryptoCurrency> items, Context context) {
         this.context = context;
         this.items = items;
@@ -44,12 +55,11 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
         try {
             Double percentChange = Double.parseDouble(item.getPercentChange24h());
 
-            if(percentChange >= 0)
+            if (percentChange >= 0)
                 holder.llBackground.setBackgroundColor(context.getResources().getColor(R.color.colorItemGreen));
             else
                 holder.llBackground.setBackgroundColor(context.getResources().getColor(R.color.colorItemRed));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -59,6 +69,9 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
         return items.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tvName)

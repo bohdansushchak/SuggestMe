@@ -13,11 +13,24 @@ import bohdan.hushcha.sushchak.suggestme.R;
 import bohdan.hushcha.sushchak.suggestme.activities.MainActivity;
 import bohdan.hushcha.sushchak.suggestme.models.Category;
 
+/**
+ * Adapter to view categories in expandable list view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class CategoryAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private ArrayList<Category> categories;
 
+    /**
+     * Class constructor
+     *
+     * @param context    context activity
+     * @param categories list categories
+     */
     public CategoryAdapter(Context context, ArrayList<Category> categories) {
         this.context = context;
         this.categories = categories;

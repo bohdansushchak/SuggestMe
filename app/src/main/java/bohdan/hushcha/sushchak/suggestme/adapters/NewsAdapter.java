@@ -22,6 +22,13 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.News.Article;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Class adapter to view news articles list in recycler view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<Article> items;
@@ -29,6 +36,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private InteractionListener mListener;
     private LoadNextItems loadNextItems;
 
+    /**
+     * @param context       context for access to base functions activity
+     * @param items         articles list
+     * @param loadNextItems interface for load next elements
+     * @param mListener     interface for get click by item in list
+     */
     public NewsAdapter(Context context, List<Article> items, InteractionListener mListener,
                        LoadNextItems loadNextItems) {
         this.items = items;
@@ -47,7 +60,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvTitle.setText(items.get(position).getTitle());
-        holder.tvDecription.setText(items.get(position).getDecription());
+        holder.tvDescription.setText(items.get(position).getDecription());
         holder.tvAuthor.setText(items.get(position).getAuthor());
 
         RequestOptions options = new RequestOptions()
@@ -75,12 +88,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.ivNewsInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.llArticleInfo.getVisibility() == View.VISIBLE){
+                if (holder.llArticleInfo.getVisibility() == View.VISIBLE) {
                     holder.llArticleInfo.setVisibility(View.GONE);
                     holder.ivNewsInfo.setRotation(0);
-                }
-
-                else{
+                } else {
                     holder.llArticleInfo.setVisibility(View.VISIBLE);
                     holder.ivNewsInfo.setRotation(180);
                 }
@@ -94,6 +105,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return items.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.ivBackground)
@@ -106,7 +120,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView tvAuthor;
 
         @BindView(R.id.tvDescription)
-        TextView tvDecription;
+        TextView tvDescription;
 
         @BindView(R.id.llNewsInfo)
         LinearLayout llArticleInfo;

@@ -16,12 +16,24 @@ import bohdan.hushcha.sushchak.suggestme.rest.models.Music.Artist;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Adapter to view artist list in recycler view.
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
 
     private List<Artist> artists;
     private LoadNextItems loadNextItems;
     private InteractionListener<String> interactionListener;
 
+    /**
+     * @param artists             list artist
+     * @param loadNextItems       interface for load next elements
+     * @param interactionListener interface for get click by item
+     */
     public ArtistAdapter(List<Artist> artists, LoadNextItems loadNextItems, InteractionListener<String> interactionListener) {
         this.artists = artists;
         this.loadNextItems = loadNextItems;
@@ -40,7 +52,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
         holder.tvArtist.setText(artists.get(position).getName());
 
-        if (position == artists.size() - 1){
+        if (position == artists.size() - 1) {
             loadNextItems.LoadNextItems();
         }
 
@@ -57,7 +69,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         return artists.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder  {
+    /**
+     * Class for hold views ids
+     */
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvArtistName)
         TextView tvArtist;
 

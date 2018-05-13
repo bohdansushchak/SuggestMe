@@ -20,7 +20,13 @@ import bohdan.hushcha.sushchak.suggestme.fragments.interfaces.LoadNextItems;
 import bohdan.hushcha.sushchak.suggestme.rest.models.CookingBook.Recipe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+/**
+ * Class adapter to view recipes list in recycler view
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private List<Recipe> recipeList;
@@ -28,6 +34,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     private InteractionListener mListener;
     private LoadNextItems loadNextItems;
 
+    /**
+     * @param recipeList    list recipes
+     * @param context       context to access to base functions activity
+     * @param mListener     interface for get click by item in list
+     * @param loadNextItems interface for load next elements
+     */
     public RecipeAdapter(List<Recipe> recipeList, Context context,
                          InteractionListener mListener, LoadNextItems loadNextItems) {
         this.recipeList = recipeList;
@@ -68,9 +80,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             }
         });
 
-        Log.d("Adapter", "Position: " + position );
+        Log.d("Adapter", "Position: " + position);
 
-        if (position == recipeList.size() - 1){
+        if (position == recipeList.size() - 1) {
             loadNextItems.LoadNextItems();
         }
     }
@@ -80,6 +92,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return recipeList.size();
     }
 
+    /**
+     * Class for hold views ids
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_publisher)
         TextView tvPublisher;
