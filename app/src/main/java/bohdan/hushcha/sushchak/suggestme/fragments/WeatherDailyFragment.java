@@ -14,9 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import bohdan.hushcha.sushchak.suggestme.R;
@@ -33,7 +31,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+/**
+ * Fragment to view daily weather
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class WeatherDailyFragment extends BaseFragment {
 
     final String TAG = " WeatherDailyFragment";
@@ -88,6 +92,9 @@ public class WeatherDailyFragment extends BaseFragment {
         return view;
     }
 
+    /**
+     * Method to initialize all views on fragment
+     */
     private void Init() {
         items = new ArrayList<>();
 
@@ -125,6 +132,12 @@ public class WeatherDailyFragment extends BaseFragment {
         });
     }
 
+    /**
+     * Method call when user clicked button.
+     * If user click search button, start call to api and view result
+     *
+     * @param view clicked items in fragment
+     */
     @OnClick(R.id.ivSearchLocation)
     void onClick(View view) {
         String query = edLocation.getText().toString().trim();

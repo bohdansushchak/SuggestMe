@@ -38,6 +38,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Fragment to search news articles in api
+ *
+ * @author Bohdan
+ * @since 1.0
+ * @version 1.0
+ */
 public class SearchNewsFragment extends BaseFragment implements LoadNextItems {
 
     private final String TAG = "SearchNewsFragment";
@@ -73,6 +80,9 @@ public class SearchNewsFragment extends BaseFragment implements LoadNextItems {
     private List<Article> articleList;
     private NewsAdapter newsAdapter;
 
+    /**
+     * Class constructor
+     */
     public SearchNewsFragment() {
 
         newsApiInterface = NewsClient.getClient().create(NewsApiInterface.class);
@@ -99,6 +109,9 @@ public class SearchNewsFragment extends BaseFragment implements LoadNextItems {
         return view;
     }
 
+    /**
+     * Private method to initialize all view in fragment
+     */
     private void init() {
         articleList = new ArrayList<>();
         newsAdapter = new NewsAdapter(getContext(), articleList, mListener, this);

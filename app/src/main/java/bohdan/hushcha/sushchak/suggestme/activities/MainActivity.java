@@ -124,6 +124,11 @@ public class MainActivity extends AppCompatActivity
         listView.requestLayout();
     }
 
+    /**
+     * Method to initialize expandable list view
+     *
+     * @param expandableListView list view with categories
+     */
     public void setExpandableListViewHeightBasedOnChildren(ExpandableListView expandableListView) {
         CategoryAdapter adapter = (CategoryAdapter) expandableListView.getExpandableListAdapter();
         if (adapter == null) {
@@ -245,7 +250,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void CheckIfUserLogined() {
         if (mAuth.getCurrentUser() != null) {
-            String email = mAuth.getCurrentUser().getUid();
+            String email = mAuth.getCurrentUser().getEmail();
 
             this.tvUserEmail.setText(email);
         } else {

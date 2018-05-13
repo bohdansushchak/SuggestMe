@@ -2,35 +2,55 @@ package bohdan.hushcha.sushchak.suggestme.utils;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 
+/**
+ * Class to get image ids by key from weather api
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class ImageUtils {
 
+    /**
+     * Method return assets id
+     *
+     * @param abbreviation key abbreviation from weather api
+     * @return id assets
+     */
     public static int getWeatherImageId(String abbreviation) {
-            switch (abbreviation) {
-                case "sn":
-                    return R.drawable.weather_sn;
-                case "sl":
-                    return R.drawable.weather_sl;
-                case "h":
-                    return R.drawable.weather_h;
-                case "t":
-                    return R.drawable.weather_t;
-                case "hr":
-                    return R.drawable.weather_hr;
-                case "lr":
-                    return R.drawable.weather_lr;
-                case "s":
-                    return R.drawable.weather_s;
-                case "hc":
-                    return R.drawable.weather_hc;
-                case "lc":
-                    return R.drawable.weather_lc;
-                case "c":
-                    return R.drawable.weather_c;
-                default:
-                    return android.R.drawable.alert_dark_frame;
-            }
+
+        switch (abbreviation) {
+            case "sn":
+                return R.drawable.weather_sn;
+            case "sl":
+                return R.drawable.weather_sl;
+            case "h":
+                return R.drawable.weather_h;
+            case "t":
+                return R.drawable.weather_t;
+            case "hr":
+                return R.drawable.weather_hr;
+            case "lr":
+                return R.drawable.weather_lr;
+            case "s":
+                return R.drawable.weather_s;
+            case "hc":
+                return R.drawable.weather_hc;
+            case "lc":
+                return R.drawable.weather_lc;
+            case "c":
+                return R.drawable.weather_c;
+            default:
+                return android.R.drawable.alert_dark_frame;
+        }
     }
 
+    /**
+     * Method return assets id
+     *
+     * @param abbreviation key abbreviation from weather api
+     * @return id assets
+     */
     public static int getWeatherIconId(String abbreviation) {
         switch (abbreviation) {
             case "sn":

@@ -11,11 +11,22 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 
+/**
+ * Class to get unsafe connection to api server
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class ClientUtils {
 
+    /**
+     * Method to get http client connection
+     *
+     * @return OkHttpClient
+     */
     public static OkHttpClient.Builder getUnsafeOkHttpClient() {
         try {
-            // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
                         @Override
@@ -35,11 +46,9 @@ public class ClientUtils {
                     }
             };
 
-            // Install the all-trusting trust manager
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
 
-            // Create an ssl socket factory with our all-trusting manager
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();

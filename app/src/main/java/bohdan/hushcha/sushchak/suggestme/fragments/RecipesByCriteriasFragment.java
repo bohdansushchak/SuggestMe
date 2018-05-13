@@ -28,6 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Fragment to search recipes by ingridients
+ *
+ * @author Bohdan
+ * @since 1.0
+ * @version 1.0
+ */
 public class RecipesByCriteriasFragment extends BaseFragment implements LoadNextItems {
 
     private final String TAG = "RecipesByCriterias";
@@ -54,6 +61,11 @@ public class RecipesByCriteriasFragment extends BaseFragment implements LoadNext
         TempIngredients = "";
     }
 
+    /**
+     * Static method to inialise fragment
+     *
+     * @return fragment
+     */
     public static RecipesByCriteriasFragment getInstance() {
         RecipesByCriteriasFragment fragment = new RecipesByCriteriasFragment();
         return fragment;

@@ -17,20 +17,32 @@ import java.util.regex.Pattern;
 
 import bohdan.hushcha.sushchak.suggestme.R;
 
+/**
+ * Service for authorise users
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class AuthService {
 
-    private final Pattern VALID_EMAIL_ADDRESS_REGEX =
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
                     Pattern.CASE_INSENSITIVE);
 
-    private final Pattern VALID_PASSWORD_REGEX =
+    private static final Pattern VALID_PASSWORD_REGEX =
             Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$",
                     Pattern.CASE_INSENSITIVE);
 
     private FirebaseAuth mAuth;
-    private Context context;
+    private static Context context;
     private GoogleApiClient mGoogleApiClient;
 
+    /**
+     * Class constructor
+     *
+     * @param context to get access to base function app
+     */
     public AuthService(Context context) {
 
         this.context = context;
@@ -41,6 +53,15 @@ public class AuthService {
                 .build();
     }
 
+    /**
+     * Method to sign up to account
+     *
+     * @param email      email to account
+     * @param password   user password to account
+     * @param rePassword repeat password
+     * @return task with authorization result
+     * @throws RegisterException register exception with error information
+     */
     public Task<AuthResult> SignUp(@NonNull String email, @NonNull String password, @NonNull String rePassword)
             throws RegisterException {
 
@@ -64,6 +85,14 @@ public class AuthService {
         return mAuth.createUserWithEmailAndPassword(email, password);
     }
 
+    /**
+     * Method to log in
+     *
+     * @param email    email to account
+     * @param password password to account
+     * @return task with authorization result
+     * @throws RegisterException exception with log in error information
+     */
     public Task<AuthResult> SignIn(@NonNull String email, @NonNull String password)
             throws RegisterException {
 
@@ -83,29 +112,59 @@ public class AuthService {
         return mAuth.signInWithEmailAndPassword(email, password);
     }
 
-    public String GetEmailError(String email) {
+    /**
+     * Method to validation email
+     *
+     * @param email email
+     * @return validation email error, null if email is ok
+     */
+    public static String GetEmailError(String email) {
         String emailError;
         Matcher emailMatcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
 
-        if (email.length() == 0)
-            emailError = context.getString(R.string.alert_empty_email);
-        else if (!emailMatcher.find())
-            emailError = context.getString(R.string.alert_email_not_valid);
-        else emailError = null;
+        if (email.length() == 0) {
+            if (context != null)
+                emailError = context.getString(R.string.alert_empty_email);
+            else emailError = "Email is empty";
+        } else if (!emailMatcher.find()) {
+
+            if (context != null)
+                emailError = context.getString(R.string.alert_email_not_valid);
+            else
+                emailError = "Email not valid";
+        } else emailError = null;
 
         return emailError;
     }
 
-    public String GetPasswordError(String password) {
+    /**
+     * Method to validation password
+     *
+     * @param password password
+     * @return validation password error, null if password is ok
+     */
+    public static String GetPasswordError(String password) {
         String passwordError;
 
         Matcher passwordMatcher = VALID_PASSWORD_REGEX.matcher(password);
-        if (password.length() == 0)
-            passwordError = context.getString(R.string.alert_empty_password);
-        else if (password.length() < 8)
-            passwordError = context.getString(R.string.alert_password_to_short);
-        else if (!passwordMatcher.find())
-            passwordError = context.getString(R.string.alert_password_not_valid);
+        if (password.length() == 0){
+            if(context != null)
+                passwordError = context.getString(R.string.alert_empty_password);
+            else
+                passwordError = "Password is empty";
+        }
+        else if (password.length() < 8){
+            if(context != null)
+                passwordError = context.getString(R.string.alert_password_to_short);
+            else passwordError = "Password to short min 8 symbols";
+        }
+
+        else if (!passwordMatcher.find()){
+            if(context != null)
+                passwordError = context.getString(R.string.alert_password_not_valid);
+            else
+                passwordError = "Password not valid";
+        }
         else passwordError = null;
 
         return passwordError;
@@ -136,6 +195,9 @@ public class AuthService {
         }
     }
 
+    /**
+     * Method to sign out from user account
+     */
     public void SignOut() {
 
         if (AccessToken.getCurrentAccessToken() != null)

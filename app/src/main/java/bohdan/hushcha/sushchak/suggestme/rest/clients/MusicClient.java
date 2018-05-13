@@ -4,6 +4,13 @@ import bohdan.hushcha.sushchak.suggestme.utils.ClientUtils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Music client for work with "audio scrobbler"
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class MusicClient {
 
     private static Retrofit retrofit = null;
@@ -14,11 +21,17 @@ public class MusicClient {
 
     public static final String SHARED_SECRET = "95e629f504d028f3cd4b34e633fcf51f";
 
-    private MusicClient(){}
+    private MusicClient() {
+    }
 
-    public static Retrofit getClient(){
+    /**
+     * Method to initialise music client
+     *
+     * @return cinema client
+     */
+    public static Retrofit getClient() {
 
-        if(retrofit == null){
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

@@ -1,7 +1,21 @@
 package bohdan.hushcha.sushchak.suggestme.utils;
 
+
+/**
+ * Class for normalise ingredients parameters for api
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class StringUtils {
 
+    /**
+     * Method to trim and normalise parameters for api
+     *
+     * @param text query ingredients
+     * @return return normalise query for api
+     */
     public static String FormatIngredients(String text) {
         if (text == null)
             throw new IllegalArgumentException("text cannot be null");
@@ -43,6 +57,12 @@ public class StringUtils {
         return formatedString;
     }
 
+    /**
+     * Method for check if string is number
+     *
+     * @param str string
+     * @return true if str is number, false if not
+     */
     public static boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);

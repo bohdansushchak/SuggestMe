@@ -22,6 +22,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Activity for register create user account
+ *
+ * @author Bohdan
+ * @since 1.0
+ * @version 1.0
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.etEmail)
@@ -119,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Method to register new user
-     * @param view
+     * @param view clicked item
      */
     @OnClick(R.id.btnRegister)
     public void clickRegister(View view) {

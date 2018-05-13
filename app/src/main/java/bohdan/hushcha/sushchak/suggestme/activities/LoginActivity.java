@@ -40,15 +40,31 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Activity for log in user to account
+ *
+ * @author Bohdan
+ * @since 1.0
+ * @version 1.0
+ */
 public class LoginActivity extends AppCompatActivity {
 
     public final String TAG = "LoginActivity";
 
-    @BindView(R.id.etEmail_Login) TextInputEditText etEmail;
-    @BindView(R.id.etPassword_Login) TextInputEditText etPassword;
-    @BindView(R.id.emailLayout) TextInputLayout emailLayout;
-    @BindView(R.id.passwordLayout) TextInputLayout passwordLayout;
-    @BindView(R.id.btnFacebook) LoginButton btnFacebook;
+    @BindView(R.id.etEmail_Login)
+    TextInputEditText etEmail;
+
+    @BindView(R.id.etPassword_Login)
+    TextInputEditText etPassword;
+
+    @BindView(R.id.emailLayout)
+    TextInputLayout emailLayout;
+
+    @BindView(R.id.passwordLayout)
+    TextInputLayout passwordLayout;
+
+    @BindView(R.id.btnFacebook)
+    LoginButton btnFacebook;
 
     private AuthService authService;
     private GoogleApiClient mGoogleApiClient;
@@ -126,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Function called when user click to buttons
+     *
      * @param v clicked item
      */
     @OnClick({R.id.sing_in_button, R.id.btnLogin, R.id.tvRegister_Login})
@@ -152,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Medthod to sign in by facebook account
+     * Method to sign in by facebook account
      */
     private void SignInByFacebookInit() {
         mCallbackManager = CallbackManager.Factory.create();
@@ -178,10 +195,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * method call when user back to application
-     * @param requestCode  contain call code
-     * @param resultCode contain code if user click ok button or cancel
-     * @param data returned result data
+     * Method call when user back to application
+     *
+     * @param requestCode contain call code
+     * @param resultCode  contain code if user click ok button or cancel
+     * @param data        returned result data
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -201,7 +219,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     *
      * @param credential auth data to login by firebase
      */
     private void SignInWithCredential(AuthCredential credential) {

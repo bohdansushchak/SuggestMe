@@ -15,8 +15,22 @@ import bohdan.hushcha.sushchak.suggestme.fragments.TopNewsFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDailyFragment;
 import bohdan.hushcha.sushchak.suggestme.fragments.WeatherDayFragment;
 
+/**
+ * Class to manage fragments in main activity
+ *
+ * @author Bohdan
+ * @version 1.0
+ * @since 1.0
+ */
 public class SwitchFragmentUtils {
 
+    /**
+     * Method for get fragments by category and child id
+     *
+     * @param group category id
+     * @param child id item in category
+     * @return fragment
+     */
     public static Fragment GetFragment(int group, int child) {
         Fragment fragment = null;
 

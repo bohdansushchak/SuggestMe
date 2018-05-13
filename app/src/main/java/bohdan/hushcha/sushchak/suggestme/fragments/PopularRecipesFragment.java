@@ -24,6 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ *
+ *
+ * @author Bohdan
+ * @since 1.0
+ * @version 1.0
+ */
 public class PopularRecipesFragment extends BaseFragment implements LoadNextItems {
 
     final String TAG = "PopularRecipesFragment";
@@ -39,12 +46,20 @@ public class PopularRecipesFragment extends BaseFragment implements LoadNextItem
     @BindView(R.id.rvRecipeList)
     RecyclerView recyclerView;
 
+    /**
+     * Class constructor
+     */
     public PopularRecipesFragment() {
         items = new ArrayList<>();
         CurrentPage = 1;
         apiService = CookingBookClient.getClient().create(CookingBookApiInterface.class);
     }
 
+    /**
+     * Static method to get fragment
+     *
+     * @return fragment with list popular recipes
+     */
     public static PopularRecipesFragment getInstance() {
         PopularRecipesFragment fragment = new PopularRecipesFragment();
         Bundle args = new Bundle();
