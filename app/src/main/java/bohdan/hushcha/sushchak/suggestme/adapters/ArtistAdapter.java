@@ -1,5 +1,6 @@
 package bohdan.hushcha.sushchak.suggestme.adapters;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ArtistAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ArtistAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.tvArtist.setText(artists.get(position).getName());
 
