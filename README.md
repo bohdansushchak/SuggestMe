@@ -1,6 +1,7 @@
 # SuggestMe
 
 [![CircleCI](https://circleci.com/gh/bohdansushchak/SuggestMe/tree/master.svg?style=svg)](https://circleci.com/gh/bohdansushchak/SuggestMe/tree/master)
+
 This helpful app can make information search better and easily.
 
 ### Feathure
