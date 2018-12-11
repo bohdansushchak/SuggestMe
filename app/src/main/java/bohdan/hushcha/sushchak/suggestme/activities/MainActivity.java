@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Function to initialize first fragment in main activity and
+     * Function to initialize first fragment in main activity
      */
     private void init() {
 
